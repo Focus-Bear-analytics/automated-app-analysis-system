@@ -1,0 +1,23 @@
+# scrapers/seeds.yml
+play_ids:
+  # Forest: Stay Focused (correct Play Store package name)
+  - cc.forestapp
+
+cws_ids:
+  # StayFocusd – Website Blocker (Chrome Web Store extension ID)
+  - laankejkbhbdhmipfmgcngdelahlfoji
+
+ios_ids:
+  # Forest iOS (App Store ID)
+  - id1146560473
+
+# You can add more below once testing is stable
+# play_ids:
+#   - com.stayfocused
+#   - com.whatever.anotherapp
+#
+# cws_ids:
+#   - extensionidhere
+#
+# ios_ids:
+#   - idXXXXXXXXX

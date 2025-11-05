@@ -1,0 +1,2 @@
+app_key,store,country,n_reviews,n_nd,avg_rating,mean_compound,pct_positive,pct_negative
+play:cc.forestapp,PlayStore,au,1026,1026,3.6783625730994154,0.3266666666666667,0.672514619883041,0.2046783625730994

@@ -1,0 +1,37 @@
+keywords:
+  # Core focus & productivity
+  - focus
+  - productivity
+  - pomodoro
+  - timer
+  - study timer
+  - routine tracker
+  - habit tracker
+
+  # Blocking & control
+  - site blocker
+  - website blocker
+  - app blocker
+  - distraction blocker
+  - screen time
+  - parental control
+
+  # ND & wellness
+  - ADHD
+  - mindfulness
+  - meditation
+
+limits:
+  per_keyword_per_store: 50      # raise to capture more per keyword
+  similar_per_app: 15            # related apps carousel
+  max_total_candidates: 500      # cap total discovery
+
+filters:
+  min_rating_count: 25
+  include_terms: ["focus","block","timer","pomodoro","productivity","habit","distraction","parental","adhd","study","routine","mindful","meditation"]
+  exclude_terms: ["wallpaper","theme","ringtone","launcher","keyboard","icon","vpn","antivirus","browser","camera","photo","video","game","music","widget","gallery"]
+
+categories:
+  play: ["PRODUCTIVITY", "EDUCATION", "HEALTH_AND_FITNESS"]
+  cws:  ["Productivity", "Education", "Utilities"]
+  ios:  ["Productivity", "Education", "Health & Fitness"]

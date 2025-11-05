@@ -1,0 +1,33 @@
+features:
+  blocking:
+    def: "Blocks distracting apps/sites or categories."
+    positive: ["block instagram", "website blocker", "distraction blocking"]
+    negative: ["block of text", "writer's block"]
+  timer:
+    def: "Any timer or time tracking of sessions."
+    positive: ["countdown", "session timer"]
+    negative: ["delivery time", "screen time* (unless analytics)"]
+  pomodoro:
+    def: "Pomodoro method (work/break cycles)."
+    positive: ["25/5 cycles", "pomodoro", "short/long breaks"]
+  habit_tracking:
+    def: "Track habits/streaks/routines/goals."
+    positive: ["habit streaks", "daily routine", "goal check-ins"]
+  focus_mode:
+    def: "Focus/Deep Work modes that hide distractions."
+    positive: ["focus mode", "deep work", "distraction-free"]
+  screen_time:
+    def: "Usage analytics of apps/time (digital wellbeing)."
+    positive: ["screen time report", "usage stats"]
+  parental_control:
+    def: "Controls for kids/parents (limits, filters)."
+    positive: ["parental control", "child lock", "family link"]
+  adhd_support:
+    def: "ADHD / neurodivergent / autism / ASD explicit support."
+    positive: ["ADHD-friendly", "for neurodivergent", "autism", "ASD"]
+  reminders:
+    def: "Reminders/notifications/alarms/nudges."
+    positive: ["reminder", "notification", "alarm", "snooze"]
+  analytics:
+    def: "Analytics/insights/charts/reports."
+    positive: ["analytics", "insights", "dashboard", "trends"]
