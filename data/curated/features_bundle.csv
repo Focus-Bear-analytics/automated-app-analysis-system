@@ -1,0 +1,697 @@
+app_key,feature,flag,confidence,review_hits,store,title,rating_avg,rating_count,installs_or_users,relevance_score
+play:ai.momental,long_llm,1,0.95,10,playstore,Momental: Meditation & Sleep,4.4,0.0,1000.0,0.75
+play:ai.perplexity.app.android,long_llm,1,0.95,10,playstore,Perplexity - Ask Anything,4.5,1110000.0,50000000.0,0.2
+play:ai.x.grok,long_llm,1,0.95,10,playstore,Grok • Smartest AI Advisor,4.9,1280000.0,50000000.0,0.2
+play:app.avocation.avocation,long_llm,1,0.95,10,playstore,Avocation Goal & Habit Tracker,4.2,8880.0,1000000.0,1.0
+play:app.disciplined.productive.structured.habit.tracker,long_llm,1,0.95,10,playstore,Disciplined - Habit Tracker,4.7,10000.0,100000.0,1.0
+play:app.hallow.android,long_llm,1,0.95,10,playstore,Hallow: Prayer & Meditation,4.7,120000.0,10000000.0,0.2
+play:app.kids360.parent,long_llm,1,0.95,10,playstore,Kids360: Parental Control App,4.5,202000.0,5000000.0,1.0
+play:app.routineflow.routineflow,long_llm,1,0.95,10,playstore,RoutineFlow: Routine for ADHD,4.3,15000.0,500000.0,1.0
+play:app.univi.prod,long_llm,1,0.95,10,playstore,Univi: ADHD Management & Focus,4.5,2170.0,100000.0,1.0
+play:app.vinztech.tickit,long_llm,1,0.95,10,playstore,Habit Tracker - TickOff,4.4,859.0,50000.0,1.0
+play:app.vinztech.trackit,long_llm,1,0.95,10,playstore,TrackIt: Study Tracker & Timer,4.4,2820.0,100000.0,1.0
+play:app.voicestories.android,long_llm,1,0.95,10,playstore,Voice: Mental Health Guide,4.7,56200.0,1000000.0,0.275
+play:cn.wps.moffice_eng,long_llm,1,0.95,10,playstore,"WPS Office-PDF, Word, Sheet",4.6,5740000.0,50000000.0,0.2
+play:co.au.goalhero,long_llm,1,0.95,10,playstore,Habit Hunter: RPG goal tracker,4.4,3200.0,50000.0,1.0
+play:co.thefab.tm,long_llm,1,0.95,10,playstore,Clarify: ADHD Organizer & help,4.1,7430.0,500000.0,1.0
+play:co.thefabulous.app,long_llm,1,0.95,10,playstore,Fabulous Daily Routine Planner,4.1,581000.0,10000000.0,1.0
+play:co.zeitic.focusmeter,long_llm,1,0.95,10,playstore,Focusmeter: Pomodoro Timer,4.6,3620.0,100000.0,1.0
+play:com.Meditation.app,long_llm,1,0.95,10,unknown,,,,,
+play:com.abdula.pranabreath,long_llm,1,0.95,10,playstore,Prana Breath: Calm & Meditate,4.8,96500.0,5000000.0,0.15
+play:com.adobe.reader,long_llm,1,0.95,10,playstore,Adobe Acrobat Reader: Edit PDF,4.5,7330000.0,500000000.0,0.2
+play:com.alarmclock.xtreme.free,long_llm,1,0.95,10,playstore,Alarm Clock Xtreme & Timer,4.5,1210000.0,50000000.0,0.2
+play:com.anthropic.claude,long_llm,1,0.95,10,playstore,Claude by Anthropic,4.5,124000.0,5000000.0,0.4
+play:com.apalon.to.do.list,long_llm,1,0.95,10,playstore,Productive - Habit tracker,3.7,20100.0,1000000.0,1.0
+play:com.app.floatingapptimer.com,long_llm,1,0.95,10,playstore,Screen time: App blocking,4.1,15800.0,1000000.0,0.9
+play:com.apps.adrcotfas.goodtime,long_llm,1,0.95,10,playstore,Minimalist Pomodoro Timer,4.6,20900.0,1000000.0,1.0
+play:com.ascent,long_llm,1,0.95,10,playstore,Ascent: screen time & offtime,4.6,3280.0,100000.0,1.0
+play:com.blockerhero,long_llm,1,0.95,10,playstore,BlockerHero - Porn Blocker,3.4,15600.0,1000000.0,1.0
+play:com.boostedproductivity.app,long_llm,1,0.95,10,playstore,Boosted Time Tracker,4.5,19600.0,1000000.0,1.0
+play:com.callapp.contacts,long_llm,1,0.95,10,playstore,CallApp: Caller ID & Block,4.3,1680000.0,100000000.0,1.0
+play:com.calm.android,long_llm,1,0.95,10,playstore,"Calm - Sleep, Meditate, Relax",4.5,601000.0,50000000.0,0.825
+play:com.camhart.pornblocker,long_llm,1,0.95,10,playstore,Truple Porn Filter / Blocker,4.4,2500.0,100000.0,0.8
+play:com.canopy.vpn.filter.parent,long_llm,1,0.95,10,playstore,Canopy - Parental Control App,4.1,1070.0,100000.0,1.0
+play:com.chois.soulspace,long_llm,1,0.95,10,playstore,Soulspace Prayer & Meditation,4.8,5920.0,50000.0,0.3
+play:com.chorefocus.app,long_llm,1,0.95,10,playstore,Chore Focus: ADHD Task Manager,4.0,137.0,10000.0,0.75
+play:com.codeorigin.timer.stopwatch.app.custom.timerapp.countdowntimer.stopwatchlaps.sports.gym.track.time.stopwatchapp.laps.clock.progress,long_llm,1,0.95,10,playstore,Timer Stopwatch App - Sound,4.4,4720.0,1000000.0,1.0
+play:com.digitalchemy.timerplus,long_llm,1,0.95,10,playstore,Multi Timer: Timer + Stopwatch,4.6,21100.0,1000000.0,1.0
+play:com.disneydigitalbooks.DisneyMagicBrushTimer_goo,long_llm,1,0.95,10,unknown,,,,,
+play:com.donutdog,long_llm,1,0.95,10,playstore,Focus Dog: Productivity Timer,4.5,2120.0,100000.0,1.0
+play:com.dottedcircle.bulletjournal,long_llm,1,0.95,10,playstore,OrganizeMe: ADHD BulletJournal,4.4,2750.0,100000.0,1.0
+play:com.downdogapp.meditation,long_llm,1,0.95,10,playstore,Meditation | Down Dog,4.9,55800.0,500000.0,0.1
+play:com.dropbox.android,long_llm,1,0.95,10,playstore,Dropbox: Secure Cloud Storage,4.4,2330000.0,1000000000.0,0.2
+play:com.engross,long_llm,1,0.95,10,playstore,Engross: Focus Timer & To-Do,4.3,13100.0,500000.0,1.0
+play:com.everydaycheckmobile,long_llm,1,0.95,10,playstore,everyday Habit Tracker,4.5,4130.0,100000.0,1.0
+play:com.evgeniysharafan.tabatatimer,long_llm,1,0.95,10,playstore,Tabata Timer: Interval Timer,4.9,217000.0,5000000.0,1.0
+play:com.evoprox.morningroutines,long_llm,1,0.95,10,playstore,Happy Kids Timer Chores,4.2,21600.0,1000000.0,1.0
+play:com.familyfirsttechnology.pornblocker,long_llm,1,0.95,10,playstore,DETOXIFY - Porn App Blocker,2.9,6360.0,500000.0,1.0
+play:com.ferdinandobermeier.focusmate,long_llm,1,0.95,10,playstore,Focus Now - Pomodoro Timer,4.3,0.0,5000.0,1.0
+play:com.flashget.parentalcontrol,long_llm,1,0.95,10,playstore,FlashGet Kids:parental control,4.7,80100.0,10000000.0,0.95
+play:com.flipd.app,long_llm,1,0.95,10,playstore,Flipd: Focus & Study Timer,3.1,6060.0,1000000.0,1.0
+play:com.focus.productivity.elmnts,long_llm,1,0.95,10,playstore,Focus Timer & ToDo: Time Block,4.8,292.0,10000.0,1.0
+play:com.google.android.apps.docs,long_llm,1,0.95,10,playstore,Google Drive,4.3,10600000.0,1000000000.0,0.2
+play:com.gravitywell.adhdlove,long_llm,1,0.95,10,playstore,dubbii: the body doubling app,4.6,798.0,100000.0,0.25
+play:com.habitgenius.habit.tracker,long_llm,1,0.95,10,playstore,Habit Tracker - HabitGenius,4.3,2310.0,100000.0,1.0
+play:com.habitpixel.app,long_llm,1,0.95,10,playstore,Habit Tracker - Habit Pixel,4.9,350.0,5000.0,1.0
+play:com.habitrpg.android.habitica,long_llm,1,0.95,10,playstore,Habitica: Gamify Your Tasks,4.7,68400.0,5000000.0,1.0
+play:com.hamatim.podomoro,long_llm,1,0.95,10,playstore,Pomodoro Productivity Timer,4.7,5760.0,100000.0,1.0
+play:com.hopemindfulness.hopemindfulness,long_llm,1,0.95,10,playstore,Hope Mindfulness & Prayer,4.0,89.0,10000.0,0.25
+play:com.hsv.freeadblockerbrowser,long_llm,1,0.95,10,playstore,Free Adblocker Browser:Adblock,4.6,967000.0,10000000.0,1.0
+play:com.hybrid.stopwatch,long_llm,1,0.95,10,playstore,Stopwatch Timer,4.6,249000.0,10000000.0,0.95
+play:com.hyperfocusacademy.adhdeasydo,long_llm,1,0.95,10,playstore,ADHD Easy-Do your ADHD Planner,4.6,0.0,1000.0,1.0
+play:com.ibragunduz.applockpro,long_llm,1,0.95,10,playstore,Applock Pro - App Lock & Guard,4.6,1900000.0,100000000.0,0.325
+play:com.imobilize.relaxsleepwell,long_llm,1,0.95,10,playstore,Relax & Sleep Well Hypnosis,4.8,15000.0,500000.0,0.1
+play:com.interval.timer.workout.tabata.hiit.free,long_llm,1,0.95,10,playstore,Interval Timer & Tabata Timer,4.9,20400.0,1000000.0,1.0
+play:com.intsig.camscanner,long_llm,1,0.95,10,playstore,"CamScanner- scanner, PDF maker",4.7,4920000.0,500000000.0,0.45
+play:com.jupiterapps.stopwatch,long_llm,1,0.95,10,playstore,MultiTimer: Stopwatch & Timer+,4.7,2970.0,50000.0,1.0
+play:com.jupli.countdowntoanything,long_llm,1,0.95,10,playstore,Countdown to Anything,4.6,4710.0,500000.0,0.05
+play:com.kappa.teddybear.android,long_llm,1,0.95,10,playstore,TeddyCare: Daily Routine Plan,4.7,21500.0,100000.0,0.475
+play:com.kiddoware.safebrowsingvpn,long_llm,1,0.95,10,playstore,Safe Internet: Porn Blocker,4.0,65.0,10000.0,1.0
+play:com.kidslox.app,long_llm,1,0.95,10,playstore,Parental Control - Kidslox,4.3,35800.0,1000000.0,1.0
+play:com.kompanion.habit.android,long_llm,1,0.95,10,playstore,Dear Me: Daily Routine Tracker,4.7,154000.0,1000000.0,0.525
+play:com.lifetech_balance,long_llm,1,0.95,10,playstore,ScreenCoach - Parental Control,4.4,61.0,10000.0,1.0
+play:com.mdev.intervaltimer,long_llm,1,0.95,10,playstore,"Interval Timer: Workout, HIIT",4.7,2780.0,100000.0,1.0
+play:com.meditation.elevenminute,long_llm,1,0.95,10,playstore,Let's Meditate: Relax & Sleep,4.7,68100.0,1000000.0,0.275
+play:com.meditationmoments.meditationmoments,long_llm,1,0.95,10,playstore,Meditation Moments,4.4,19300.0,1000000.0,1.0
+play:com.microsoft.copilot,long_llm,1,0.95,10,playstore,​​Microsoft Copilot,4.7,1710000.0,10000000.0,0.325
+play:com.microsoft.office.excel,long_llm,1,0.95,10,playstore,Microsoft Excel: Spreadsheets,4.8,7750000.0,1000000000.0,0.45
+play:com.microsoft.office.officehubrow,long_llm,1,0.95,10,playstore,Microsoft 365 Copilot,4.6,8230000.0,1000000000.0,0.45
+play:com.microsoft.office.powerpoint,long_llm,1,0.95,10,playstore,Microsoft PowerPoint,4.8,3640000.0,1000000000.0,0.45
+play:com.microsoft.office.word,long_llm,1,0.95,10,playstore,Microsoft Word: Edit Documents,4.8,14300000.0,1000000000.0,0.2
+play:com.mindefy.phoneaddiction.mobilepe,long_llm,1,0.95,10,playstore,YourHour - ScreenTime App,4.3,76700.0,1000000.0,1.0
+play:com.mmguardian.parentapp,long_llm,1,0.95,10,playstore,MMGuardian Parental Control,4.2,26500.0,1000000.0,0.9
+play:com.motivated.app,long_llm,1,0.95,10,playstore,Motivated: Habit Tracker,4.3,4810.0,100000.0,1.0
+play:com.motorola.spaces,long_llm,1,0.95,10,playstore,Family Space,3.6,15100.0,100000000.0,0.575
+play:com.msw.pornblocker,long_llm,1,0.95,10,playstore,PureWeb: Porn Blocker,4.1,6960.0,100000.0,1.0
+play:com.newswarajya.noswipe.reelshortblocker,long_llm,1,0.95,10,playstore,NoScroll: Block Reels & Shorts,4.3,24300.0,1000000.0,1.0
+play:com.omf.android,long_llm,1,0.95,10,playstore,Oxford Mindfulness,3.6,0.0,1000.0,0.0
+play:com.ourpact.androidparent,long_llm,1,0.95,10,playstore,OurPact – Parental Control App,2.6,2000.0,1000000.0,1.0
+play:com.petitbambou,long_llm,1,0.95,10,playstore,Mindfulness with Petit BamBou,4.7,143000.0,10000000.0,0.2
+play:com.planproductive.nopox,long_llm,1,0.95,10,playstore,NopoX - Porn Blocker,4.4,7320.0,50000.0,1.0
+play:com.pomodoro.foca,long_llm,1,0.95,10,playstore,Foca: Pomodoro Focus Timer,4.4,2660.0,100000.0,1.0
+play:com.qqlabs.minimalistlauncher,long_llm,1,0.95,10,playstore,minimalist phone®: Launcher,4.5,43400.0,5000000.0,0.15
+play:com.revokevpnapp,long_llm,1,0.95,10,playstore,BLOKK: Privacy VPN & Blocker,4.0,4160.0,500000.0,0.8
+play:com.robobobo.apps.buddhasquotes,long_llm,1,0.95,10,playstore,Buddha Wisdom - Buddhism Guide,4.6,2870.0,100000.0,0.05
+play:com.robokiller.app,long_llm,1,0.95,10,playstore,Robokiller - Spam Call Blocker,4.0,124000.0,5000000.0,1.0
+play:com.safesurfer,long_llm,1,0.95,10,playstore,Safe Surfer: Block Porn & Apps,3.8,4950.0,500000.0,1.0
+play:com.sand.airdroidkidp,long_llm,1,0.95,10,playstore,AirDroid Parental Control,4.5,110000.0,10000000.0,1.0
+play:com.screentime.rc,long_llm,1,0.95,10,playstore,Screen Time - Parental Control,3.1,49400.0,1000000.0,1.0
+play:com.screenzen,long_llm,1,0.95,10,playstore,ScreenZen・Screen Time Control,4.8,17400.0,500000.0,0.85
+play:com.sentryapplications.alarmclock,long_llm,1,0.95,10,playstore,Talking Alarm Clock Beyond,4.7,114000.0,5000000.0,0.15
+play:com.shikudo.focus.google,long_llm,1,0.95,10,playstore,Focus Plant: Pomodoro Forest,4.4,51600.0,1000000.0,1.0
+play:com.shikudo.focus.study.forest.pomodoro.productivity.hero.rpg.android,long_llm,1,0.95,10,playstore,Focus Quest: Pomodoro adhd app,4.4,6200.0,500000.0,1.0
+play:com.shikudo.focusapp.google,long_llm,1,0.95,10,playstore,Striving: Pomodoro study timer,4.6,8480.0,500000.0,1.0
+play:com.simplehabit.simplehabitapp,long_llm,1,0.95,10,playstore,Simple Habit: Meditation,4.6,45200.0,1000000.0,1.0
+play:com.skillfoxapps.qhabit,long_llm,1,0.95,10,playstore,Qhabit: Daily habit tracker,4.3,224.0,10000.0,1.0
+play:com.smilingmind.app,long_llm,1,0.95,10,playstore,Smiling Mind: Mental Wellbeing,4.2,9150.0,1000000.0,0.475
+play:com.spotlightsix.zentimerlite2,long_llm,1,0.95,10,playstore,Insight Timer - Meditation App,4.7,248000.0,10000000.0,1.0
+play:com.stayfocused,long_llm,1,0.95,10,playstore,Stay Focused: Site/App Blocker,4.6,130000.0,1000000.0,1.0
+play:com.subconscious.thrive,long_llm,1,0.95,10,playstore,Atom: Meditation for Beginners,4.7,42600.0,1000000.0,1.0
+play:com.superelement.pomodoro,long_llm,1,0.95,10,playstore,Focus To-Do: Pomodoro & Tasks,4.6,266000.0,10000000.0,1.0
+play:com.teadoku.hs,long_llm,1,0.95,10,playstore,Habit Tracker: Goals & Rewards,4.8,48.0,1000.0,1.0
+play:com.teqtic.lockmeout,long_llm,1,0.95,10,playstore,Lock Me Out - App/Site Blocker,4.7,9850.0,500000.0,1.0
+play:com.thehungrywasp.iamsober,long_llm,1,0.95,10,playstore,I Am Sober,4.8,125000.0,5000000.0,0.65
+play:com.thewayapp.mobile,long_llm,1,0.95,10,playstore,The Way: Meditation Path,4.8,200.0,10000.0,0.0
+play:com.third.eye.brainwaves.chakra.meditation,long_llm,1,0.95,10,playstore,Third Eye Opening Chakra Reiki,4.7,15600.0,100000.0,0.35
+play:com.ticktick.task,long_llm,1,0.95,10,playstore,TickTick:To Do List & Calendar,4.6,150000.0,5000000.0,1.0
+play:com.timetimer.android,long_llm,1,0.95,10,playstore,Time Timer Visual Productivity,4.3,1100.0,100000.0,1.0
+play:com.todoist,long_llm,1,0.95,10,playstore,Todoist: Planner & Calendar,4.6,289000.0,10000000.0,0.825
+play:co.blocksite,long_llm,1,0.95,10,playstore,BlockSite: Block Apps & Sites,3.7,53900.0,10000000.0,1.0
+play:com.underthing.focus.friend,long_llm,1,0.95,10,playstore,Focus Friend by Hank Green,4.4,4410.0,500000.0,1.0
+play:com.unpluq.beta,long_llm,1,0.95,10,playstore,Unpluq: Control Your Time,4.4,1490.0,100000.0,1.0
+play:com.urbandroid.ddc,long_llm,1,0.95,10,playstore,Digital Detox: Focus & Live,4.6,36500.0,1000000.0,0.525
+play:com.vladlee.easyblacklist,long_llm,1,0.95,10,playstore,Calls Blacklist - Call Blocker,4.2,812000.0,10000000.0,1.0
+play:com.wallhabit.app,long_llm,1,0.95,10,playstore,WallHabit Block Shorts & Reels,4.6,850.0,50000.0,1.0
+play:com.wlxd.pomochallenge,long_llm,1,0.95,10,playstore,Productivity Challenge Timer,4.8,21100.0,500000.0,1.0
+play:com.wondershare.famisafe,long_llm,1,0.95,10,playstore,Parental Control App- FamiSafe,3.9,14000.0,5000000.0,1.0
+play:com.wverlaek.block,long_llm,1,0.95,10,playstore,Block Apps & Sites | Wellbeing,4.1,13900.0,1000000.0,1.0
+play:com.yygg.note.app,long_llm,1,0.95,10,playstore,"Notewise - AI Notes, PDF, Docs",4.4,20900.0,1000000.0,0.275
+play:com.zed.appblock.websiteblocker.siteblocker,long_llm,1,0.95,10,playstore,Website Blocker : Block Sites,3.5,88.0,10000.0,1.0
+play:cz.mobilesoft.appblock,long_llm,1,0.95,10,playstore,AppBlock - Block Apps & Sites,4.6,186000.0,5000000.0,1.0
+play:eu.faircode.netguard,long_llm,1,0.95,10,playstore,NetGuard - no-root firewall,4.4,28400.0,10000000.0,0.2
+play:focustree.app,long_llm,1,0.95,10,playstore,Focus Tree - Focus Timer,4.4,20800.0,500000.0,1.0
+play:habittracker.todolist.tickit.daily.planner,long_llm,1,0.95,10,playstore,Habit Tracker - Habit Diary,4.8,126000.0,5000000.0,1.0
+play:hdesign.theclock,long_llm,1,0.95,10,playstore,The Clock: Alarm Clock & Timer,4.5,70900.0,1000000.0,0.15
+play:in.evolve.android,long_llm,1,0.95,10,playstore,Evolve: Self-Care & Meditation,4.5,16700.0,1000000.0,0.775
+play:inflow.adhd.productivity,long_llm,1,0.95,10,playstore,Inflow ADHD,3.9,1860.0,100000.0,1.0
+play:io.funswitch.blocker,long_llm,1,0.95,10,playstore,BlockerX: Porn Blocker,4.4,241000.0,5000000.0,1.0
+play:io.zario,long_llm,1,0.95,10,playstore,Zario: Track & Limit App Usage,4.1,359.0,10000.0,1.0
+play:ipnossoft.rma.free,long_llm,1,0.95,10,playstore,BetterSleep: Sleep tracker,4.5,393000.0,10000000.0,0.2
+play:kz.sirius.kidssecurity,long_llm,1,0.95,10,playstore,Parental Control App Blocker,4.3,72600.0,1000000.0,0.775
+play:meditofoundation.medito,long_llm,1,0.95,10,playstore,Medito: Meditation & Sleep,4.9,37400.0,1000000.0,0.4
+play:mobicip.com.safeBrowserff,long_llm,1,0.95,10,unknown,,,,,
+play:net.sarasarasa.lifeup,long_llm,1,0.95,10,playstore,LifeUp: Gamified To Do List,4.6,6220.0,100000.0,1.0
+play:net.smartwod.timer,long_llm,1,0.95,10,playstore,SmartWOD Timer - WOD timer,4.9,29700.0,1000000.0,1.0
+play:org.atmana.appblocker,long_llm,1,0.95,10,playstore,App Blocker- Block Apps,3.7,297.0,10000.0,1.0
+play:org.atmana.contentblocker,long_llm,1,0.95,10,playstore,Content Blocker - I am blocked,4.4,0.0,500.0,1.0
+play:org.atmana.websiteblocker,long_llm,1,0.95,10,playstore,Website Blocker- Block Sites,4.3,3110.0,100000.0,1.0
+play:org.findmykids.app,long_llm,1,0.95,10,playstore,Findmykids: Kids GPS Tracker,4.6,1900000.0,50000000.0,0.325
+play:org.leadmenot,long_llm,1,0.95,10,playstore,LeadMeNot: App & Porn Blocker,4.0,625.0,100000.0,1.0
+play:org.name.shimmerapp,long_llm,1,0.95,10,playstore,Shimmer: ADHD Coaching,4.3,61.0,5000.0,0.25
+play:phosphorus.app.usage.screen.time,long_llm,1,0.95,10,playstore,Screen Time & Limits: Digitox,4.5,13100.0,1000000.0,1.0
+play:pony.tothemoon.focusguard,long_llm,1,0.95,10,playstore,DetoxLock: cold turkey blocker,4.3,6600.0,100000.0,1.0
+play:pps.android.yoodoo,long_llm,1,0.95,10,playstore,Yoodoo: ADHD Daily Planner,4.1,308.0,10000.0,1.0
+play:tech.miidii.offscreen_android,long_llm,1,0.95,10,playstore,OffScreen - Less Screen Time,3.4,555.0,100000.0,0.75
+play:to.freedom.android2,long_llm,1,0.95,10,playstore,Freedom: App & Website Blocker,4.1,6940.0,1000000.0,1.0
+play:ua.com.tim_berners.parental_control,long_llm,1,0.95,10,playstore,Parental Control - Kroha,4.5,24900.0,1000000.0,1.0
+play:wtf.riedel.onesec,long_llm,1,0.95,10,playstore,"one sec | app blocker, focus",4.1,32700.0,1000000.0,1.0
+play:xyz.thefor.habits.habits,long_llm,1,0.95,10,playstore,TheFor: Habit Tracker,4.2,3370.0,500000.0,1.0
+play:app.blissful.mood.tracker.journal.selfcare,long_llm,1,0.95,10,playstore,"Blissful Journal, Mood Tracker",4.3,1350.0,50000.0,0.175
+play:app.pumped.workout.log.tracker.strong.gym.exercise,long_llm,1,0.95,10,playstore,Pumped Workout Tracker Gym Log,4.7,7860.0,100000.0,0.175
+play:app.resubs,long_llm,1,0.95,10,playstore,Subscription Manager - ReSubs,4.5,412.0,10000.0,0.0
+play:app.stacked.routines.habits.stacking.productivity.goals,long_llm,1,0.95,10,playstore,"Stacked: Routine, Stack Habits",4.6,778.0,10000.0,1.0
+play:app.streamguide,long_llm,1,0.95,10,playstore,StreamGuide: TV & Movie Finder,4.3,4300.0,100000.0,0.05
+play:app.sweepy.sweepy,long_llm,1,0.95,10,playstore,Sweepy: Home Cleaning Schedule,4.5,17300.0,1000000.0,0.15
+play:app.vinztech.diaryit,long_llm,1,0.95,10,playstore,DiaryIt - Daily Diary Journal,4.6,135.0,1000.0,0.0
+play:betwixt.web.app,long_llm,1,0.95,10,playstore,Betwixt—The Mental Health Game,4.6,6180.0,100000.0,0.3
+play:blueprint.project.management.time.tracker,long_llm,1,0.95,10,playstore,Blueprint: To Do List Pomodoro,4.9,2320.0,10000.0,1.0
+play:co.pixo.apps.babystory,long_llm,1,0.95,10,playstore,Baby Story: Pregnancy Pictures,4.4,1620.0,100000.0,0.05
+play:co.pixo.apps.logoshop.androidApp,long_llm,1,0.95,10,unknown,,,,,
+play:co.pixo.spoke,long_llm,1,0.95,10,playstore,Spoke: Shift Calendar Planner,4.2,116.0,10000.0,0.375
+play:co.pixo.vico,long_llm,1,0.95,10,playstore,VICO: Video Editor & AI Reels,3.6,100.0,10000.0,0.0
+play:co.thefab.mind,long_llm,1,0.95,10,playstore,Lumiere: Ease Stress & Anxiety,4.5,625.0,10000.0,0.125
+play:co.thefab.sleep,long_llm,1,0.95,10,playstore,Lune: Bedtime Sleep Routine,4.2,272.0,10000.0,0.75
+play:co.thomasmenzel.proddy,long_llm,1,0.95,10,playstore,Habit Tracker - Proddy,3.9,8220.0,100000.0,1.0
+play:com.aheadsolutions.aHead,long_llm,1,0.95,10,unknown,,,,,
+play:com.albul.timeplanner,long_llm,1,0.95,10,playstore,Time Planner: Schedule & Tasks,4.1,22400.0,5000000.0,0.9
+play:com.appetiser.bbr.bodiesbyrachel,long_llm,1,0.95,10,playstore,Move With Us,4.6,2470.0,50000.0,0.3
+play:com.asanarebel.perfectdayplanner,long_llm,1,0.95,10,playstore,Perfect Day: Organize Your Day,4.0,2530.0,100000.0,0.925
+play:com.basmo.BibleChat,long_llm,1,0.95,10,unknown,,,,,
+play:com.bybazsoft.challenge,long_llm,1,0.95,10,playstore,Wipepp - Habit Tracking,4.3,35600.0,1000000.0,1.0
+play:com.claudivan.agendadoestudanteplus,long_llm,1,0.95,10,playstore,Student Calendar - Timetable,4.7,53500.0,1000000.0,0.15
+play:com.clevguard.kidsguardpro.parent,long_llm,1,0.95,10,playstore,KidsGuard Pro-Phone Monitoring,3.9,2210.0,1000000.0,0.6
+play:com.curiosity.curiositystream,long_llm,1,0.95,10,playstore,Curiosity Stream,3.1,14600.0,1000000.0,0.15
+play:com.feelgoodcompany.feelgood,long_llm,1,0.95,10,playstore,SELF - Self Care Affirmations,4.6,7810.0,500000.0,0.925
+play:com.fenchtose.reflog,long_llm,1,0.95,10,playstore,Taskito: To-Do List & Planner,4.3,10600.0,1000000.0,1.0
+play:com.fourdesire.journal,long_llm,1,0.95,10,playstore,To-Do Adventure: Task Tracker,3.4,762.0,100000.0,0.625
+play:com.glorify.app,long_llm,1,0.95,10,playstore,Glorify: Devotional & Prayer,4.8,1160000.0,10000000.0,0.325
+play:com.gmail.jmartindev.timetune,long_llm,1,0.95,10,playstore,TimeTune - Schedule Planner,4.6,93400.0,5000000.0,1.0
+play:com.hrd.iam,long_llm,1,0.95,10,playstore,I am - Daily affirmations,4.8,283000.0,5000000.0,0.4
+play:com.intelligentchange.fiveminutejournal,long_llm,1,0.95,10,playstore,5 Minute Journal・Self-care,4.5,10600.0,100000.0,0.35
+play:com.ishafoundation.app,long_llm,1,0.95,10,playstore,Sadhguru - Yoga & Meditation,4.9,143000.0,5000000.0,0.15
+play:com.koala.hypnostories,long_llm,1,0.95,10,playstore,hypnu™: Sleep & Relax Hypnosis,4.2,245.0,10000.0,0.125
+play:com.looploop.tody,long_llm,1,0.95,10,playstore,Tody - Smarter Cleaning,4.8,20100.0,1000000.0,0.15
+play:com.mentallabs.mentalhealth,long_llm,1,0.95,10,playstore,Mental Health: Serene,4.7,1170.0,50000.0,0.175
+play:com.modernsam.modernsam,long_llm,1,0.95,10,playstore,ModernSam: LVL up your life,4.4,436.0,50000.0,0.5
+play:com.motionapp.motionapp,long_llm,1,0.95,10,playstore,Motion: Gamify your Motivation,4.2,176.0,5000.0,0.125
+play:com.moviebase,long_llm,1,0.95,10,playstore,Moviebase: TV & Movie Tracker,4.4,115000.0,1000000.0,0.15
+play:com.museLIVE.quabbleapp,long_llm,1,0.95,10,unknown,,,,,
+play:com.oremus.catholic.bible.rosary.prayer,long_llm,1,0.95,10,playstore,Oremus - Catholic Bible&Prayer,4.9,673000.0,5000000.0,0.15
+play:com.prosper.routines.todo.productive.fabulous.habits.selfcare,long_llm,1,0.95,10,playstore,"SupaTask - Daily Planner, Todo",4.7,7740.0,100000.0,0.3
+play:com.replit.app,long_llm,1,0.95,10,playstore,Replit: Vibe Code Apps,4.1,11600.0,1000000.0,0.15
+play:com.seekrtech.waterapp,long_llm,1,0.95,10,playstore,WaterDo:To Do List & Schedule,4.4,15200.0,500000.0,0.225
+play:daldev.android.gradehelper,long_llm,1,0.95,10,playstore,School Planner,4.3,192000.0,10000000.0,0.2
+play:dev.giall.timelog,long_llm,1,0.95,10,playstore,Timelog - Goal & Time Tracker,4.7,3050.0,100000.0,0.925
+play:global.gps.location.tracker.kids,long_llm,1,0.95,10,playstore,GPS Tracker: Location Tracking,4.5,101000.0,1000000.0,0.65
+play:imagetopdf.pdfconverter.jpgtopdf.pdfeditor,long_llm,1,0.95,10,playstore,Image to PDF - PDF Maker,4.9,1900000.0,50000000.0,0.2
+play:io.konveier.timo,long_llm,1,0.95,10,playstore,Daily Planner Organizer: Brite,4.1,10800.0,100000.0,1.0
+play:io.vyzn.clew,long_llm,1,0.95,10,playstore,Clew: aprende inglés leyendo,5.0,2500.0,50000.0,0.05
+play:is.abide,long_llm,1,0.95,10,playstore,Abide: Bible Meditation Prayer,4.2,21600.0,1000000.0,0.15
+play:journaling.app,long_llm,1,0.95,10,playstore,Honestly: Wellbeing Coaching,4.6,16100.0,100000.0,0.1
+play:org.atmana.zenze,long_llm,1,0.95,10,playstore,App Limit - Limit apps,4.1,4740.0,100000.0,1.0
+play:pdf.reader.pdfviewer.pdfeditor,long_llm,1,0.95,10,playstore,PDF Reader - PDF Editor,4.7,617000.0,50000000.0,0.2
+play:ru.zengalt.simpler,long_llm,1,0.95,10,playstore,Simpler: English learning app,4.8,720000.0,10000000.0,0.2
+play:seekrtech.sleep,long_llm,1,0.95,10,playstore,SleepTown,4.1,13900.0,1000000.0,0.15
+play:tech.butterfly.app,long_llm,1,0.95,10,playstore,Manus AI,4.6,151000.0,1000000.0,0.15
+play:todolist.scheduleplanner.dailyplanner.todo.reminders,long_llm,1,0.95,10,playstore,To-Do List - Schedule Planner,4.6,626000.0,10000000.0,0.2
+ios:id1441578839,long_llm,1,0.95,10,appstore,BPS Focus,1.70412,267.0,0.0,0.5
+ios:id1225155794,long_llm,1,0.95,10,appstore,Flora - Green Focus,4.75739,79634.0,0.0,1.0
+ios:id867374917,long_llm,1,0.95,10,appstore,Focus Keeper - Pomodoro Timer,4.79842,30212.0,0.0,1.0
+play:cc.forestapp,long_llm,1,0.95,10,playstore,Forest: Focus for Productivity,4.5,785000.0,10000000.0,1.0
+ios:id1559730367,long_llm,1,0.95,10,appstore,Focus Traveller - Flow Timer,4.88178,2927.0,0.0,1.0
+ios:id1274938524,long_llm,1,0.95,10,appstore,Focos,4.72654,51114.0,0.0,0.35
+play:com.alt.goodmorning,long_llm,1,0.95,10,playstore,"Routine Planner, Habit Tracker",4.4,16100.0,1000000.0,1.0
+play:com.superbyte.studybunny,long_llm,1,0.95,10,playstore,Study Bunny: Focus Timer,4.5,81500.0,5000000.0,0.775
+ios:id1631305261,long_llm,1,0.95,10,appstore,Focus Tree – Focus Timer,4.68771,3010.0,0.0,1.0
+ios:id1459096306,long_llm,1,0.95,10,appstore,Focus Plant: Forest phone lock,4.72327,5041.0,0.0,1.0
+ios:id1497465230,long_llm,1,0.95,10,appstore,Opal: Screen Time Control,4.77393,52810.0,0.0,1.0
+ios:id975017240,long_llm,1,0.95,10,appstore,Focus - Timer for Productivity,4.39757,1572.0,0.0,1.0
+ios:id1071708905,long_llm,1,0.95,10,appstore,Flipd: focus & study timer,4.51291,6853.0,0.0,1.0
+ios:id6746562271,long_llm,1,0.95,10,appstore,Cat On Chair - Focus Timer,5.0,26.0,0.0,1.0
+ios:id973130201,long_llm,1,0.95,10,appstore,Be Focused – Focus Timer,4.71439,4247.0,0.0,1.0
+ios:id6448949389,long_llm,1,0.95,10,appstore,Exocus | Painless Focus,4.90909,33.0,0.0,1.0
+ios:id1135988868,long_llm,1,0.95,10,appstore,Plantie - Stay focused,4.72325,1897.0,0.0,1.0
+ios:id1423210932,long_llm,1,0.95,10,appstore,Flow - Focus & Pomodoro Timer,4.7744,1547.0,0.0,1.0
+ios:id6753161990,long_llm,1,0.95,10,appstore,"ReactionIQ: Reflex, Focus & IQ",0.0,0.0,0.0,0.5
+ios:id1532875441,long_llm,1,0.95,10,appstore,one sec | screen time + focus,4.83739,21069.0,0.0,0.975
+ios:id1077776989,long_llm,1,0.95,10,appstore,"TIDE: Sleep, Focus, Meditation",4.82974,8170.0,0.0,1.0
+ios:id1265128036,long_llm,1,0.95,10,appstore,Pomodoro - Focus Timer,4.74892,10475.0,0.0,1.0
+ios:id1346247457,long_llm,1,0.95,10,appstore,Endel: Focus & Sleep Sounds,4.65108,29422.0,0.0,1.0
+ios:id953426154,long_llm,1,0.95,10,appstore,Be Focused Pro - Focus Timer,4.63698,2953.0,0.0,1.0
+ios:id1239133490,long_llm,1,0.95,10,appstore,Focus timer - time keeper,4.60405,1427.0,0.0,1.0
+ios:id1110684238,long_llm,1,0.95,10,appstore,Brain.fm: Focus & Sleep Music,4.52521,4602.0,0.0,1.0
+ios:id1471458198,long_llm,1,0.95,10,appstore,Focus Tomato - Let's focus now,4.89606,1597.0,0.0,1.0
+play:kr.co.rinasoft.yktime,long_llm,1,0.95,10,playstore,FLIP - Focus Timer for Study,4.4,37600.0,5000000.0,1.0
+ios:id1542448354,long_llm,1,0.95,10,appstore,FocusFlow - Focus Todo Habit,4.61353,207.0,0.0,1.0
+ios:id1663556775,long_llm,1,0.95,10,appstore,Ultimate Focus - Visual Timer,4.71429,105.0,0.0,1.0
+ios:id1474340105,long_llm,1,0.95,10,appstore,OffScreen: Screen Time Control,4.49047,2308.0,0.0,1.0
+ios:id1579390348,long_llm,1,0.95,10,appstore,Focused Pupa - Earn PupaCoin,4.0,3.0,0.0,1.0
+ios:id1492424176,long_llm,1,0.95,10,appstore,Focus Noodles-Study timer,4.74586,181.0,0.0,1.0
+ios:id1480220328,long_llm,1,0.95,10,appstore,Tiimo: AI Planner & To-do,4.53763,8145.0,0.0,1.0
+ios:id6450676637,long_llm,1,0.95,10,appstore,Age of Pomodoro: Focus timer,4.8764,89.0,0.0,1.0
+play:io.unorderly.structured,long_llm,1,0.95,10,playstore,Structured - Daily Planner,4.5,21200.0,1000000.0,0.275
+play:notion.id,long_llm,1,0.95,10,playstore,"Notion: Notes, Tasks, AI",4.7,298000.0,10000000.0,0.575
+play:com.openai.chatgpt,long_llm,1,0.95,10,playstore,ChatGPT,4.7,28900000.0,500000000.0,0.2
+ios:id983826477,long_llm,1,0.95,10,appstore,Productive - Habit Tracker,4.5975,91116.0,0.0,1.0
+ios:id1103961876,long_llm,1,0.95,10,appstore,Do Habits: Get It Done,4.03768,16662.0,0.0,1.0
+ios:id993066159,long_llm,1,0.95,10,appstore,To Do List MinimaList & Widget,4.76607,39316.0,0.0,0.475
+ios:id1353634006,long_llm,1,0.95,10,appstore,Google Tasks: Get Things Done,4.79831,97043.0,0.0,0.35
+ios:id670870972,long_llm,1,0.95,10,appstore,Productivity - Daily Planner,4.70038,2026.0,0.0,1.0
+ios:id572688855,long_llm,1,0.95,10,appstore,Todoist: To Do List & Calendar,4.80277,119634.0,0.0,0.725
+ios:id1212616790,long_llm,1,0.95,10,appstore,Microsoft To Do,4.72959,247865.0,0.0,0.1
+ios:id626144601,long_llm,1,0.95,10,appstore,TickTick:To-Do List & Calendar,4.85879,38016.0,0.0,1.0
+ios:id461504587,long_llm,1,0.95,10,appstore,Trello: organize anything!,4.38278,6377.0,0.0,0.05
+ios:id1553223828,long_llm,1,0.95,10,appstore,DailyBean - simplest journal,4.81918,65701.0,0.0,0.35
+ios:id1203637303,long_llm,1,0.95,10,appstore,Fabulous: Daily Habit Tracker,4.49259,83819.0,0.0,1.0
+ios:id1029207872,long_llm,1,0.95,10,appstore,Google Keep - Notes and lists,4.49589,19202.0,0.0,0.225
+ios:id281796108,long_llm,1,0.95,10,appstore,Evernote - Notes Organizer,4.41378,71802.0,0.0,0.35
+ios:id1092799236,long_llm,1,0.95,10,appstore,Yuka - Food & Cosmetic Scanner,4.81313,79441.0,0.0,0.1
+ios:id917701230,long_llm,1,0.95,10,appstore,Influenster: Try & Review,4.77626,58064.0,0.0,0.1
+ios:id410395246,long_llm,1,0.95,10,appstore,Microsoft OneNote,4.71863,994223.0,0.0,0.225
+ios:id618783545,long_llm,1,0.95,10,appstore,Slack,3.91251,30473.0,0.0,0.475
+ios:id489969512,long_llm,1,0.95,10,appstore,Asana: Work Management,4.69262,15437.0,0.0,0.475
+ios:id1220976145,long_llm,1,0.95,10,appstore,Google Assistant,4.7356,66906.0,0.0,0.1
+ios:id1553693943,long_llm,1,0.95,10,appstore,3 Tasks - Daily Productivity,5.0,1.0,0.0,1.0
+ios:id497328576,long_llm,1,0.95,10,appstore,Any.do: To do list & Planner,4.62826,49490.0,0.0,0.6
+ios:id997102246,long_llm,1,0.95,10,appstore,Spark AI Email & Calendar,4.63137,79557.0,0.0,1.0
+ios:id1158877342,long_llm,1,0.95,10,appstore,Grammarly: AI Writing Keyboard,4.65563,191772.0,0.0,0.1
+ios:id409077093,long_llm,1,0.95,10,appstore,Priority Matrix,4.64437,1420.0,0.0,0.55
+ios:id6478173099,long_llm,1,0.95,10,appstore,MLS Productivity,4.33333,6.0,0.0,0.275
+ios:id830466924,long_llm,1,0.95,10,appstore,Pomodoro Timer: Stay Focused,4.64755,593.0,0.0,1.0
+ios:id6737629792,long_llm,1,0.95,10,appstore,My Little Pomodoro: Focus,4.77778,18.0,0.0,1.0
+ios:id1621897751,long_llm,1,0.95,10,appstore,Pomodoro Timer: One Thing,4.72848,151.0,0.0,0.625
+ios:id1291898086,long_llm,1,0.95,10,appstore,Toggl Track: Hours & Time Log,4.77439,8989.0,0.0,1.0
+ios:id6465894484,long_llm,1,0.95,10,appstore,Study Time With Rain: Pomodoro,4.7663,552.0,0.0,1.0
+ios:id719462746,long_llm,1,0.95,10,appstore,Flat Tomato (Time Management),4.59999,520.0,0.0,0.5
+ios:id1269788228,long_llm,1,0.95,10,appstore,Freedom: Screen Time Control,4.36742,4567.0,0.0,1.0
+ios:id1521432881,long_llm,1,0.95,10,appstore,Session Pomodoro Focus Timer,4.77876,339.0,0.0,1.0
+ios:id6737768320,long_llm,1,0.95,10,appstore,"Daily Habits, Habit tracker",4.89583,48.0,0.0,1.0
+ios:id6474303915,long_llm,1,0.95,10,appstore,Tomato Timer ۬,4.73184,179.0,0.0,1.0
+ios:id1523968394,long_llm,1,0.95,10,appstore,Focused Work - Pomodoro Timer,4.72931,580.0,0.0,1.0
+play:com.persapps.multitimer,long_llm,1,0.95,10,playstore,MultiTimer: Multiple timers,4.7,3200.0,100000.0,1.0
+play:milki.focus.timer,long_llm,1,0.95,10,playstore,Milki - Pomodoro Study Timer,4.6,13000.0,100000.0,1.0
+ios:id1510276630,long_llm,1,0.95,10,appstore,LoveTodo - Pomodoro&Otome Game,4.30435,23.0,0.0,0.275
+ios:id391564049,long_llm,1,0.95,10,appstore,Timer+ Timers and Stopwatches,4.76372,39042.0,0.0,1.0
+ios:id1279716547,long_llm,1,0.95,10,appstore,Timer Plus - Workouts Timer,4.83922,49457.0,0.0,1.0
+play:com.fehnerssoftware.visualtimer,long_llm,1,0.95,10,playstore,Visual Countdown Timer,4.7,4330.0,500000.0,0.925
+ios:id1181028777,long_llm,1,0.95,10,appstore,Flip Clock - digital widgets,4.63777,60956.0,0.0,0.225
+ios:id1496908204,long_llm,1,0.95,10,appstore,Little Timer Hatch Countdown,4.5372,10981.0,0.0,0.725
+ios:id332520417,long_llm,1,0.95,10,appstore,Time Timer,4.60425,13938.0,0.0,1.0
+ios:id1403700342,long_llm,1,0.95,10,appstore,Fullscreen Clock: Flip & Focus,4.73437,1807.0,0.0,1.0
+ios:id1248966041,long_llm,1,0.95,10,appstore,SmartWOD Timer - WOD Clock,4.93954,54055.0,0.0,1.0
+ios:id1304344207,long_llm,1,0.95,10,appstore,Flip Timer & stopwatch,4.57261,7396.0,0.0,0.675
+ios:id826016623,long_llm,1,0.95,10,appstore,PushPress Workout Timer,4.82024,5374.0,0.0,0.925
+ios:id1403367428,long_llm,1,0.95,10,appstore,Countdown,4.81219,142732.0,0.0,0.225
+ios:id475816966,long_llm,1,0.95,10,appstore,Seconds Interval Timer,4.70221,22536.0,0.0,1.0
+ios:id1067755201,long_llm,1,0.95,10,appstore,Alarm & Timer,4.31496,1978.0,0.0,0.425
+ios:id1078562105,long_llm,1,0.95,10,appstore,Timer ٞ,4.41683,974.0,0.0,0.25
+ios:id1255964203,long_llm,1,0.95,10,appstore,Tabata Timer: Interval Timer.,4.89243,8265.0,0.0,1.0
+ios:id664563975,long_llm,1,0.95,10,appstore,Tabata Timer and HIIT Timer,4.81555,73318.0,0.0,0.85
+ios:id1554256831,long_llm,1,0.95,10,appstore,Interval Timer Plus,4.89842,4607.0,0.0,0.925
+ios:id481229967,long_llm,1,0.95,10,appstore,Repeat Timer: Interval Remind,4.54864,6702.0,0.0,1.0
+ios:id1138584627,long_llm,1,0.95,10,appstore,Timer & stopwatch - Timeglass,4.6936,1423.0,0.0,1.0
+ios:id890352174,long_llm,1,0.95,10,appstore,Simple Timer & Alarm ListTimer,4.65283,265.0,0.0,1.0
+ios:id981379631,long_llm,1,0.95,10,appstore,MultipleTimers+,4.66411,131.0,0.0,1.0
+ios:id557785123,long_llm,1,0.95,10,appstore,Photo Timer+,4.74899,7773.0,0.0,0.425
+ios:id415294299,long_llm,1,0.95,10,appstore,Timer Auto Camera - Set Second,4.69784,973.0,0.0,1.0
+ios:id6443672034,long_llm,1,0.95,10,appstore,Interval Timer: Tabata & HIIT,4.875,296.0,0.0,1.0
+ios:id6739964338,long_llm,1,0.95,10,appstore,Tabata Timer 2025,4.97143,35.0,0.0,0.0
+ios:id590573213,long_llm,1,0.95,10,appstore,UniTimer,4.8,15.0,0.0,0.525
+ios:id1070535098,long_llm,1,0.95,10,appstore,MultiTimer-romer,4.72727,22.0,0.0,0.4
+ios:id1531048091,long_llm,1,0.95,10,appstore,(Not Boring) Timer,4.80478,1675.0,0.0,1.0
+ios:id346432063,long_llm,1,0.95,10,appstore,Tabata Pro HIIT Interval Timer,4.85554,17306.0,0.0,1.0
+ios:id1501162474,long_llm,1,0.95,10,appstore,Multi-Timer; Stopwatch & Timer,4.78313,83.0,0.0,0.875
+ios:id1441909643,long_llm,1,0.95,10,appstore,YPT - Study Group,4.67555,1088.0,0.0,0.05
+ios:id1519159240,long_llm,1,0.95,10,appstore,TimerTiTi - Timer for Study,4.68421,19.0,0.0,0.525
+ios:id1560095006,long_llm,1,0.95,10,appstore,Study Tracker - Plan & Record,3.94444,18.0,0.0,0.15
+ios:id1609750176,long_llm,1,0.95,10,appstore,Multi Timer - Visual Timer,4.5,2.0,0.0,1.0
+ios:id6447776505,long_llm,1,0.95,10,appstore,My Study Room,4.0,2.0,0.0,0.025
+ios:id1644638467,long_llm,1,0.95,10,appstore,Study Time Record,4.42856,14.0,0.0,0.0
+ios:id505410049,long_llm,1,0.95,10,appstore,Studyplus - Record study,4.76412,301.0,0.0,0.0
+ios:id1318534582,long_llm,1,0.95,10,appstore,Focusi: Study Timer,4.46666,15.0,0.0,1.0
+ios:id6444372570,long_llm,1,0.95,10,appstore,Study Timer: Focus & Pomodoro,4.72727,11.0,0.0,1.0
+ios:id1271515042,long_llm,1,0.95,10,appstore,"Visual Timer, Liquid Hourglass",4.64126,538.0,0.0,1.0
+ios:id6737145799,long_llm,1,0.95,10,appstore,Study Timer - Shadow Task,5.0,3.0,0.0,1.0
+ios:id6751235134,long_llm,1,0.95,10,appstore,HabitVibe: Habit Tracker App,5.0,1.0,0.0,1.0
+play:com.minding.myroutine,long_llm,1,0.95,10,playstore,MyRoutine: Routine Habit Goal,3.9,12000.0,1000000.0,1.0
+play:daily.planner.routine.habits,long_llm,1,0.95,10,playstore,Me+ Lifestyle Routine,4.9,799000.0,10000000.0,1.0
+ios:id6749454677,long_llm,1,0.95,10,appstore,Habit-Tracker Routine Planner,5.0,8.0,0.0,0.15
+ios:id1394150432,long_llm,1,0.95,10,appstore,everyday - Habit Tracker,4.70552,4109.0,0.0,1.0
+ios:id1111447047,long_llm,1,0.95,10,appstore,Habitify: Habit Tracker,4.59616,6099.0,0.0,1.0
+ios:id522008611,long_llm,1,0.95,10,appstore,ATracker Time Tracker,4.68501,3016.0,0.0,0.925
+play:com.studio.hellohabit,long_llm,1,0.95,10,playstore,HelloHabit - Habit Tracker,4.7,4030.0,100000.0,1.0
+ios:id1263789061,long_llm,1,0.95,10,appstore,Habit Tracker: ShineDay Streak,4.70791,3119.0,0.0,1.0
+ios:id6446997766,long_llm,1,0.95,10,appstore,Grit: Daily Habit Tracker,4.81206,7396.0,0.0,1.0
+ios:id1517360968,long_llm,1,0.95,10,appstore,Habio - Daily Habit Tracker,4.2903,3958.0,0.0,1.0
+ios:id1639800794,long_llm,1,0.95,10,appstore,RoutineFlow: Guided Routines,4.77278,2117.0,0.0,0.8
+ios:id1519999420,long_llm,1,0.95,10,appstore,"Daily Planner, Schedule: Brite",4.57578,3418.0,0.0,1.0
+ios:id393159800,long_llm,1,0.95,10,appstore,Way of Life - Habit Tracker,4.81555,4798.0,0.0,0.675
+ios:id1576857102,long_llm,1,0.95,10,appstore,Workout Tracker Gentler Streak,4.72071,8586.0,0.0,0.05
+ios:id464254577,long_llm,1,0.95,10,appstore,Strong Workout Tracker Gym Log,4.8655,108121.0,0.0,0.35
+ios:id1149192857,long_llm,1,0.95,10,appstore,Habit Hub: Routine & Schedule,4.65604,7975.0,0.0,1.0
+ios:id672401817,long_llm,1,0.95,10,appstore,Strides: Habit Tracker + Goals,4.78895,18223.0,0.0,0.725
+ios:id1090990601,long_llm,1,0.95,10,appstore,Tally: The Anything Tracker,4.34673,3928.0,0.0,0.425
+ios:id1458862350,long_llm,1,0.95,10,appstore,Hevy - Workout Tracker Gym Log,4.92285,43783.0,0.0,0.475
+ios:id1514915737,long_llm,1,0.95,10,appstore,Awesome Habits: Habit Tracker,4.80293,751.0,0.0,1.0
+ios:id519561306,long_llm,1,0.95,10,appstore,ATracker PRO Time Tracker,4.71347,705.0,0.0,0.875
+ios:id6470944782,long_llm,1,0.95,10,appstore,Atomic: Habit Tracker,4.7,10.0,0.0,0.525
+ios:id1636512377,long_llm,1,0.95,10,appstore,HabitBoard - Habit Tracker,4.85714,7.0,0.0,1.0
+ios:id1547137474,long_llm,1,0.95,10,appstore,Onrise: Habit Tracker & Focus,4.84163,1989.0,0.0,1.0
+play:com.roehl.habitkit,long_llm,1,0.95,10,playstore,Habit Tracker - HabitKit,4.7,8720.0,500000.0,1.0
+ios:id1522121879,long_llm,1,0.95,10,appstore,Habit Rabbit: Habit Tracker,4.66775,7398.0,0.0,1.0
+ios:id6474421906,long_llm,1,0.95,10,appstore,Atoms - from Atomic Habits,4.82714,9349.0,0.0,1.0
+ios:id6480042457,long_llm,1,0.95,10,appstore,Habit Tracker - Daily Goals,4.83406,1579.0,0.0,1.0
+ios:id1445651730,long_llm,1,0.95,10,appstore,Habit — Daily Tracker,3.69486,2412.0,0.0,1.0
+ios:id1389900237,long_llm,1,0.95,10,appstore,Habit Tracker - Productify,4.44123,485.0,0.0,1.0
+ios:id963034692,long_llm,1,0.95,10,appstore,Streaks,4.81907,27300.0,0.0,0.225
+ios:id1593891243,long_llm,1,0.95,10,appstore,(Not Boring) Habits,4.80215,4837.0,0.0,1.0
+ios:id1479581895,long_llm,1,0.95,10,appstore,Avocation - Habit Tracker,4.6463,933.0,0.0,1.0
+ios:id1403517519,long_llm,1,0.95,10,appstore,Habit Tracker Calendar: Evoday,4.76402,1284.0,0.0,1.0
+ios:id6742149187,long_llm,1,0.95,10,appstore,Tippy - Habit Tracker Pet,0.0,0.0,0.0,1.0
+ios:id1041482672,long_llm,1,0.95,10,appstore,Habit-Bull: Daily Goal Planner,4.66696,8056.0,0.0,1.0
+ios:id994882113,long_llm,1,0.95,10,appstore,Habitica: Gamified Taskmanager,4.03043,2168.0,0.0,1.0
+ios:id6752837361,long_llm,1,0.95,10,appstore,HabTap - Habit Tracker,0.0,0.0,0.0,1.0
+ios:id1253577148,long_llm,1,0.95,10,appstore,HabitMinder • Habit Tracker,4.62284,5674.0,0.0,1.0
+ios:id6753177043,long_llm,1,0.95,10,appstore,HabitWay - Habit Builder,0.0,0.0,0.0,1.0
+ios:id1194023242,long_llm,1,0.95,10,appstore,Daylio Journal - Daily Diary,4.7731,55452.0,0.0,0.35
+ios:id1563837295,long_llm,1,0.95,10,appstore,Check Calendar - Habit Tracker,4.75889,983.0,0.0,1.0
+ios:id1055295863,long_llm,1,0.95,10,appstore,Today Habit tracker,4.67927,3545.0,0.0,1.0
+ios:id1506160130,long_llm,1,0.95,10,appstore,Purity - Porn Block Browser,4.61568,791.0,0.0,0.875
+ios:id1645639057,long_llm,1,0.95,10,appstore,Refocus: App Blocker & Limits,4.80478,6639.0,0.0,1.0
+ios:id1474967653,long_llm,1,0.95,10,appstore,BlockSite: Block Apps & Focus,4.21813,5382.0,0.0,1.0
+ios:id1571638750,long_llm,1,0.95,10,appstore,BlankPage - stay focused,4.47634,317.0,0.0,0.5
+ios:id1515753232,long_llm,1,0.95,10,appstore,AppBlock: Block Apps & Website,4.55348,4282.0,0.0,1.0
+ios:id726780077,long_llm,1,0.95,10,appstore,Brainbuddy: Quit Porn Now,4.67587,24095.0,0.0,0.35
+ios:id885146361,long_llm,1,0.95,10,appstore,Website Blocker - Browse Safe,3.97753,89.0,0.0,1.0
+ios:id1522854086,long_llm,1,0.95,10,appstore,BlockerX: Pornblocker app,4.40128,6245.0,0.0,1.0
+ios:id335318146,long_llm,1,0.95,10,appstore,Covenant Eyes,4.33462,54587.0,0.0,0.35
+ios:id1541027222,long_llm,1,0.95,10,appstore,ScreenZen- Screen Time Control,4.84489,25215.0,0.0,0.6
+ios:id1018301773,long_llm,1,0.95,10,appstore,AdBlock Pro for Safari,4.47207,63509.0,0.0,1.0
+ios:id6741067501,long_llm,1,0.95,10,appstore,Website Blocker - Block Sites,4.4878,123.0,0.0,1.0
+ios:id1365531024,long_llm,1,0.95,10,appstore,1Blocker - Adblock,4.49368,11787.0,0.0,1.0
+ios:id1052879175,long_llm,1,0.95,10,appstore,Brave Browser & Search Engine,4.79441,514019.0,0.0,0.975
+ios:id1022831885,long_llm,1,0.95,10,appstore,Robokiller: Spam Call Blocker,4.50873,410549.0,0.0,0.975
+ios:id6705133649,long_llm,1,0.95,10,appstore,Porn & Web Blocker : BlockP,3.9,40.0,0.0,1.0
+ios:id1606029127,long_llm,1,0.95,10,appstore,No Nut: Quit Porn Addiction,4.72388,3216.0,0.0,0.425
+ios:id1030595027,long_llm,1,0.95,10,appstore,Wipr,4.28252,1030.0,0.0,1.0
+ios:id691121579,long_llm,1,0.95,10,appstore,AdBlock,4.3007,33418.0,0.0,1.0
+ios:id6446425510,long_llm,1,0.95,10,appstore,Crumblr — Hide cookies popups,4.29412,17.0,0.0,0.525
+ios:id1102208660,long_llm,1,0.95,10,appstore,Shield Porn Blocker,4.29607,331.0,0.0,0.75
+ios:id1555980557,long_llm,1,0.95,10,appstore,SkyBlue Ad Blocker for Safari,4.4783,830.0,0.0,1.0
+ios:id1506604517,long_llm,1,0.95,10,appstore,AdLock: Ads Blocker & Privacy,4.41648,1916.0,0.0,1.0
+ios:id1071244095,long_llm,1,0.95,10,appstore,xBlock Porn Blocker,4.64362,564.0,0.0,1.0
+ios:id1551848949,long_llm,1,0.95,10,appstore,Migiri: Porn Blocker & More,4.53763,3162.0,0.0,1.0
+ios:id6740869199,long_llm,1,0.95,10,appstore,Blkitfy Block Websites & Limit,4.4,5.0,0.0,1.0
+ios:id6504861501,long_llm,1,0.95,10,appstore,Ghostery Privacy Ad Blocker,4.30302,99.0,0.0,0.75
+ios:id1564900435,long_llm,1,0.95,10,appstore,Total Adblock - Ad Blocker,3.95187,39828.0,0.0,1.0
+ios:id1645472970,long_llm,1,0.95,10,appstore,OmniLock,4.125,24.0,0.0,1.0
+ios:id1405229961,long_llm,1,0.95,10,appstore,Ad Remover - Ad Blocker,3.68662,1854.0,0.0,0.425
+ios:id1508341781,long_llm,1,0.95,10,appstore,Ad Blocker VPN & DNS – Blokada,3.8973,9387.0,0.0,1.0
+ios:id1023924541,long_llm,1,0.95,10,appstore,BlockBear!,4.66258,2694.0,0.0,1.0
+ios:id1603024803,long_llm,1,0.95,10,appstore,Ochi: Block Websites & Apps,4.53793,145.0,0.0,1.0
+ios:id663592361,long_llm,1,0.95,10,appstore,"DuckDuckGo Browser, Search, AI",4.85132,2201934.0,0.0,0.85
+ios:id1047223162,long_llm,1,0.95,10,appstore,AdGuard  — adblock&privacy,4.30372,16996.0,0.0,0.975
+ios:id1544743900,long_llm,1,0.95,10,appstore,Hush Nag Blocker,4.43541,960.0,0.0,0.5
+ios:id1037709284,long_llm,1,0.95,10,appstore,Roadblock - Content Blocker,4.17828,258.0,0.0,1.0
+ios:id6443399771,long_llm,1,0.95,10,appstore,Online Shield - Fast VPN Proxy,4.54884,7964.0,0.0,0.8
+ios:id1529362535,long_llm,1,0.95,10,appstore,Halt: AdBlock Browser,4.56587,1875.0,0.0,1.0
+ios:id6451248050,long_llm,1,0.95,10,appstore,App Lock - Block Apps,4.58249,6079.0,0.0,0.3
+ios:id6476949191,long_llm,1,0.95,10,appstore,Super App Lock: Lock Apps,4.74052,2004.0,0.0,0.3
+ios:id1569973513,long_llm,1,0.95,10,appstore,App Lock - Lock Apps & Photos,4.49985,22833.0,0.0,0.225
+ios:id1509154892,long_llm,1,0.95,10,appstore,AppLock - photo lock,3.56389,360.0,0.0,0.0
+ios:id6451398522,long_llm,1,0.95,10,appstore,PAUSED: Screen Time Control +,4.51724,29.0,0.0,0.875
+ios:id914825567,long_llm,1,0.95,10,appstore,Parental Control App - Kidslox,4.30626,37687.0,0.0,1.0
+ios:id6444819615,long_llm,1,0.95,10,appstore,Cape: Screen Time Master,4.63533,14498.0,0.0,0.225
+ios:id1385417904,long_llm,1,0.95,10,appstore,FamiSafe-Parental Control App,4.01851,3998.0,0.0,1.0
+ios:id6502186144,long_llm,1,0.95,10,appstore,App Blocker: Limit Screen Time,4.48101,79.0,0.0,1.0
+ios:id986999874,long_llm,1,0.95,10,appstore,Hiya: Spam Blocker & Caller ID,4.53827,233972.0,0.0,0.475
+ios:id6448239603,long_llm,1,0.95,10,appstore,App Lock,4.60923,3598.0,0.0,0.3
+ios:id954029412,long_llm,1,0.95,10,appstore,Parental Control App - OurPact,4.39682,36734.0,0.0,1.0
+ios:id1260462853,long_llm,1,0.95,10,appstore,Ad blocker by Magic Lasso,4.29335,767.0,0.0,1.0
+ios:id1616433953,long_llm,1,0.95,10,appstore,"App Lock, Hide App & Lock Apps",4.40089,11492.0,0.0,0.1
+ios:id1615561965,long_llm,1,0.95,10,appstore,RealCall - Spam Call Blocker,4.49504,21562.0,0.0,1.0
+ios:id777875529,long_llm,1,0.95,10,appstore,Verizon Call Filter,4.68999,245745.0,0.0,0.975
+ios:id1258654743,long_llm,1,0.95,10,appstore,Smart Home Manager,4.75738,394335.0,0.0,0.225
+ios:id1134727588,long_llm,1,0.95,10,appstore,Nomorobo - Robocall Blocker,4.4732,20372.0,0.0,0.6
+ios:id6746379633,long_llm,1,0.95,10,appstore,Monk – #1 Physical App Blocker,5.0,1.0,0.0,1.0
+ios:id1242689729,long_llm,1,0.95,10,appstore,番茄ToDo-极简高效自律番茄钟,4.915,4577.0,0.0,0.175
+ios:id375121227,long_llm,1,0.95,10,appstore,Today FM,0.0,0.0,0.0,0.0
+ios:id1570856853,long_llm,1,0.95,10,appstore,Blank Spaces Launcher (-),4.60173,2772.0,0.0,0.175
+ios:id6448859727,long_llm,1,0.95,10,appstore,World Clock Master: Time Zones,4.69608,612.0,0.0,0.0
+ios:id1189844594,long_llm,1,0.95,10,appstore,Block Distracting Websites,4.26339,224.0,0.0,1.0
+ios:id1673743726,long_llm,1,0.95,10,appstore,Unpluq: Reduce Screen Time,4.79277,859.0,0.0,1.0
+ios:id6670452224,long_llm,1,0.95,10,appstore,Timmy: App Blocker,4.86076,79.0,0.0,1.0
+ios:id6477306136,long_llm,1,0.95,10,appstore,Blokd - App Blocker,4.29208,202.0,0.0,1.0
+ios:id6736793117,long_llm,1,0.95,10,appstore,Foqos,4.90714,280.0,0.0,0.875
+ios:id6443657745,long_llm,1,0.95,10,appstore,BB - Screen Time & App Blocker,4.86348,315.0,0.0,1.0
+ios:id6479611902,long_llm,1,0.95,10,appstore,Superhappy Screen Time Blocker,4.62825,269.0,0.0,1.0
+ios:id6608976383,long_llm,1,0.95,10,appstore,Website & App Blocker | Atten,4.72441,127.0,0.0,1.0
+ios:id1662217862,long_llm,1,0.95,10,appstore,Wipr 2,4.76302,768.0,0.0,0.375
+ios:id1572515807,long_llm,1,0.95,10,appstore,ClearSpace: Reduce Screen Time,4.75479,7353.0,0.0,1.0
+ios:id6451370747,long_llm,1,0.95,10,appstore,Screen Time Control: Unplugged,4.94444,18.0,0.0,1.0
+ios:id1644737181,long_llm,1,0.95,10,appstore,BePresent: Screen Time Control,4.81181,13306.0,0.0,1.0
+ios:id6446800962,long_llm,1,0.95,10,appstore,Roots: Screen Time Control,4.78752,1266.0,0.0,1.0
+ios:id6738301540,long_llm,1,0.95,10,appstore,Jolt: Screen Time Control,2.0,1.0,0.0,1.0
+ios:id6747114186,long_llm,1,0.95,10,appstore,FlowIn - Screen Time Control,5.0,17.0,0.0,1.0
+ios:id1055315077,long_llm,1,0.95,10,appstore,Screen Time Parental Control,1.46286,175.0,0.0,0.75
+ios:id1440668949,long_llm,1,0.95,10,appstore,Circle Parental Controls App,4.19737,13366.0,0.0,1.0
+ios:id6747120789,long_llm,1,0.95,10,appstore,FitPhone: Earn Screen Time,4.77647,85.0,0.0,0.375
+play:com.qustodio.family.parental.control.app.screentime,long_llm,1,0.95,10,playstore,Qustodio Parental Control App,3.6,19900.0,5000000.0,1.0
+ios:id6751124216,long_llm,1,0.95,10,appstore,Pause: Screen Time Control,0.0,0.0,0.0,1.0
+ios:id6737131495,long_llm,1,0.95,10,appstore,Screen Time Control: Inscreen,4.65625,32.0,0.0,0.875
+ios:id6739589530,long_llm,1,0.95,10,appstore,touch grass: screen time limit,4.68372,2795.0,0.0,1.0
+ios:id6502852840,long_llm,1,0.95,10,appstore,Thrive - Smarter screen time,0.0,0.0,0.0,0.875
+ios:id6469043032,long_llm,1,0.95,10,appstore,Focus - Screen Time Control,4.73684,57.0,0.0,1.0
+ios:id1635965517,long_llm,1,0.95,10,appstore,ScreenTime+ | Focus App Block,4.35294,17.0,0.0,1.0
+ios:id1150085200,long_llm,1,0.95,10,appstore,Google Family Link,4.6692,252248.0,0.0,0.85
+ios:id1190074407,long_llm,1,0.95,10,appstore,Nintendo Switch Parental Cont…,4.71715,156922.0,0.0,0.725
+ios:id1596059191,long_llm,1,0.95,10,appstore,Kids360: Parental Control,4.63632,5744.0,0.0,1.0
+ios:id1365784521,long_llm,1,0.95,10,appstore,Parental Control App - Kroha,4.09483,232.0,0.0,1.0
+ios:id994098803,long_llm,1,0.95,10,appstore,Findmykids: GPS Phone Tracker,4.73398,20002.0,0.0,0.1
+ios:id353334746,long_llm,1,0.95,10,appstore,AT&T Secure Family® parent app,4.58343,19603.0,0.0,1.0
+ios:id1226900784,long_llm,1,0.95,10,appstore,MMGuardian Parent App,4.30602,964.0,0.0,1.0
+ios:id923408272,long_llm,1,0.95,10,appstore,Verizon Family,4.27299,33059.0,0.0,0.35
+ios:id1182397829,long_llm,1,0.95,10,appstore,mSpy: Find my Friends Phone,4.21983,11836.0,0.0,0.225
+ios:id6692626981,long_llm,1,0.95,10,appstore,Parental Control App - Kidsee,4.76051,309.0,0.0,0.875
+ios:id6741681993,long_llm,1,0.95,10,appstore,Number Location Phone Locator,4.36975,119.0,0.0,0.125
+ios:id875252906,long_llm,1,0.95,10,appstore,SecureTeen Parental Control,4.24376,841.0,0.0,0.875
+ios:id6444557796,long_llm,1,0.95,10,appstore,Kids Mode & Child Lock :Suzy,4.78711,512.0,0.0,0.0
+ios:id299153586,long_llm,1,0.95,10,appstore,Parental Control App - Mobicip,3.33439,1896.0,0.0,1.0
+ios:id1575693779,long_llm,1,0.95,10,appstore,Eyezy - Pro Parental Control,4.72998,4707.0,0.0,0.175
+ios:id1634119476,long_llm,1,0.95,10,appstore,BrightCanary Parental Controls,4.37455,550.0,0.0,0.25
+ios:id1348097043,long_llm,1,0.95,10,appstore,T-Mobile FamilyMode,4.50344,14407.0,0.0,0.475
+ios:id1450358983,long_llm,1,0.95,10,appstore,Kid Security: Parental Control,4.54509,255.0,0.0,1.0
+ios:id1613169688,long_llm,1,0.95,10,appstore,Parental Controls by Ohana,4.25086,291.0,0.0,0.25
+ios:id1483440638,long_llm,1,0.95,10,appstore,SafeKiddo Parental Control,0.0,0.0,0.0,0.625
+ios:id1671825554,long_llm,1,0.95,10,appstore,Adora - Parental Control,4.91667,12.0,0.0,0.025
+ios:id1502380751,long_llm,1,0.95,10,appstore,Parental Control: SmartDaddy,4.8,5.0,0.0,1.0
+ios:id6741699842,long_llm,1,0.95,10,appstore,Havenly Parental Control,5.0,4.0,0.0,0.775
+ios:id6742233914,long_llm,1,0.95,10,appstore,Family Find: Parental Control,4.68421,19.0,0.0,0.4
+ios:id6458733529,long_llm,1,0.95,10,appstore,Parental Control App - Blokada,5.0,1.0,0.0,1.0
+ios:id6446271738,long_llm,1,0.95,10,appstore,KidsNanny - Parental Control,5.0,1.0,0.0,1.0
+ios:id6450408337,long_llm,1,0.95,10,appstore,Family Guard: Parental Control,5.0,1.0,0.0,0.9
+ios:id1156285759,long_llm,1,0.95,10,appstore,Safe Family: Screen Time App,4.22653,980.0,0.0,1.0
+ios:id1451295827,long_llm,1,0.95,10,appstore,Impulse - Brain Training,4.74885,782299.0,0.0,0.35
+ios:id1010391170,long_llm,1,0.95,10,appstore,Clarity: CBT Self Help Journal,4.84478,27967.0,0.0,0.1
+ios:id1624890673,long_llm,1,0.95,10,appstore,ADHD Lifehacks For Adults Pro,4.46316,475.0,0.0,0.375
+ios:id1084540807,long_llm,1,0.95,10,appstore,Vocabulary - Learn words daily,4.79934,167255.0,0.0,0.1
+ios:id1528183849,long_llm,1,0.95,10,appstore,Inflow - Manage your ADHD,4.38493,5388.0,0.0,1.0
+ios:id1562706384,long_llm,1,0.95,10,appstore,How We Feel,4.86644,24521.0,0.0,0.1
+ios:id6472498233,long_llm,1,0.95,10,appstore,Propel: ADHD Games for Adults,4.79692,650.0,0.0,1.0
+ios:id1670958524,long_llm,1,0.95,10,appstore,"Clarify: ADHD Organizer, Timer",4.34004,2238.0,0.0,1.0
+ios:id1494584871,long_llm,1,0.95,10,appstore,"ADHD Organizer, Daily Planner",4.81928,1151.0,0.0,1.0
+ios:id1540472983,long_llm,1,0.95,10,appstore,Betwixt–The Mental Health Game,4.87328,2912.0,0.0,0.3
+play:com.llamaapp,long_llm,1,0.95,10,playstore,Llama Life ADHD Routine & Task,4.0,110.0,10000.0,0.625
+ios:id874656917,long_llm,1,0.95,10,appstore,I am - Daily Affirmations,4.84734,678061.0,0.0,0.35
+play:com.akiliinteractive.t01a,long_llm,1,0.95,10,playstore,EndeavorOTC®: Outplay ADHD,3.3,385.0,50000.0,1.0
+ios:id1492017640,long_llm,1,0.95,10,appstore,Tappy: Self Care Fidgeter,4.81524,17374.0,0.0,0.85
+ios:id1482225056,long_llm,1,0.95,10,appstore,Joon: Kids ADHD Chore Tracker,4.6866,6353.0,0.0,0.675
+ios:id1347447233,long_llm,1,0.95,10,appstore,TimeFinder: Time Blocking,4.66986,1669.0,0.0,0.425
+ios:id1628994767,long_llm,1,0.95,10,appstore,Numo: Cringe-Free ADHD App,4.32451,983.0,0.0,0.0
+ios:id1466184914,long_llm,1,0.95,10,appstore,Hiki: Autism ADHD & ND Dating,3.7768,1707.0,0.0,0.175
+ios:id920161006,long_llm,1,0.95,10,appstore,Breethe: Sleep & Meditation,4.73107,64676.0,0.0,0.475
+ios:id6743442157,long_llm,1,0.95,10,appstore,MellowFlow - Focus for ADHD,4.46392,97.0,0.0,1.0
+ios:id6473397856,long_llm,1,0.95,10,appstore,ADHD Planner AI Task: Splitti,4.375,16.0,0.0,1.0
+ios:id804284729,long_llm,1,0.95,10,appstore,Mindfulness Coach,4.76734,10122.0,0.0,0.1
+play:com.getsomeheadspace.android,long_llm,1,0.95,10,playstore,Headspace: Meditation & Health,4.4,337000.0,10000000.0,0.825
+ios:id337472899,long_llm,1,0.95,10,appstore,Insight Timer–Meditate & Sleep,4.89578,428100.0,0.0,1.0
+play:se.lichtenstein.mind.en,long_llm,1,0.95,10,playstore,The Mindfulness App,4.3,20400.0,1000000.0,0.15
+ios:id571800810,long_llm,1,0.95,10,appstore,Calm,4.77501,1904442.0,0.0,0.85
+ios:id369838631,long_llm,1,0.95,10,appstore,Breathing Zone,4.78813,3252.0,0.0,0.05
+ios:id1273719339,long_llm,1,0.95,10,appstore,Plum Village: Zen Meditation,4.95824,3521.0,0.0,0.3
+ios:id1326310617,long_llm,1,0.95,10,appstore,Healthy Minds Program,4.87298,7621.0,0.0,0.175
+ios:id380816407,long_llm,1,0.95,10,appstore,Mindfulness Bell,4.60276,10971.0,0.0,0.225
+ios:id1372575227,long_llm,1,0.95,10,appstore,Gratitude: Self-Care Journal,4.88349,44083.0,0.0,0.6
+play:com.elevatelabs.geonosis,long_llm,1,0.95,10,playstore,Balance: Meditation & Sleep,4.7,46800.0,1000000.0,1.0
+play:com.mindfulness.android,long_llm,1,0.95,10,playstore,Mindfulness.com Meditation App,4.7,4360.0,500000.0,0.175
+ios:id6739004389,long_llm,1,0.95,10,appstore,Begin: Mindfulness & Wellbeing,4.5,30.0,0.0,0.25
+play:com.changecollective.tenpercenthappier,long_llm,1,0.95,10,playstore,Happier Meditation,4.8,18500.0,500000.0,0.35
+play:org.wakingup.android,long_llm,1,0.95,10,playstore,Waking Up: Meditation & Wisdom,4.7,41300.0,1000000.0,0.525
+ios:id1461517107,long_llm,1,0.95,10,appstore,Mesmerize - Visual Meditation,4.72949,47877.0,0.0,0.975
+ios:id1190294015,long_llm,1,0.95,10,appstore,"Meditopia: Sleep, Meditation",4.85174,21827.0,0.0,0.35
+ios:id1482725254,long_llm,1,0.95,10,appstore,Open: Breathwork + Meditation,4.89212,11077.0,0.0,0.35
+play:com.aurahealth,long_llm,1,0.95,10,playstore,"Aura: Meditation & Sleep, CBT",4.6,14800.0,1000000.0,0.4
+ios:id1504538204,long_llm,1,0.95,10,appstore,InnerNow: Meditation & Joy,4.86805,39371.0,0.0,0.1
+ios:id982502810,long_llm,1,0.95,10,appstore,3 Minute Mindfulness,4.6558,2086.0,0.0,0.175
+ios:id1093360165,long_llm,1,0.95,10,appstore,"Simple Habit Sleep, Meditation",4.80542,77848.0,0.0,1.0
+ios:id1052216403,long_llm,1,0.95,10,appstore,MindDoc: Mental Health Support,4.70552,29445.0,0.0,0.1
+ios:id1241229134,long_llm,1,0.95,10,appstore,Reflectly - Journal & AI Diary,4.56697,81710.0,0.0,0.475
+ios:id367506176,long_llm,1,0.95,10,appstore,Relax Meditation: Guided Mind,4.71389,8986.0,0.0,0.3
+ios:id941222646,long_llm,1,0.95,10,appstore,Petit BamBou: Mindfulness,4.85799,1824.0,0.0,0.05
+ios:id1474170096,long_llm,1,0.95,10,appstore,FitMind: Mental Fitness,4.84115,15568.0,0.0,0.35
+ios:id1108786610,long_llm,1,0.95,10,appstore,Mindvalley: Self Improvement,4.75946,6211.0,0.0,0.175
+ios:id1382141225,long_llm,1,0.95,10,appstore,Yoga Fit | Yoga for Beginners,4.81832,118925.0,0.0,0.225
+ios:id1570156834,long_llm,1,0.95,10,appstore,"Mo Meditation, Sleep, Recovery",4.50638,2269.0,0.0,0.175
+ios:id687421118,long_llm,1,0.95,10,appstore,Buddhify: Guided Meditation,4.75197,6100.0,0.0,0.175
+ios:id1436994560,long_llm,1,0.95,10,appstore,Portal - Escape Into Nature,4.7773,9605.0,0.0,1.0
+ios:id1292587933,long_llm,1,0.95,10,appstore,Lojong: Meditation & Relax,4.95097,673.0,0.0,0.75
+ios:id667197203,long_llm,1,0.95,10,appstore,Daily Affirmations | #Mindful,4.79609,13418.0,0.0,0.1
+ios:id515571863,long_llm,1,0.95,10,appstore,Pocket Meditation Timer,4.39783,1385.0,0.0,0.55
+ios:id1465713447,long_llm,1,0.95,10,appstore,Declutter The Mind Meditation,4.84068,885.0,0.0,0.375
+ios:id601617403,long_llm,1,0.95,10,appstore,ALO Wellness Club,4.8901,28190.0,0.0,0.1
+ios:id1457846652,long_llm,1,0.95,10,appstore,MindPal - Brain Training Games,4.74261,83302.0,0.0,0.1
+ios:id1066018502,long_llm,1,0.95,10,appstore,Meditation Studio,4.79132,9028.0,0.0,0.425
+ios:id1247478067,long_llm,1,0.95,10,appstore,HypnoBox: Hypnosis & Sleep,4.71705,1085.0,0.0,0.55
+ios:id1559563420,long_llm,1,0.95,10,appstore,RESPIRA: Breath & Meditation,4.77725,211.0,0.0,0.375
+ios:id6746482627,long_llm,1,0.95,10,appstore,Guided Meditation - ZenForge,4.71429,42.0,0.0,0.25
+ios:id314498713,long_llm,1,0.95,10,appstore,BetterSleep: Relax and Sleep,4.74951,383963.0,0.0,0.35
+ios:id1188080269,long_llm,1,0.95,10,appstore,Unplug: Meditation,4.85043,6131.0,0.0,0.05
+ios:id886156937,long_llm,1,0.95,10,appstore,Chakra Meditation Balancing,4.76333,5662.0,0.0,0.55
+ios:id537568757,long_llm,1,0.95,10,appstore,Sadhguru- Yoga & Meditation,4.91629,16714.0,0.0,0.1
+ios:id1172138662,long_llm,1,0.95,10,appstore,Slowdive | Meditation & Mantra,4.64576,8116.0,0.0,0.925
+ios:id1210209691,long_llm,1,0.95,10,appstore,Oak - Meditation & Breathing,4.83587,31384.0,0.0,0.475
+ios:id930904592,long_llm,1,0.95,10,appstore,Sattva Meditations & Mantras,4.8211,10447.0,0.0,0.1
+ios:id1023475268,long_llm,1,0.95,10,appstore,Glo | Yoga and Meditation App,4.88249,31470.0,0.0,0.225
+ios:id1559346778,long_llm,1,0.95,10,appstore,Sleeper: Sounds & Meditation,4.71429,21.0,0.0,0.65
+ios:id448207365,long_llm,1,0.95,10,appstore,Meditation & Relaxation Music,4.76659,11332.0,0.0,0.35
+ios:id1303790148,long_llm,1,0.95,10,appstore,Brightmind Meditation,4.75351,998.0,0.0,0.0
+ios:id726031617,long_llm,1,0.95,10,appstore,Abide: Bible Prayer Meditation,4.87237,120454.0,0.0,0.1
+ios:id1089982285,long_llm,1,0.95,10,appstore,Zen: Guided Meditation & Sleep,4.65941,2525.0,0.0,0.175
+play:uk.co.serenity.guided.meditation,long_llm,1,0.95,10,playstore,Serenity: Guided Meditation,4.8,54000.0,1000000.0,0.15
+cws:abdkjmofmjelgafcdffaimhgdgpagmop,long_llm,1,0.95,10,chromews,Freedom - Website Blocker for Chrome,3.4,89.0,50000.0,1.0
+cws:accebjobnljiehcaocahignlanfnfkcc,long_llm,1,0.95,10,chromews,"NimbusMind: Meditation, Relax, and Calm",4.1,65.0,8000.0,0.0
+cws:adfojedkgobckedhbgbijhbjddjifhbg,long_llm,1,0.95,10,chromews,Mindful Bells,3.0,2.0,0.0,0.0
+cws:adkoogofipagajddbdeibkomhdfmkikb,long_llm,1,0.95,10,chromews,Mindfulness Reminder,1.0,1.0,0.0,0.0
+cws:afhokbldaaeggpigpijmomaooflpikji,long_llm,1,0.95,10,chromews,MakeTime - increase productivity,4.3,138.0,10000.0,1.0
+cws:amgmdnojamodmpfjaokfgpijhpcednjm,long_llm,1,0.95,10,chromews,Search Box Focus,4.9,21.0,1000.0,0.775
+cws:andfohanhajengikbobaoblbdkmlkicp,long_llm,1,0.95,10,chromews,Meditate - Meditation anywhere,4.6,35.0,6000.0,0.375
+cws:aoabjfoanlljmgnohepbkimcekolejjn,long_llm,1,0.95,10,chromews,Web Site blocker,4.7,210.0,40000.0,1.0
+cws:aobapnhgpjlldncjopmbbfeoomombhel,long_llm,1,0.95,10,chromews,"Purrfect Pomodoro Timer: Productivity, Time Management & Daily Journal",5.0,36.0,1000.0,1.0
+cws:aoikahlohpgnfiphghckjpmmimpekobj,long_llm,1,0.95,10,chromews,Buddha & Meditation,4.0,1.0,0.0,0.0
+cws:bebhefcdgigdmaalghmfldlpnlihgagh,long_llm,1,0.95,10,chromews,YouTube Distraction Blocker,4.9,7.0,0.0,0.525
+cws:bhfebicpocbejcpcabecofnmfcogidca,long_llm,1,0.95,10,chromews,AIWebFilter - Parental Control for Kids,5.0,3.0,0.0,1.0
+cws:bkkbcggnhapdmkeljlodobbkopceiche,long_llm,1,0.95,10,chromews,Pop up blocker for Chrome™ - Poper Blocker,4.8,81400.0,2000000.0,1.0
+cws:bllpeahnacejimdfpldjchhamafmdcfo,long_llm,1,0.95,10,chromews,Free Online Meditation Timer,0.0,0.0,0.0,1.0
+cws:bpakimmhdmcbgbcnhanfcpelcnookihi,long_llm,1,0.95,10,chromews,Pomodoro Timer PRO,4.0,52.0,7000.0,1.0
+cws:caggnmlckgjpgpgpgjeobdcfgbkefioo,long_llm,1,0.95,10,chromews,Week Plan,3.8,120.0,10000.0,1.0
+cws:cicadgehhallnipmampflnkfffojbnap,long_llm,1,0.95,10,chromews,Meditation Timer,5.0,8.0,0.0,1.0
+cws:cihakgginfmjajjpjfeicbalidblngep,long_llm,1,0.95,10,chromews,ZenBoard – Modern Habit Tracker,5.0,5.0,0.0,1.0
+cws:cjiinmicahhdcmfpdohhaahgkdiehfga,long_llm,1,0.95,10,chromews,Skipper - Tab management that works with ADHD brains,3.9,57.0,10000.0,0.625
+cws:ckfejoidaicoaiacpegjindigbllohie,long_llm,1,0.95,10,chromews,Habit Tracker - Track My Habit,5.0,8.0,0.0,1.0
+cws:dbhignogopodfeeoanflgdpbckhonief,long_llm,1,0.95,10,chromews,My Habits - Daily Reminder,3.7,3.0,0.0,1.0
+cws:ddeaekifelikgnaacipabpmjpffgifek,long_llm,1,0.95,10,chromews,Anori: productivity new tab,4.5,84.0,30000.0,0.375
+cws:dgllcfdfcgnocdmmglnpbpoalhpdfckg,long_llm,1,0.95,10,chromews,Distraction Free Reddit,4.3,22.0,1000.0,0.525
+cws:djnloioaddlnmagobbcnjpppmbelfocf,long_llm,1,0.95,10,chromews,Focus for Google Docs,4.7,9.0,1000.0,0.775
+cws:dkdhhcbjijekmneelocdllcldcpmekmm,long_llm,1,0.95,10,chromews,Time Tracker for Browser - Web Habit Builder,4.9,105.0,7000.0,0.75
+cws:dnkgajhanikioecinafibmfmnnfdmpgp,long_llm,1,0.95,10,chromews,Parental Control: Porn Blocker,0.0,0.0,0.0,1.0
+cws:dnnpgmbhdojpjkpeeafgdelohfhbpiga,long_llm,1,0.95,10,chromews,FocusTube: Distraction Blocker for YouTube,4.9,58.0,3000.0,1.0
+cws:dpfofggmkhdbfcciajfdphofclabnogo,long_llm,1,0.95,10,chromews,Block Site - Site Blocker & Focus Mode,4.7,1600.0,100000.0,1.0
+cws:eandalcihlejmcokgmmbkaopglpfncbo,long_llm,1,0.95,10,chromews,Marinara New: Pomodoro® Assistant,4.9,68.0,10000.0,1.0
+cws:ecpkkfgllianigfeoonafccgbfeglmgb,long_llm,1,0.95,10,chromews,Focus - On Your Work,4.2,30.0,5000.0,1.0
+cws:efkkjffdefaaioagghcaflicdajfhceo,long_llm,1,0.95,10,chromews,Web Timer,4.0,48.0,5000.0,0.875
+cws:egibjhmcalglgmnlenmjfblobkbgpfdc,long_llm,1,0.95,10,chromews,SurfPal: Limit Screen Time · Block Website · Stay Focused,5.0,46.0,3000.0,0.375
+cws:eiimnmioipafcokbfikbljfdeojpcgbh,long_llm,1,0.95,10,chromews,BlockSite Block Websites & Stay Focused,4.5,31200.0,1000000.0,1.0
+cws:ejfldchfgbinehokoegomooplcajinli,long_llm,1,0.95,10,chromews,ADHD Zapper,5.0,3.0,0.0,0.4
+cws:eknlhojagpjfpdddedbehcljmkeklihc,long_llm,1,0.95,10,chromews,Website Whitelist | Parent Control,4.9,16.0,1000.0,1.0
+cws:elfaihghhjjoknimpccccmkioofjjfkf,long_llm,1,0.95,10,chromews,StayFree - Website Blocker & Web Analytics,4.8,2300.0,200000.0,1.0
+cws:eoagmdboiealblmpaahjlhajggndaahi,long_llm,1,0.95,10,chromews,Productivity Owl,4.0,374.0,6000.0,1.0
+cws:eofcaehjlblipnihkibhbffpdkaffdfc,long_llm,1,0.95,10,chromews,Mindful Break,5.0,2.0,0.0,0.0
+cws:fbfofhjejhibcepcojipjofcocpongnd,long_llm,1,0.95,10,chromews,Distraction blocker,5.0,1.0,0.0,1.0
+cws:femnahohginddofgekknfmaklcbpinkn,long_llm,1,0.95,10,chromews,"one sec | Website Blocker, Screen Time, Digital Detox, ADHD, Block Websites",4.9,896.0,30000.0,1.0
+cws:ffijoclmniipjbhecddgkfpdafpbdnen,long_llm,1,0.95,10,chromews,TMetric – Time Tracker & Productivity App,4.1,62.0,30000.0,0.5
+cws:fgaaffhjdmhlhdmmigjpjepflplblgam,long_llm,1,0.95,10,chromews,Pomodoro Timer for Google Chrome™,3.9,34.0,4000.0,1.0
+cws:fghajdnplonfdpoeagigdpnfcfojlhbg,long_llm,1,0.95,10,chromews,Breathing Exercises - Meditation & Mindfulness,0.0,0.0,0.0,0.75
+cws:fhjbmbgaedfnglhbioghdggfecaeeobf,long_llm,1,0.95,10,chromews,Productivity,5.0,1.0,0.0,1.0
+cws:flmcglmalcnabfaalkomeaohklknbbhg,long_llm,1,0.95,10,chromews,Meeting Timer - for Google Meet,4.8,42.0,7000.0,1.0
+cws:fphdedbphehkdfapllonjhlilonhmjgf,long_llm,1,0.95,10,chromews,Habit Tracker with Points,0.0,0.0,0.0,0.5
+cws:fplpionjidcdpcepnnkhapiahgcjedhi,long_llm,1,0.95,10,chromews,Mindfulness Quotes,0.0,0.0,0.0,0.0
+cws:gachmghamoanlighmiebamagipmhdphl,long_llm,1,0.95,10,chromews,ScreenTime,3.5,11.0,3000.0,0.275
+cws:bigkololejnhhbgflfoeeoeaoofnhlkp,long_llm,1,0.95,10,chromews,ADHD Reader,5.0,2.0,0.0,0.9
+cws:gefaddaengbodpiobpbgblajdboalmgc,long_llm,1,0.95,10,chromews,Just Focus,4.6,78.0,10000.0,1.0
+cws:gfbgojjldmklkfbkcdbifancaknmbodl,long_llm,1,0.95,10,chromews,ultimate ADHD,4.0,1.0,0.0,0.0
+cws:gfkgelnlcnomnahkfmhemgpahgmibofd,long_llm,1,0.95,10,chromews,LeetCode Timer,4.4,22.0,10000.0,1.0
+cws:ggdoldplpieidgdofjpnakebdchiklgo,long_llm,1,0.95,10,chromews,Parental Control | Safe browsing for kids,5.0,6.0,0.0,0.9
+cws:gkoiknfcddbjpadkeffgebenhngcgain,long_llm,1,0.95,10,chromews,AI Parental Control,5.0,3.0,0.0,1.0
+cws:gmmcoggmjnbbklphjcbnpfepmagelgkk,long_llm,1,0.95,10,chromews,Meowdoro Tracker - Pomodoro Work Timer & Productivity Tool,4.9,24.0,1000.0,1.0
+cws:hdfdgocligofefcgklikgpjadbphlipm,long_llm,1,0.95,10,chromews,amber - mindfulness,0.0,0.0,0.0,0.0
+cws:hdnpgokelhelboajpcaboglaidmnpego,long_llm,1,0.95,10,chromews,meeting adhd,5.0,4.0,0.0,0.4
+cws:hgemonjbnpehgjmmhbobbgmdcdjghnni,long_llm,1,0.95,10,chromews,ADHD Fast Reader,5.0,2.0,0.0,0.0
+cws:hgledomnjnainmhjejcepomfflgficml,long_llm,1,0.95,10,chromews,Focus by MDS,4.1,51.0,30000.0,0.75
+cws:hhhkpidlaeengejelinhblaibbfgkhih,long_llm,1,0.95,10,chromews,ADHD Reading Help,4.1,31.0,8000.0,0.25
+cws:iaanigfbldakklgdfcnbjonbehpbpecl,long_llm,1,0.95,10,chromews,Habitica Pomodoro SiteKeeper,4.7,177.0,10000.0,1.0
+cws:ibnmiodpchjddbmmigomhinjnkailbif,long_llm,1,0.95,10,chromews,Mindfulness Tips,0.0,0.0,0.0,0.25
+cws:iccjkhpkdhdhjiaocipcegfeoclioejn,long_llm,1,0.95,10,chromews,Pomodoro Chrome Extension,4.0,43.0,50000.0,0.75
+ios:id6738397686,long_llm,1,0.95,10,appstore,Screen Time Tracker,3.33333,3.0,0.0,0.0
+cws:ieandfkgbncmapkpgchnffbodegkemea,long_llm,1,0.95,10,chromews,Focus Indicator,5.0,5.0,0.0,0.525
+cws:ifdepgnnjpnbkcgempionjablajancjc,long_llm,1,0.95,10,chromews,FocusGuard - Block Site & Focus Mode,4.6,3400.0,80000.0,1.0
+cws:ihdnneiaaelmjhaajpajjkedfimcmpgj,long_llm,1,0.95,10,chromews,Study Timer,4.8,98.0,6000.0,1.0
+cws:ihhgdadeplnooijnccogligfccjpahik,long_llm,1,0.95,10,chromews,Impulse. Website Blocker & Focus Screen Time Control,4.6,28.0,0.0,1.0
+cws:ikeobpbhahohfjgdljpcknchekgfhman,long_llm,1,0.95,10,chromews,Meditation Search,0.0,0.0,40000.0,0.625
+cws:ilioecelhjbmebaimobaaggalibfphhl,long_llm,1,0.95,10,chromews,Website Blocker and Focus Mode,3.0,4.0,1000.0,1.0
+cws:jbojhemhnilgooplglkfoheddemkodld,long_llm,1,0.95,10,chromews,Otto: Pomodoro timer and Website Blocker,4.5,213.0,60000.0,1.0
+cws:jdgkhgoanhhnileehaipfpffmnfiiibh,long_llm,1,0.95,10,chromews,Focus Timer,4.4,12.0,6000.0,1.0
+cws:jemdldabgmbndebknjpdoeamckbliobm,long_llm,1,0.95,10,chromews,Achieve: Earn Your Screen Time Extension,3.7,3.0,0.0,0.65
+cws:jgpddkifkljmnfahlaofmjdeempjbpke,long_llm,1,0.95,10,chromews,"Alarm, Timer and Stopwatch",4.4,95.0,70000.0,0.5
+cws:jlfhlkcmpimgeoajhahflaeinbfeeogk,long_llm,1,0.95,10,chromews,Meditation,4.9,17.0,0.0,0.0
+cws:jpafaidkicnfcohbcfegbokibbghpnee,long_llm,1,0.95,10,chromews,Mobicip Parental Control with Screen Time,3.1,52.0,2000.0,0.875
+cws:jplackcnmigbganpfbkghkinkbhpgnpg,long_llm,1,0.95,10,chromews,Screen Time Limiter,5.0,2.0,0.0,0.4
+cws:kbdpkdpanmgcclpnmfmbbffgejnfopke,long_llm,1,0.95,10,chromews,A Meditation Timer,0.0,0.0,0.0,0.375
+cws:kgbcoelgfffkmkpfnldemdinmcbpjlaa,long_llm,1,0.95,10,chromews,MeaVana: Productivity & Motivation Dashboard,4.8,144.0,5000.0,0.25
+cws:kgehdpikfeppnmjeoklagcpmjhbdhokl,long_llm,1,0.95,10,chromews,Meditation Music,5.0,1.0,0.0,1.0
+cws:kniediipngcpmbmpeacaoinhoeipfina,long_llm,1,0.95,10,chromews,Website Blocker,4.7,82.0,20000.0,1.0
+cws:koepjhgljgmbeknbdeognkbchjmdkbpd,long_llm,1,0.95,10,chromews,ADHD reader,4.8,4.0,0.0,0.0
+cws:laankejkbhbdhmipfmgcngdelahlfoji,long_llm,1,0.95,10,chromews,StayFocusd – Website Blocker & Focus Timer & Shorts Blocker,4.5,8400.0,600000.0,1.0
+cws:lblahbehladilcgehcaockdfhmpfpech,long_llm,1,0.95,10,chromews,Iterate AI: Plan and test analytics event tracking in seconds,5.0,1.0,0.0,0.0
+cws:ljkbjodfmekklcoibdnhahlaalhihmlb,long_llm,1,0.95,10,chromews,Super Productivity,3.7,6.0,1000.0,0.4
+cws:lkicfohpijhcaahdmianhgjglifhlmge,long_llm,1,0.95,10,chromews,Monora: ADHD Focus Timer & Distraction Blocker,5.0,1.0,0.0,1.0
+cws:llfdaleknghepofjcleahemgndnaghhk,long_llm,1,0.95,10,chromews,"BlockP: AI Website, App & Porn Blocker",4.7,318.0,7000.0,1.0
+cws:llingdngkbcacpjlhdnfockdicffgocp,long_llm,1,0.95,10,chromews,MindTrail – Smart Internet Habit Tracker,5.0,1.0,0.0,0.4
+cws:lllnjdmfnfjifcfpppjmcnanpokikcpl,long_llm,1,0.95,10,chromews,Homey: Productivity New Tab,4.8,6200.0,90000.0,0.05
+cws:llnpcnfcbmhkgemaphdocjihgnklklmh,long_llm,1,0.95,10,chromews,Highlight Focus,5.0,4.0,0.0,0.4
+cws:lloicgmikhdfeenbhbojimobhcjmehhm,long_llm,1,0.95,10,chromews,fitAnalytica - Best Walking & Running App,4.6,10.0,0.0,0.025
+cws:lmbcpkppmmciddpaabpflajbnoajjgem,long_llm,1,0.95,10,chromews,Army Habit Tracker,0.0,0.0,0.0,1.0
+cws:lmkjefjdiaffaoibklngnodemckllljd,long_llm,1,0.95,10,chromews,TimeDay - Focus Pomodoro Timer and Countdown,4.2,5.0,0.0,1.0
+cws:lnhoabacmnkaepaabhoiehgelofdmdlh,long_llm,1,0.95,10,chromews,Zen Screen Time,0.0,0.0,0.0,0.0
+cws:lniombipmmhhighllijmcdncnefpjloi,long_llm,1,0.95,10,chromews,AppBlock - Block sites & Stay focused,4.7,561.0,40000.0,1.0
+cws:lpeafonknajhomldlfpanjmigadammgf,long_llm,1,0.95,10,chromews,Website Blocker | Parental Control,0.0,0.0,0.0,1.0
+cws:mhbhbdkpjlofhhhfemeleclklfidfgjp,long_llm,1,0.95,10,chromews,To-do List Chrome Extension,4.8,116.0,10000.0,0.5
+cws:mibchpjmhiodhdenfchoghahndkbcefk,long_llm,1,0.95,10,chromews,Smart Parental Control,5.0,1.0,0.0,0.9
+cws:nanjaegameeoomamnliimipmmfabdngd,long_llm,1,0.95,10,chromews,Pomodoro,4.6,17.0,4000.0,0.9
+cws:ncaaipdfhdijmfdfmeoagmogddhkfdec,long_llm,1,0.95,10,chromews,Self Control -- Block sites and stay focused,4.0,243.0,20000.0,1.0
+play:com.oristats.habitbull,long_llm,1,0.95,10,playstore,Habit Tracker,4.4,81800.0,1000000.0,1.0
+cws:nehkafajpagjonhpomopglimnhcicdph,long_llm,1,0.95,10,chromews,Expense Tracker,5.0,5.0,0.0,0.525
+cws:nfhjdkmpebifdelclimjfaackjhiglpc,long_llm,1,0.95,10,chromews,Slides Timer,3.5,95.0,100000.0,1.0
+cws:ngceodoilcgpmkijopinlkmohnfifjfb,long_llm,1,0.95,10,chromews,Focus To-Do: Pomodoro Timer & To Do List,4.8,12200.0,500000.0,1.0
+cws:ngmbhlokkidckgigcocifgbjljbeidhp,long_llm,1,0.95,10,chromews,YouTube Parental Control - Block any content!,0.0,0.0,0.0,1.0
+cws:nhdcmopcaponlhjlhhfbdgngcebhicfi,long_llm,1,0.95,10,chromews,Robot Meditation at Sunset,0.0,0.0,0.0,0.0
+cws:njkbbegeohchbcbannojicmcalojcfek,long_llm,1,0.95,10,chromews,Pavlok Productivity,2.2,13.0,0.0,1.0
+cws:bjcnpgekponkjpincbcoflgkdomldlnl,long_llm,1,0.95,10,chromews,Block Site,4.5,59.0,4000.0,0.875
+cws:nlkcecddkejakmaipagbcemeohfomedn,long_llm,1,0.95,10,chromews,Browser Screen Time,4.6,13.0,10000.0,0.025
+cws:nmdegdfncjhaiapngoohabcgoeihoipn,long_llm,1,0.95,10,chromews,Distraction Blocker with Focus Timer,0.0,0.0,0.0,1.0
+cws:nmlcegphlmcpempfdglmakfikekkkgca,long_llm,1,0.95,10,chromews,Hedge - AI-powered distraction blocker,4.2,5.0,0.0,1.0
+cws:nnkkgbabjapocnoedeaifoimlbejjckj,long_llm,1,0.95,10,chromews,Block Site Ex,4.0,97.0,20000.0,1.0
+cws:nplkomfjljkaboeadkolegoacdmkeimp,long_llm,1,0.95,10,chromews,Pomodoro Method,4.0,5.0,1000.0,1.0
+cws:odfaaonbinobeomfaaepmjjhodelkkke,long_llm,1,0.95,10,chromews,Porn Blocker,4.4,95.0,60000.0,1.0
+cws:oejgccbfbmkkpaidnkphaiaecficdnfn,long_llm,1,0.95,10,chromews,Toggl Track: Productivity & Time Tracker,4.4,1500.0,400000.0,1.0
+cws:ofmanejijbcohgebmdfacglmhemiifca,long_llm,1,0.95,10,chromews,Screentime,4.0,60.0,20000.0,0.125
+cws:ohjjagkpmpegpmhlknfecopbafpdddgo,long_llm,1,0.95,10,chromews,Mindful Pause,0.0,0.0,0.0,0.0
+cws:pacollipcdllokahiioagjbinbidcaaf,long_llm,1,0.95,10,chromews,"Flowstate: Filter YouTube & X feeds with AI. Total focus, zero distraction",4.7,26.0,0.0,0.75
+cws:pajmmdmjkjjhogcgloaphjibbpdhmklp,long_llm,1,0.95,10,chromews,CountDown Timer,4.6,32.0,6000.0,0.5
+cws:pappcjmimkmjekiaiedkhfogpclanicb,long_llm,1,0.95,10,chromews,Call Timer for Meet,3.8,53.0,70000.0,0.25
+cws:pbihgpakabjjclmieijhfaaajpbbbpej,long_llm,1,0.95,10,chromews,Mindfulness Break Reminder,0.0,0.0,0.0,0.75
+cws:pbnhgpbneanmjlcnkmifdkpbkjaoebpb,long_llm,1,0.95,10,chromews,"Timer, Alarm & Stopwatch",2.9,15.0,8000.0,0.775
+cws:peocghcbolghcodidjgkndgahnlaecfl,long_llm,1,0.95,10,chromews,Parental Control - Adult Blocker,3.3,154.0,10000.0,0.625
+cws:pfbgmmjloigajfgnfmgmdbafaedpmlml,long_llm,1,0.95,10,chromews,Pomodoro Timer,4.7,6.0,3000.0,1.0
+cws:pgbdljpkijehgoacbjpolaomhkoffhnl,long_llm,1,0.95,10,chromews,MailTracker: Email tracker for Gmail,4.7,4800.0,100000.0,0.05
+cws:phibodiabnfldclfgkkafehjbadgeaad,long_llm,1,0.95,10,chromews,Habit Tracker - Daily Progress,0.0,0.0,0.0,0.375
+cws:ppdaimjdegannlbdhdlcehjlcngcboog,long_llm,1,0.95,10,chromews,Visual Timer,4.5,31.0,20000.0,1.0
