@@ -1,8 +1,11 @@
 <<<<<<< HEAD
-import streamlit as st
+
+import os
+from pathlib import Path
+
 import pandas as pd
 import plotly.express as px
-import os
+import streamlit as st
 import streamlit.components.v1 as components
 
 # -----------------------------------------------------------
@@ -116,7 +119,10 @@ menu = st.sidebar.radio(
 # -----------------------------------------------------------
 # LOAD DATA
 # -----------------------------------------------------------
-DATA_PATH = r"C:\Users\pavan\OneDrive\Desktop\focus-intel\data\curated\apps_all_clean.csv"
+BASE_DIR = Path(__file__).resolve().parent
+CURATED_DIR = BASE_DIR / "data" / "curated"
+
+DATA_PATH = CURATED_DIR / "apps_all_clean.csv"
 
 if not os.path.exists(DATA_PATH):
     st.error("❌ File apps_all_clean.csv not found.")
@@ -240,19 +246,19 @@ elif menu == "Sentiment Analysis":
     st.title("💬 Sentiment Analysis")
 
     # Define paths for sentiment files
-    SENTIMENT_PATH = r"C:\Users\pavan\OneDrive\Desktop\focus-intel\data\curated\reviews_with_sentiment.csv"
-    playstore_path = r"C:\Users\pavan\OneDrive\Desktop\focus-intel\data\curated\playstore_reviews_sentiment.csv"
-    ios_path = r"C:\Users\pavan\OneDrive\Desktop\focus-intel\data\curated\ios_reviews_sentiment.csv"
+    SENTIMENT_PATH = CURATED_DIR / "reviews_with_sentiment.csv"
+    PLAYSTORE_PATH = CURATED_DIR / "playstore_reviews_sentiment.csv"
+    IOS_PATH = CURATED_DIR / "ios_reviews_sentiment.csv"
 
     # --- Load datasets ---
     dfs = []
-    if os.path.exists(playstore_path):
-        play_df = pd.read_csv(playstore_path)
+    if os.path.exists(PLAYSTORE_PATH):
+        play_df = pd.read_csv(PLAYSTORE_PATH)
         play_df["Platform"] = "PlayStore"
         dfs.append(play_df)
 
-    if os.path.exists(ios_path):
-        ios_df = pd.read_csv(ios_path)
+    if os.path.exists(IOS_PATH):
+        ios_df = pd.read_csv(IOS_PATH)
         ios_df["Platform"] = "iOS"
         dfs.append(ios_df)
 
@@ -400,14 +406,14 @@ elif menu == "Sentiment Analysis":
 elif menu == "Feature Matrix":
     st.title("🧩 Feature Matrix – Competitive Feature Analysis ")
 
-    feature_data_path = r"C:\Users\pavan\OneDrive\Desktop\focus-intel\data\curated\features_extracted_merged_filled.csv"
+    FEATURE_DATA_PATH = CURATED_DIR / "features_extracted_merged_filled.csv"
 
-    if not os.path.exists(feature_data_path):
+    if not os.path.exists(FEATURE_DATA_PATH):
         st.error("❌ File features_extracted_merged_filled.csv not found.")
         st.stop()
 
     # --- Load and clean data ---
-    df = pd.read_csv(feature_data_path)
+    df = pd.read_csv(FEATURE_DATA_PATH)
     df.columns = [c.strip() for c in df.columns]
 
     if "features_list" not in df.columns:
@@ -624,14 +630,14 @@ elif menu == "Feature Matrix":
 elif menu == "ADHD Analysis":
     st.title("🧠 ADHD Analysis – Deep Dive into Special User Reviews")
 
-    reviews_path = r"C:\Users\pavan\OneDrive\Desktop\focus-intel\data\curated\reviews.csv"
+    REVIEWS_PATH = CURATED_DIR / "reviews.csv"
 
-    if not os.path.exists(reviews_path):
+    if not os.path.exists(REVIEWS_PATH):
         st.error("❌ File reviews.csv not found.")
         st.stop()
 
     # --- Load and clean data ---
-    df_reviews = pd.read_csv(reviews_path)
+    df_reviews = pd.read_csv(REVIEWS_PATH)
     df_reviews.columns = [c.strip().lower() for c in df_reviews.columns]
 
     if "special_reviews" not in df_reviews.columns or "body" not in df_reviews.columns:
