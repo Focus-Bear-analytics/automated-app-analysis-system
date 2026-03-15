@@ -1,6 +1,5 @@
 """
 Focus Bear Competitive Intelligence Dashboard
-=============================================
 """
 
 import ast
