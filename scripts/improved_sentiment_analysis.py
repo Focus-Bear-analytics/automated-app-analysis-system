@@ -20,7 +20,7 @@ def get_sentiment(text):
         return "Neutral"
 
 # Applying to see if new sentiment generates
-df["Improved_Sentiment"] = df["review"].apply(get_sentiment)
+df["Improved_Sentiment"] = df["text"].apply(get_sentiment)
 
 print("Sentiment distribution:")
 print(df['sentiment_label'].value_counts())
