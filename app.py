@@ -366,6 +366,15 @@ elif menu == "Sentiment Analysis":
     # 🧩 3. Sentiment by Platform (PlayStore vs iOS)
     # -------------------------------------------------------
     st.subheader("🧩 Sentiment by Platform (PlayStore vs iOS)")
+
+    # Fix platform column naming
+    if "store" in reviews.columns:
+        reviews["Platform"] = reviews["store"]
+    elif "platform" in reviews.columns:
+        reviews["Platform"] = reviews["platform"]
+    else:
+        reviews["Platform"] = "Unknown"
+        
     platform_sent = reviews.groupby(["Platform", "SentimentCategory"]).size().reset_index(name="Count")
 
     fig_platform = px.bar(
