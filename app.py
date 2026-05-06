@@ -245,7 +245,7 @@ elif menu == "Sentiment Analysis":
     st.title("💬 Sentiment Analysis")
 
     # Define paths for sentiment files
-    SENTIMENT_PATH = CURATED_DIR / "reviews_with_improved_sentiment.csv"
+    SENTIMENT_PATH = CURATED_DIR / "reviews_with_ml_sentiment.csv"
     PLAYSTORE_PATH = None
     IOS_PATH = None
 
@@ -294,15 +294,19 @@ elif menu == "Sentiment Analysis":
             reviews.rename(columns={col: "Rating"}, inplace=True)
 
     # --- Convert sentiment into categories ---
-    if "Improved_Sentiment" in reviews.columns:
+    if "ML_Sentiment" in reviews.columns:
+        reviews["SentimentCategory"] = reviews["ML_Sentiment"].astype(str).str.strip().str.title()
+
+    elif "Improved_Sentiment" in reviews.columns:
         reviews["SentimentCategory"] = reviews["Improved_Sentiment"].astype(str).str.strip().str.title()
+
     elif pd.api.types.is_numeric_dtype(reviews["Sentiment"]):
-         reviews["SentimentCategory"] = pd.cut(
+        reviews["SentimentCategory"] = pd.cut(
             reviews["Sentiment"], bins=[-1.0, -0.05, 0.05, 1.0],
             labels=["Negative", "Neutral", "Positive"]
-     )
+        )
     else:
-         reviews["SentimentCategory"] = reviews["Sentiment"].astype(str).str.strip().str.title()
+        reviews["SentimentCategory"] = reviews["Sentiment"].astype(str).str.strip().str.title()
 
     reviews.dropna(subset=["SentimentCategory"], inplace=True)
 
@@ -374,7 +378,7 @@ elif menu == "Sentiment Analysis":
         reviews["Platform"] = reviews["platform"]
     else:
         reviews["Platform"] = "Unknown"
-        
+
     platform_sent = reviews.groupby(["Platform", "SentimentCategory"]).size().reset_index(name="Count")
 
     fig_platform = px.bar(
