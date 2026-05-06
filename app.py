@@ -245,18 +245,18 @@ elif menu == "Sentiment Analysis":
     st.title("💬 Sentiment Analysis")
 
     # Define paths for sentiment files
-    SENTIMENT_PATH = CURATED_DIR / "reviews_with_sentiment.csv"
-    PLAYSTORE_PATH = CURATED_DIR / "playstore_reviews_sentiment.csv"
-    IOS_PATH = CURATED_DIR / "ios_reviews_sentiment.csv"
+    SENTIMENT_PATH = CURATED_DIR / "reviews_with_improved_sentiment.csv"
+    PLAYSTORE_PATH = None
+    IOS_PATH = None
 
     # --- Load datasets ---
     dfs = []
-    if os.path.exists(PLAYSTORE_PATH):
+    if PLAYSTORE_PATH and os.path.exists(PLAYSTORE_PATH):
         play_df = pd.read_csv(PLAYSTORE_PATH)
         play_df["Platform"] = "PlayStore"
         dfs.append(play_df)
 
-    if os.path.exists(IOS_PATH):
+    if IOS_PATH and os.path.exists(IOS_PATH):
         ios_df = pd.read_csv(IOS_PATH)
         ios_df["Platform"] = "iOS"
         dfs.append(ios_df)
@@ -294,13 +294,15 @@ elif menu == "Sentiment Analysis":
             reviews.rename(columns={col: "Rating"}, inplace=True)
 
     # --- Convert sentiment into categories ---
-    if pd.api.types.is_numeric_dtype(reviews["Sentiment"]):
-        reviews["SentimentCategory"] = pd.cut(
+    if "Improved_Sentiment" in reviews.columns:
+        reviews["SentimentCategory"] = reviews["Improved_Sentiment"].astype(str).str.strip().str.title()
+    elif pd.api.types.is_numeric_dtype(reviews["Sentiment"]):
+         reviews["SentimentCategory"] = pd.cut(
             reviews["Sentiment"], bins=[-1.0, -0.05, 0.05, 1.0],
             labels=["Negative", "Neutral", "Positive"]
-        )
+     )
     else:
-        reviews["SentimentCategory"] = reviews["Sentiment"].astype(str).str.strip().str.title()
+         reviews["SentimentCategory"] = reviews["Sentiment"].astype(str).str.strip().str.title()
 
     reviews.dropna(subset=["SentimentCategory"], inplace=True)
 
