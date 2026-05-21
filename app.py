@@ -412,7 +412,31 @@ elif menu == "Sentiment Analysis":
     ⚠️ **Neutral Reviews:** {neu:,} ({neu/total:.1%})  
     ❌ **Negative Reviews:** {neg:,} ({neg/total:.1%})
     """)
+    st.subheader("🧠 ADHD / Focus Related Insights")
 
+    try:
+        adhd_df = pd.read_csv("data/curated/adhd_reviews_analysis.csv")
+
+        total_adhd = len(adhd_df)
+
+        adhd_counts = adhd_df["ML_Sentiment"].value_counts()
+
+        positive_count = adhd_counts.get("Positive", 0)
+        negative_count = adhd_counts.get("Negative", 0)
+        neutral_count = adhd_counts.get("Neutral", 0)
+
+        st.markdown(f"""
+        ✅ **Positive ADHD Reviews:** {positive_count}
+
+        ⚠️ **Neutral ADHD Reviews:** {neutral_count}
+
+        ❌ **Negative ADHD Reviews:** {negative_count}
+
+        📊 **Total ADHD / Focus Reviews:** {total_adhd}
+        """)
+
+    except Exception as e:
+        st.warning("ADHD review analysis not available.")
 
 # -----------------------------------------------------------
 # FEATURE MATRIX PAGE (Interactive + Professional Layout)
