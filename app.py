@@ -438,6 +438,40 @@ elif menu == "Sentiment Analysis":
     except Exception as e:
         st.warning("ADHD review analysis not available.")
 
+# -------------------------------------------------
+# ADHD THEME ANALYSIS
+# -------------------------------------------------
+
+    st.subheader("🧠 ADHD Theme Analysis")
+
+    try:
+
+        theme_df = pd.read_csv("data/curated/adhd_theme_analysis.csv")
+
+        theme_counts = theme_df["ADHD_Theme"].value_counts().reset_index()
+
+        theme_counts.columns = ["Theme", "Count"]
+
+        fig_theme = px.bar(
+            theme_counts,
+            x="Theme",
+            y="Count",
+            color="Theme",
+            title="ADHD Theme Distribution"
+        )
+
+        fig_theme.update_layout(
+            plot_bgcolor="#111827",
+            paper_bgcolor="#111827",
+            font=dict(color="white")
+        )
+
+        st.plotly_chart(fig_theme, use_container_width=True)
+
+    except Exception as e:
+
+        st.error(f"Error loading ADHD theme analysis: {e}")
+
 # -----------------------------------------------------------
 # FEATURE MATRIX PAGE (Interactive + Professional Layout)
 # -----------------------------------------------------------
