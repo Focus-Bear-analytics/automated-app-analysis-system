@@ -17,28 +17,60 @@ else:
 # ADHD-related theme categories
 themes = {
 
-    "Focus Improvement": [
-        "focus", "focused", "concentrate", "concentration"
+    "Attention Support": [
+        "focus",
+        "focused",
+        "attention",
+        "concentrate",
+        "concentration",
+        "study",
+        "task",
+        "stay on track"
     ],
 
-    "Productivity Benefit": [
-        "productive", "productivity", "efficient", "workflow"
+    "Task Management": [
+        "productive",
+        "productivity",
+        "efficient",
+        "workflow",
+        "routine",
+        "planning",
+        "organised",
+        "organized"
+    ],
+
+    "Behavioural Motivation": [
+        "dopamine",
+        "motivation",
+        "motivated",
+        "reward",
+        "habit",
+        "discipline",
+        "rewarding"
     ],
 
     "Distraction Complaint": [
-        "distracting", "distraction", "interrupt", "notification"
-    ],
-
-    "Motivation/Dopamine": [
-        "dopamine", "motivation", "motivated", "reward"
+        "distracting",
+        "distraction",
+        "interrupt",
+        "notification"
     ],
 
     "Subscription Complaint": [
-        "subscription", "premium", "expensive", "price", "paywall"
+        "subscription",
+        "premium",
+        "expensive",
+        "price",
+        "paywall"
     ],
 
-    "Bug/Performance Issue": [
-        "bug", "crash", "freeze", "glitch", "slow"
+    "Performance Issue": [
+        "bug",
+        "crash",
+        "freeze",
+        "glitch",
+        "slow",
+        "lag"
     ]
 }
 
