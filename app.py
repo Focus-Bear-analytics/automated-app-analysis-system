@@ -472,7 +472,7 @@ elif menu == "Sentiment Analysis":
         # AI GENERATED ADHD INSIGHTS
         # -------------------------------------------------
 
-        st.subheader("🤖 AI Generated ADHD Insights")
+        st.subheader("🤖 Automated ADHD Insight Summary")
 
         top_theme = theme_counts.iloc[0]["Theme"]
 
@@ -507,7 +507,52 @@ elif menu == "Sentiment Analysis":
         • Productivity applications may assist users with attention regulation behaviours
         """)
     
-        
+        # -------------------------------------------------
+        # LLM-BASED ADHD BEHAVIOUR DETECTION
+        # -------------------------------------------------
+
+        st.subheader("🧠 LLM-Based ADHD Behaviour Detection")
+
+        llm_df = pd.read_csv("data/curated/llm_adhd_behaviour_analysis.csv")
+
+        llm_counts = llm_df["LLM_ADHD_Theme"].value_counts().reset_index()
+        llm_counts.columns = ["Behaviour Theme", "Count"]
+
+        # Remove non-ADHD related reviews from the chart
+        llm_adhd_counts = llm_counts[llm_counts["Behaviour Theme"] != "Not ADHD Related"]
+
+        fig_llm = px.bar(
+            llm_adhd_counts,
+            x="Behaviour Theme",
+            y="Count",
+            color="Behaviour Theme",
+            title="LLM-Detected ADHD Behaviour Themes"
+        )
+
+        fig_llm.update_layout(
+            plot_bgcolor="#111827",
+            paper_bgcolor="#111827",
+            font=dict(color="white"),
+            xaxis_title="Behaviour Theme",
+            yaxis_title="Review Count"
+        )
+
+        st.plotly_chart(fig_llm, use_container_width=True)
+
+        total_llm_adhd = llm_adhd_counts["Count"].sum()
+
+        st.info(f"""
+        The LLM-based classifier identified **{total_llm_adhd}** reviews with ADHD-relevant behavioural patterns.
+
+        Detected behavioural categories include:
+        - Time Management
+        - Motivation and Reward
+        - Task Management
+        - Distraction Management
+
+        This helps identify ADHD-related behavioural patterns even when reviews do not directly mention ADHD keywords.
+        """)
+            
     except Exception as e:
 
         st.error(f"Error loading ADHD theme analysis: {e}")
