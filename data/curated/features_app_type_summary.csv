@@ -1,0 +1,4 @@
+app_type,app_type_label,num_apps,total_feature_hits,avg_confidence
+dsct,Digital Self-Control Tools,415,1263,0.908
+planners,Planners,337,748,0.894
+habit_apps,Habit Apps,300,841,0.893

@@ -1,0 +1,189 @@
+# scrapers/discovery.yml
+# Competitor discovery rules for focus / ADHD / productivity / habit-building apps.
+# Point 3 update: remove non-relevant apps at ingestion / transformation stage.
+
+keywords:
+  - focus app
+  - focus timer
+  - productivity app
+  - productivity timer
+  - deep work
+  - study timer
+  - concentration app
+  - pomodoro
+  - pomodoro timer
+  - time blocking
+  - time management
+  - work timer
+  - habit tracker
+  - routine tracker
+  - daily routine
+  - habit builder
+  - goal tracker
+  - distraction blocker
+  - website blocker
+  - site blocker
+  - app blocker
+  - focus mode
+  - screen time control
+  - digital wellbeing
+  - ADHD productivity
+  - ADHD planner
+  - ADHD focus
+  - ADHD routine
+  - ADHD task manager
+  - study focus
+  - study planner
+  - task planner
+  - todo focus
+
+limits:
+  per_keyword_per_store: 50
+  similar_per_app: 15
+  max_total_candidates: 500
+
+filters:
+  min_rating_count: 25
+  min_play_installs: 50000
+  min_cws_users: 10000
+  min_relevance: 0.15
+
+  include_terms:
+    - focus
+    - focused
+    - productivity
+    - productive
+    - pomodoro
+    - timer
+    - study
+    - concentration
+    - deep work
+    - habit
+    - routine
+    - goal
+    - task
+    - todo
+    - distraction
+    - block
+    - blocker
+    - website blocker
+    - site blocker
+    - app blocker
+    - focus mode
+    - screen time
+    - digital wellbeing
+    - adhd
+    - planner
+    - reminders
+    - meditation
+    - mindfulness
+
+  exclude_terms:
+    - wallpaper
+    - theme
+    - ringtone
+    - launcher
+    - keyboard
+    - icon
+    - vpn
+    - antivirus
+    - browser
+    - camera
+    - photo
+    - video
+    - game
+    - music
+    - widget
+    - gallery
+    - movie
+    - streaming
+    - shopping
+    - dating
+    - social media
+    - news
+    - weather
+    - calculator
+    - file manager
+    - cleaner
+    - battery saver
+    - qr scanner
+    - chatbot
+    - chat bot
+    - ai assistant
+    - ai chatbot
+    - search assistant
+    - search engine
+    - office
+    - office suite
+    - document editor
+    - documents
+    - spreadsheet
+    - presentation
+    - slides
+    - word processor
+    - pdf editor
+    - email client
+    - meeting
+    - calendar only
+
+  exclude_titles:
+    - grok
+    - perplexity
+    - perplexity - ask anything
+    - microsoft office
+    - microsoft 365
+    - google docs
+    - google sheets
+    - google slides
+    - google drive
+    - gmail
+    - chatgpt
+    - claude
+    - gemini
+    - copilot
+
+  exclude_developers:
+    - x.ai
+    - xai
+    - perplexity ai
+    - perplexityai
+    - microsoft corporation
+    - openai
+    - anthropic
+    - anthropic pbc
+    - google llc
+
+  exclude_categories:
+    - games
+    - entertainment
+    - photo & video
+    - music
+    - social networking
+    - shopping
+    - news
+    - weather
+    - finance
+    - business
+    - travel
+    - food & drink
+    - sports
+    - utilities
+    - tools
+    - personalization
+    - communication
+    - dating
+    - navigation
+    - reference
+
+categories:
+  play:
+    - PRODUCTIVITY
+    - EDUCATION
+    - HEALTH_AND_FITNESS
+  cws:
+    - Productivity
+    - Education
+  ios:
+    - Productivity
+    - Education
+    - Health & Fitness

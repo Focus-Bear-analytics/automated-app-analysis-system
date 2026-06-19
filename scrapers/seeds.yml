@@ -1,23 +1,215 @@
-# scrapers/seeds.yml
+  # scrapers/seeds.yml
+# Expanded seed list for focus/productivity/ADHD-related competitor discovery.
+#
+# Purpose:
+# Use verified app IDs as starting points for discovering more real competitors.
+# These seeds cover different subgroups:
+# - focus timers
+# - Pomodoro apps
+# - app / website blockers
+# - screen-time control
+# - ADHD planners
+# - habit trackers
+# - routine planners
+# - study planners
+# - task planners
+#
+# Do NOT add broad AI chatbots, office suites, document editors, browsers,
+# games, VPN apps, wallpapers, finance apps, workout timers, or general utilities.
+
 play_ids:
-  # Forest: Stay Focused (correct Play Store package name)
-  - cc.forestapp
+  # ------------------------------------------------------------
+  # Focus / forest-style productivity apps
+  # ------------------------------------------------------------
+  - cc.forestapp                         # Forest: Focus for Productivity
+  - com.focusgenie                       # FocusGenie
+  - com.focus.mobile.focus               # Timey - Focus Timer
+  - com.focus.focusflight                # FocusFlight: Focus Timer
+  - info.cat_techs.pomo                  # Study Circle - The Focus App
+  - focustree.app                        # Focus Tree: Timer & Flashcards
+
+  # ------------------------------------------------------------
+  # Distraction blocking / app blocking / website blocking
+  # ------------------------------------------------------------
+  - com.stayfocused                      # Stay Focused: app and website blocker
+  - com.blocksite                        # BlockSite
+  - com.teqtic.lockmeout                 # Lock Me Out - App/Site Blocker
+  - com.wverlaek.block                   # Block - App & Site Blocker
+  - org.atmana.appblocker                # App Blocker - Block Apps
+  - life.blockin                         # Screen Time for Focus - Blockin
+  - com.screenzen                        # ScreenZen - Screen Time Control
+  - tech.miidii.offscreen_android        # OffScreen - Less Screen Time
+  - com.bsktech.AU                       # AppUp: Screen Time & Blocker
+  - com.wallhabit.app                    # WallHabit Block Shorts & Reels
+  - sleeptech.stayaway                   # Lock My Phone: Digital Detox
+  - com.superappsdev.internetblocker     # Internet Blocker
+  - com.unrushedapps.launch_break        # App Pause: Mindful Screen Time
+  - com.app.floatingapptimer.com         # StayOff: Screen Time Control
+
+  # ------------------------------------------------------------
+  # Pomodoro / focus timer apps
+  # ------------------------------------------------------------
+  - com.superelement.pomodoro            # Focus To-Do / Pomodoro-style app
+  - com.pomodrone.app                    # Pomodoro Timer
+  - co.pixo.apps.focuskeeper             # Pomodoro Timer - Focus Keeper
+  - com.apps.adrcotfas.goodtime          # Goodtime: Pomodoro Timer
+  - org.nsh07.pomodoro                   # Tomato: Focus Timer
+  - io.limeware.pomotimer                # Pomo: Pomodoro Study Timer
+  - milki.focus.timer                    # Milki - Pomodoro Study Timer
+  - com.enfpdev.pomocat                  # Pomocat - Cute Pomodoro Timer
+  - com.cetinkaya.time_balance           # Pomodoro Focus Timer: Balance
+  - com.hamatim.podomoro                 # Pomodoro Productivity Timer
+  - focus.pomodoro.timer.technique       # Pomodoro Productivity Timer
+  - com.just4fun.pomodoro                # Cute Pomodoro
+
+  # ------------------------------------------------------------
+  # ADHD planner / ADHD routine / executive-function support
+  # ------------------------------------------------------------
+  - com.nick.weiss.Decomposer            # ADHD Planner AI Task: Splitti
+  - com.sproutapp.sprout                 # Sprout - Smart ADHD Task App
+  - com.habitomic.android                # Habitomic: ADHD-Friendly Habits
+  - com.llamaapp                         # ADHD Organizer: Llama Life
+  - app.kiteki                           # RoutineWin: ADHD Routine Timer
+  - pps.android.yoodoo                   # Yoodoo: ADHD Daily Planner
+  - com.chorefocus.app                   # Chore Focus: ADHD Task Manager
+  - app.univi.prod                       # Unique: ADHD Planner & Journal
+  - neurolist.app.neurolist              # Neurolist: AI Planner for ADHD
+  - co.thefab.tm                         # Clarify: ADHD Organizer & help
+  - com.briliadult                       # Brili Routines - Habit Tracker
+
+  # ------------------------------------------------------------
+  # Habit tracking / routine planning
+  # ------------------------------------------------------------
+  - org.isoron.uhabits                   # Loop Habit Tracker
+  - com.habitnow                         # HabitNow Daily Routine Planner
+  - co.unstatic.habitify                 # Habitify: Habit Tracker
+  - app.avocation.avocation              # Avocation Goal & Habit Tracker
+  - app.gainaura.habits                  # Aura: Habit & Streak Tracker
+  - com.habitive                         # Habitive - Habit Tracker
+  - com.ofalvai.habittracker             # Habit Builder
+  - com.planmecorp.planme                # PlanMe: Daily Routine Planner
+  - com.roubit                           # Roubit: Daily Life Routine Care
+  - co.thefabulous.app                   # Fabulous Daily Routine Planner
+  - daily.planner.routine.habits         # Me+ Lifestyle Routine
+  - com.gmail.jmartindev.timetune        # TimeTune - Schedule Planner
+  - io.unorderly.structured              # Structured - Daily Planner
+
+  # ------------------------------------------------------------
+  # Task / study / time planning productivity support
+  # ------------------------------------------------------------
+  - com.todoist                          # Todoist
+  - com.ticktick.task                    # TickTick
+  - in.gurulabs.timetable                # TimeTable+ Study Planner App
+  - com.howtostudyincollege.shovel       # Shovel - Study Planner
+  - app.TimeFinder.TimeFinder            # TimeFinder: Time Blocking
+  - com.to_do_list_studio.uptodo         # To-Do List & Daily Planner
+  - com.planner.journal                  # Daily Planner, To Do List
+#updates
+  - com.hypenet.focused                   # blockit | stop phone addiction
+  - com.bosla.app                         # Bosla - Time Boxing, 2nd Brain
+  - com.giddoyo.study.mate                # Study Planner: Task Splitter
+  - com.pbsolvers.timeboxplanner          # Timebox Planner
+  - com.visual.scheduler                  # Visual Schedule: Daily Planner
+
+  # Procrastination / digital wellbeing / phone addiction
+  - com.procrastination.tracker.android   # DWT - Procrastination Tracker
+  - com.fresh.AddictionBlocker            # Addiction Blocker
+  - org.dgeek.beyond                      # Beyond - Digital Wellbeing
+
+  # Habit / routine / executive-function related
+  - com.ofalvai.habittracker              # Habit Builder
+  - com.skillfoxapps.qhabit               # Qhabit: Daily habit tracker
+
 
 cws_ids:
-  # StayFocusd – Website Blocker (Chrome Web Store extension ID)
-  - laankejkbhbdhmipfmgcngdelahlfoji
+  # ------------------------------------------------------------
+  # Website blockers / browser focus tools
+  # ------------------------------------------------------------
+  - laankejkbhbdhmipfmgcngdelahlfoji     # StayFocusd
+  - eiimnmioipafcokbfikbljfdeojpcgbh     # BlockSite
+  - kjacjjdnoddnpbbcjilcajfhhbdhkpgk     # Forest extension
+  - dpfofggmkhdbfcciajfdphofclabnogo     # Block Site - Site Blocker & Focus Mode
+  - ifdepgnnjpnbkcgempionjablajancjc     # FocusGuard - Block Site & Focus Mode
+  - kniediipngcpmbmpeacaoinhoeipfina     # Website Blocker
+  - lfbpllmokmhinnopfchemobgglipfini     # Site Blocker: Stay focused
+  - aoabjfoanlljmgnohepbkimcekolejjn     # Web Site blocker
+  - ncaaipdfhdijmfdfmeoagmogddhkfdec     # Self Control - Block sites and stay focused
+  - lebiggkccaodkkmjeimmbogdedcpnmfb     # Block Site
+  - femnahohginddofgekknfmaklcbpinkn     # one sec website blocker
+
+  # ------------------------------------------------------------
+  # Pomodoro / focus timer extensions
+  # ------------------------------------------------------------
+  - fgdbgpogmjcfhbifhhongdeidnnmnadb     # YouTube Focus Mode
+  - jdgkhgoanhhnileehaipfpffmnfiiibh     # Focus Timer
+  - eoaadhjniegbmpgooeflmdfonmaajpcp     # Pomodoro Technique Timer
+  - gmmcoggmjnbbklphjcbnpfepmagelgkk     # Meowdoro Tracker
+  - fgaaffhjdmhlhdmmigjpjepflplblgam     # Pomodoro Timer for Google Chrome
+  - njboofjpggbholgpjkdllgnancfangoo     # Pomodoro Focus Timer
+  - gefaddaengbodpiobpbgblajdboalmgc     # Just Focus
+  - ngceodoilcgpmkijopinlkmohnfifjfb     # Focus To-Do Chrome extension
+
+#updates
+  - ajfnijfldjjdnahcfophikekeinkcjkh      # ADHD-Friendly Todo List
+  - ipdhikeonhhnphaffliobbkdepniggil      # ByeByeDistraction
+  - kmknalpaghkffobnpnepdlggelbpgifp      # ProductivityPro - Smart Time Tracker
+
+  # Focus / digital wellbeing / distraction control
+  - efkdgnehbfibggfibkcihjkdajdnjmng      # Todo List - Focus Tasks
+  - ehjjfofjnfhalaleelhbjjellbfhbfgm      # MindShield - Digital Wellbeing Tool
+  - andkpmfpmmfbnlbjjnkibmipcocccnpn      # MindShield - Digital Wellbeing Tool duplicate/listing
+  - nognbljbdjgcnimgimlpaginadeiiefe      # Focused Todo
+
+  # Habit / planning / visual task support
+  - bnoncjmpkkgnkgkebkgmmbphmebdbnje      # Triumph - Habit tracker
+  - chjmonpkdbgeepflmgghhfcflejcglpp      # Habit Tracker
+  - phibodiabnfldclfgkkafehjbadgeaad      # Habit Tracker - Daily Progress
+
 
 ios_ids:
-  # Forest iOS (App Store ID)
-  - id1146560473
+  # ------------------------------------------------------------
+  # Focus / Pomodoro / deep-work timers
+  # ------------------------------------------------------------
+  - id1146560473                         # Forest
+  - id966057213                          # Focus To-Do: Focus Timer & Tasks
+  - id973130201                          # Be Focused - Deep Focus Timer
+  - id1423210932                         # Flow: Focus & Pomodoro Timer
+  - id1435127190                         # FLIP - Focus Timer for Study
+  - id1528322796                         # FocusPomo - Pomodoro Timer
+  - id1265128036                         # Pomodoro - Focus Timer
+  - id1471458198                         # Focus Tomato
+  - id1621897751                         # Pomodoro Focus Timer: OneThing
+  - id1667838757                         # Pomocat - Adorable Focus Timer
+  - id6648771147                         # FocusFlight - Deepfocus Timer
+  - id1631305261                         # Focus Tree: Timer & Flashcards
+  - id6742278016                         # Focus Friend, by Hank Green
 
-# You can add more below once testing is stable
-# play_ids:
-#   - com.stayfocused
-#   - com.whatever.anotherapp
-#
-# cws_ids:
-#   - extensionidhere
-#
-# ios_ids:
-#   - idXXXXXXXXX
+  # ------------------------------------------------------------
+  # Screen-time control / app blocking
+  # ------------------------------------------------------------
+  - id6756433110                         # Nudge: Focus & App Blocker
+  - id6449219142                         # Screen Time Limit: App Blocker
+  - id1659162950                         # Blockin - Screen Time for Focus
+  - id1474340105                         # OffScreen: Screen Time Control
+  - id1541027222                         # ScreenZen - Screen Time Control
+
+  # ------------------------------------------------------------
+  # Habit / routine / daily planning
+  # ------------------------------------------------------------
+  - id1111447047                         # Habitify
+  - id1499198946                         # Structured daily planner
+
+  # ------------------------------------------------------------
+  # Task planning / productivity support
+  # ------------------------------------------------------------
+  - id572688855                          # Todoist
+  - id626144601                          # TickTick
+
+  # ------------------------------------------------------------
+  # Focus sounds / supportive focus environment
+  # ------------------------------------------------------------
+  - id1346247457                         # Endel: Focus & Sleep Sounds
+  - id1239520314                          # Circle: stay focused
+
+  # Focus
+  - id1239520314                          # Circle: stay focused

@@ -14,7 +14,7 @@ def main():
         print("[agg-insights] SKIP (no review_labels.csv)")
         return
 
-    df = pd.read_csv(p)
+    df = pd.read_csv(p, engine="python", on_bad_lines="skip")
     rows = []
     for ak, g in df.groupby("app_key"):
         type_counts = g["type"].value_counts().to_dict()

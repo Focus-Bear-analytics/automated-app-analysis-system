@@ -1,0 +1,47 @@
+# scrapers/seeds.yml
+# Expanded seed list for focus/productivity/ADHD-related competitor discovery.
+#
+# Purpose:
+# Use known relevant apps as starting points for discovering more competitors.
+# Seeds should stay within focus, ADHD support, productivity, Pomodoro,
+# habit-building, routine planning, task management, and distraction-blocking.
+#
+# Do NOT add broad AI chatbots, office suites, document editors, browsers,
+# games, VPN apps, wallpapers, or general utilities here.
+
+play_ids:
+  # Focus / forest-style productivity
+  - cc.forestapp          # Forest: focus and productivity
+
+  # Distraction blocking / app blocking
+  - com.stayfocused      # Stay Focused: app and website blocker
+  - com.blocksite        # BlockSite: distraction blocking
+
+  # Pomodoro / focus timer
+  - com.superelement.pomodoro   # Focus To-Do / Pomodoro-style app
+  - com.pomodrone.app           # Pomodoro-style focus timer
+
+  # Habit and routine support
+  - org.isoron.uhabits          # Loop Habit Tracker
+  - com.habitnow                # HabitNow: habit tracker and planner
+
+  # Task / focus productivity support
+  - com.todoist                 # Todoist
+  - com.ticktick.task           # TickTick
+
+cws_ids:
+  # Website blockers / browser focus tools
+  - laankejkbhbdhmipfmgcngdelahlfoji  # StayFocusd
+  - eiimnmioipafcokbfikbljfdeojpcgbh  # BlockSite
+  - kjacjjdnoddnpbbcjilcajfhhbdhkpgk  # Forest extension
+
+ios_ids:
+  # Focus / Pomodoro / task support
+  - id1146560473  # Forest
+  - id966057213   # Focus To-Do: Pomodoro & Tasks
+  - id572688855   # Todoist
+  - id626144601   # TickTick
+
+  # Habit / routine / planner support
+  - id1111447047  # Habitify
+  - id1499198946  # Structured daily planner

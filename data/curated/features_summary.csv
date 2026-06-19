@@ -1,0 +1,22 @@
+app_type,app_type_label,feature,feature_label,source,num_apps,avg_confidence,core_apps,uncertain_apps
+dsct,Digital Self-Control Tools,self_tracking,Self-Tracking,Lyngs et al.,325,0.922,314,1
+planners,Planners,time_blocking,Time Blocking,Project extension,252,0.926,0,0
+dsct,Digital Self-Control Tools,goal_advancement,Goal-Advancement,Lyngs et al.,244,0.892,242,7
+habit_apps,Habit Apps,habit_tracking,Habit Tracking,Project extension,212,0.902,0,1
+habit_apps,Habit Apps,habit_analytics,Habit Analytics,Project extension,208,0.886,0,7
+dsct,Digital Self-Control Tools,block_removal,Block/Removal,Lyngs et al.,188,0.93,188,0
+planners,Planners,task_management,Task Management,Project extension,187,0.899,0,1
+dsct,Digital Self-Control Tools,custom_rules,Custom Rules,Project extension,168,0.902,19,0
+habit_apps,Habit Apps,habit_reminders,Habit Reminders,Project extension,150,0.898,0,0
+dsct,Digital Self-Control Tools,scheduling,Scheduling,Project extension,137,0.913,77,1
+dsct,Digital Self-Control Tools,reward_punishment,Reward/Punishment,Lyngs et al.,133,0.887,126,3
+habit_apps,Habit Apps,routine_builder,Routine Builder,Project extension,111,0.89,0,0
+habit_apps,Habit Apps,streaks,Streaks,Project extension,101,0.903,0,0
+planners,Planners,calendar_scheduling,Calendar/Scheduling,Project extension,86,0.885,0,0
+planners,Planners,goal_planning,Goal Planning,Project extension,86,0.858,0,8
+planners,Planners,notes_knowledge,Notes/Knowledge Management,Project extension,61,0.858,0,2
+habit_apps,Habit Apps,accountability,Accountability,Project extension,59,0.856,0,6
+planners,Planners,prioritisation,Prioritisation,Project extension,53,0.858,0,3
+dsct,Digital Self-Control Tools,override_friction,Override Friction,Project extension,52,0.894,8,3
+planners,Planners,project_planning,Project Planning,Project extension,23,0.843,0,4
+dsct,Digital Self-Control Tools,emergency_access,Emergency Access,Project extension,16,0.875,2,0

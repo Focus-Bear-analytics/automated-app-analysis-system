@@ -1,257 +1,246 @@
-# llm/sentiment_pipeline.py
 """
-Run sentiment over reviews.csv and produce:
-- data/curated/reviews_with_sentiment.csv  (row-level, adds sentiment_score/label)
-- data/curated/app_sentiment.csv           (per-app aggregates)
+llm/sentiment_pipeline.py — v2
 
-Examples:
-# full set (past year, skip ultra-short reviews)
-python -m llm.sentiment_pipeline run \
-  --in data/curated/reviews.csv \
-  --out-reviews data/curated/reviews_with_sentiment.csv \
-  --out-apps data/curated/app_sentiment.csv \
-  --engine vader \
-  --since-days 365 \
-  --min-words 3
+3-class sentiment (Positive / Negative / Mixed) for app reviews.
+Primary : RoBERTa (cardiffnlp/twitter-roberta-base-sentiment-latest)
+Fallback : LLM (OpenAI gpt-4o-mini or Gemini 1.5-flash)
 
-# only ND-tagged (“special”) reviews
-python -m llm.sentiment_pipeline run \
-  --in data/curated/reviews.csv \
-  --out-reviews data/curated/reviews_with_sentiment__special.csv \
-  --out-apps data/curated/app_sentiment__special.csv \
-  --engine vader \
-  --special-only \
-  --since-days 365 \
-  --min-words 3
+Fixes applied:
+✓ Chunked reader — never loads full file into memory
+✓ Resume: builds seen-ID set from review_id column only (not full CSV reload)
+✓ Output written with csv.QUOTE_ALL — prevents CSV parser errors on reload
+✓ 3-class output: Positive / Negative / Mixed
+✓ Explicit is_adhd_review boolean (expanded keyword set)
+✓ Adds body_len column
 """
 
 import argparse
+import csv
+import json
+import os
 import re
+import time
 from pathlib import Path
-from typing import Optional, Tuple, List
 
-import numpy as np
 import pandas as pd
 
-# progress bar (noop fallback if tqdm missing)
-try:
-    from tqdm import tqdm
-except Exception:
-    def tqdm(x, **k):  # type: ignore
-        return x
+ADHD_PATTERN = re.compile(
+    r"\b(adhd|add\b|a\.d\.h\.d|a\.d\.d|adderall|ritalin|vyvanse|concerta|"
+    r"neurodivergent|neurodiversity|neurodivers\w+|nd[- ]?friendly|"
+    r"executive function\w*|dopamine|hyperfocus|"
+    r"can.?t focus|autism|autistic|asd|asperger|"
+    r"working memory|task initiation|brain fog|sensory processing|"
+    r"dyslexia|dyscalculia|dyspraxia|tourette)\b",
+    re.IGNORECASE,
+)
 
-# -------- text utilities --------
+def flag_adhd(text: str) -> bool:
+    return bool(ADHD_PATTERN.search(str(text)))
 
-_URL_RX = re.compile(r"https?://\S+|www\.\S+", re.I)
+_roberta_pipe = None
 
-def compose_text(title: Optional[str], body: Optional[str]) -> str:
-    t = (title or "").strip()
-    b = (body or "").strip()
-    if t and b:
-        return f"{t}. {b}"
-    return t or b
+def _get_roberta():
+    global _roberta_pipe
+    if _roberta_pipe is None:
+        from transformers import pipeline as hf_pipeline
+        _roberta_pipe = hf_pipeline(
+            "text-classification",
+            model="cardiffnlp/twitter-roberta-base-sentiment-latest",
+            truncation=True, max_length=512, top_k=None,
+        )
+    return _roberta_pipe
 
-def clean_text(s: str) -> str:
-    if not isinstance(s, str):
-        return ""
-    # strip URLs and compress whitespace
-    s = _URL_RX.sub(" ", s)
-    s = re.sub(r"\s+", " ", s).strip()
-    return s
+ROBERTA_LABEL_MAP = {"positive": "Positive", "negative": "Negative", "neutral": "Mixed"}
 
-# -------- sentiment engines --------
+def classify_roberta(texts: list, batch_size: int = 64) -> list:
+    pipe = _get_roberta()
+    results = []
+    for i in range(0, len(texts), batch_size):
+        for out in pipe(texts[i: i + batch_size]):
+            top = max(out, key=lambda x: x["score"])
+            label = ROBERTA_LABEL_MAP.get(top["label"].lower(), "Mixed")
+            results.append({
+                "sentiment_label": label,
+                "sentiment_score": round(top["score"], 4)
+            })
+    return results
 
-class VaderEngine:
-    def __init__(self):
-        from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
-        self.an = SentimentIntensityAnalyzer()
-    def score(self, text: str) -> Tuple[float, str]:
-        vs = self.an.polarity_scores(text or "")
-        c = float(vs.get("compound", 0.0))
-        label = "positive" if c >= 0.05 else ("negative" if c <= -0.05 else "neutral")
-        return c, label
+LLM_PROMPT = """Classify the sentiment of this app review into exactly one of:
+Positive, Negative, or Mixed.
 
-class HFEngine:
-    """
-    Optional heavy model (will fallback to VADER if transformers/torch missing).
-    """
-    def __init__(self, model_name: str = "cardiffnlp/twitter-roberta-base-sentiment"):
-        try:
-            from transformers import pipeline  # type: ignore
-        except Exception as e:
-            raise RuntimeError("transformers not installed") from e
-        self.pipe = pipeline("sentiment-analysis", model=model_name)
-    def score(self, text: str) -> Tuple[float, str]:
-        if not text:
-            return 0.0, "neutral"
-        res = self.pipe(text[:512])[0]  # keep it quick
-        lab = str(res["label"]).lower()
-        sc = float(res.get("score", 0.0))
-        if "pos" in lab:
-            return sc, "positive"
-        if "neg" in lab:
-            return -sc, "negative"
-        return 0.0, "neutral"
+Rules:
+- "Positive" = overall happy, recommends the app
+- "Negative" = overall unhappy, does NOT recommend
+- "Mixed" = balanced or unclear
 
-def load_engine(name: str):
-    name = (name or "vader").lower()
-    if name == "vader":
-        return VaderEngine()
-    if name in ("hf", "transformer", "roberta"):
-        try:
-            return HFEngine()
-        except Exception:
-            # Fall back silently to VADER if HF unavailable
-            return VaderEngine()
-    return VaderEngine()
+Return ONLY valid JSON: {{"sentiment": "Positive"|"Negative"|"Mixed", "confidence": "high"|"medium"|"low"}}
 
-# -------- core runner --------
+Review:
+{text}"""
 
-def run_sentiment(
-    inp: str,
-    out_reviews: str,
-    out_apps: str,
-    engine_name: str = "vader",
-    since_days: Optional[int] = None,
-    min_words: int = 0,
-    min_chars: int = 0,
-    special_only: bool = False,
-    drop_neutrals_for_agg: bool = False,
-):
-    inp_p = Path(inp)
-    if not inp_p.exists():
-        raise SystemExit(f"Input not found: {inp_p}")
+def classify_llm_single(text: str, model: str = "gpt-4o-mini") -> dict:
+    prompt = LLM_PROMPT.format(text=str(text)[:2000])
+    try:
+        if os.environ.get("OPENAI_API_KEY"):
+            import openai
+            openai.api_key = os.environ["OPENAI_API_KEY"]
+            resp = openai.chat.completions.create(
+                model=model,
+                temperature=0,
+                response_format={"type": "json_object"},
+                messages=[{"role": "user", "content": prompt}],
+            )
+            raw = json.loads(resp.choices[0].message.content)
+        elif os.environ.get("GEMINI_API_KEY"):
+            import google.generativeai as genai
+            genai.configure(api_key=os.environ["GEMINI_API_KEY"])
+            raw_text = (
+                genai.GenerativeModel("gemini-1.5-flash")
+                .generate_content(prompt).text
+                .strip().lstrip("```json").lstrip("```").rstrip("```").strip()
+            )
+            raw = json.loads(raw_text)
+        else:
+            return {"sentiment_label": "Mixed", "sentiment_score": 0.0}
 
-    # read header once to decide usecols robustly
-    header_cols: List[str] = pd.read_csv(inp_p, nrows=0).columns.tolist()
-    wanted = [
-        "app_key","store","app_id","country","lang","review_id",
-        "user_name","rating","title","body","version","at","special_reviews"
-    ]
-    usecols = [c for c in wanted if c in header_cols]
+        label = raw.get("sentiment", "Mixed")
+        if label not in {"Positive", "Negative", "Mixed"}:
+            label = "Mixed"
+        score = {"high": 0.9, "medium": 0.7, "low": 0.5}.get(
+            raw.get("confidence", "medium"), 0.7
+        )
+        return {"sentiment_label": label, "sentiment_score": score}
+    except Exception as e:
+        return {"sentiment_label": "Mixed", "sentiment_score": 0.0, "error": str(e)}
 
-    # stable dtypes to avoid warnings
-    df = pd.read_csv(inp_p, usecols=usecols, dtype=str, low_memory=False).fillna("")
-    # rating to numeric
-    if "rating" in df.columns:
-        df["rating"] = pd.to_numeric(df["rating"], errors="coerce")
+def iter_jsonl(path: Path, chunksize: int):
+    buf = []
+    with path.open("r", encoding="utf-8", errors="replace") as f:
+        for line in f:
+            line = line.strip()
+            if not line:
+                continue
+            try:
+                buf.append(json.loads(line))
+            except json.JSONDecodeError:
+                continue
+            if len(buf) >= chunksize:
+                yield pd.DataFrame(buf)
+                buf = []
+    if buf:
+        yield pd.DataFrame(buf)
 
-    # optional date filter
-    if "at" in df.columns and since_days and since_days > 0:
-        ts = pd.to_datetime(df["at"].replace("", np.nan), errors="coerce", utc=True)
-        cutoff = pd.Timestamp.utcnow() - pd.Timedelta(days=since_days)
-        df = df[ts >= cutoff].copy()
+def iter_csv(path: Path, chunksize: int):
+    for chunk in pd.read_csv(path, chunksize=chunksize, low_memory=False, on_bad_lines="skip"):
+        yield chunk
 
-    # compose + clean review text
-    titles = df["title"] if "title" in df.columns else ""
-    bodies = df["body"] if "body" in df.columns else ""
-    df["text"] = [clean_text(compose_text(t, b)) for t, b in zip(titles, bodies)]
-
-    # length filters
-    if min_words > 0:
-        df = df[df["text"].str.split().str.len().fillna(0) >= min_words]
-    if min_chars > 0:
-        df = df[df["text"].str.len().fillna(0) >= min_chars]
-
-    # special-only filter
-    if special_only and "special_reviews" in df.columns:
-        df = df[df["special_reviews"].fillna("").astype(bool)]
-
-    # if nothing left, write empty but valid outputs
-    if df.empty:
-        Path(out_reviews).parent.mkdir(parents=True, exist_ok=True)
-        df.to_csv(out_reviews, index=False)
-        pd.DataFrame(columns=[
-            "app_key","store","country","n_reviews","n_nd","avg_rating",
-            "mean_compound","pct_positive","pct_negative"
-        ]).to_csv(out_apps, index=False)
-        print("[sentiment] no rows after filters; wrote empty outputs.")
-        return
-
-    # engine
-    eng = load_engine(engine_name)
-
-    # score
-    compounds, labels = [], []
-    for txt in tqdm(df["text"].tolist(), desc="Scoring reviews"):
-        c, lbl = eng.score(txt)
-        compounds.append(c)
-        labels.append(lbl)
-    df["sentiment_score"] = compounds
-    df["sentiment_label"] = labels
-
-    # row-level save (keep nice set of columns if present)
-    out_reviews_p = Path(out_reviews)
-    out_reviews_p.parent.mkdir(parents=True, exist_ok=True)
-    keep_cols = [
-        "app_key","store","app_id","country","lang","review_id",
-        "user_name","rating","title","body","version","at",
-        "special_reviews","sentiment_score","sentiment_label","text"
-    ]
-    cols_out = [c for c in keep_cols if c in df.columns]
-    df[cols_out].to_csv(out_reviews_p, index=False)
-
-    # ----- aggregates (per app_key, store, country) -----
-    gcols = [c for c in ["app_key","store","country"] if c in df.columns]
-    agg_df = df.copy()
-
-    if drop_neutrals_for_agg:
-        agg_df = agg_df[agg_df["sentiment_label"] != "neutral"].copy()
-
-    # make an explicit boolean ND column to avoid lambdas referencing outer vars
-    if "special_reviews" in agg_df.columns:
-        agg_df["is_nd"] = agg_df["special_reviews"].fillna("").astype(bool)
-    else:
-        agg_df["is_nd"] = False
-
-    # groupby.agg with named aggregations (no FutureWarning)
-    grp = agg_df.groupby(gcols, dropna=False)
-    app_agg = grp.agg(
-        n_reviews     = ('sentiment_score', 'size'),
-        n_nd          = ('is_nd', 'sum'),
-        avg_rating    = ('rating', lambda s: pd.to_numeric(s, errors='coerce').mean()),
-        mean_compound = ('sentiment_score', 'mean'),
-        pct_positive  = ('sentiment_label', lambda s: (s == 'positive').mean()),
-        pct_negative  = ('sentiment_label', lambda s: (s == 'negative').mean()),
-    ).reset_index()
-
-    out_apps_p = Path(out_apps)
-    out_apps_p.parent.mkdir(parents=True, exist_ok=True)
-    app_agg.to_csv(out_apps_p, index=False)
-
-    print(f"[sentiment] wrote reviews -> {out_reviews_p}")
-    print(f"[sentiment] wrote app aggregates -> {out_apps_p}")
-
-# -------- CLI --------
+def load_done_ids(out_path: Path) -> set:
+    done: set = set()
+    if not out_path.exists():
+        return done
+    try:
+        col_df = pd.read_csv(out_path, usecols=["review_id"], low_memory=False, on_bad_lines="skip")
+        return set(col_df["review_id"].dropna().astype(str).tolist())
+    except Exception:
+        pass
+    try:
+        with out_path.open("r", encoding="utf-8", errors="replace") as f:
+            header = f.readline().strip().split(",")
+            if "review_id" in header:
+                idx = header.index("review_id")
+                for line in f:
+                    parts = line.strip().split(",")
+                    if len(parts) > idx:
+                        done.add(parts[idx].strip('"'))
+    except Exception:
+        pass
+    return done
 
 def main():
-    ap = argparse.ArgumentParser(description="Sentiment over reviews.csv (row + app aggregates)")
-    sub = ap.add_subparsers(dest="cmd", required=True)
-
-    p = sub.add_parser("run")
-    p.add_argument("--in", dest="inp", default="data/curated/reviews.csv")
-    p.add_argument("--out-reviews", default="data/curated/reviews_with_sentiment.csv")
-    p.add_argument("--out-apps", default="data/curated/app_sentiment.csv")
-    p.add_argument("--engine", default="vader", help="vader | hf")
-    p.add_argument("--since-days", type=int, default=None, help="only include reviews within the last N days")
-    p.add_argument("--min-words", type=int, default=0, help="drop reviews with fewer than N words")
-    p.add_argument("--min-chars", type=int, default=0, help="drop reviews with fewer than N characters")
-    p.add_argument("--special-only", action="store_true", help="keep only rows where special_reviews is truthy")
-    p.add_argument("--drop-neutrals-for-agg", action="store_true", help="exclude neutral rows when computing app aggregates")
-
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--in", dest="inp", required=True)
+    ap.add_argument("--out", dest="out", default="data/curated/reviews_with_sentiment.csv")
+    ap.add_argument("--backend", choices=["roberta", "llm"], default="roberta")
+    ap.add_argument("--min-body-len", type=int, default=15)
+    ap.add_argument("--chunksize", type=int, default=10_000)
+    ap.add_argument("--llm-model", default="gpt-4o-mini")
+    ap.add_argument("--llm-sleep", type=float, default=0.05)
+    ap.add_argument("--resume", action="store_true")
     args = ap.parse_args()
-    if args.cmd == "run":
-        run_sentiment(
-            inp=args.inp,
-            out_reviews=args.out_reviews,
-            out_apps=args.out_apps,
-            engine_name=args.engine,
-            since_days=args.since_days,
-            min_words=args.min_words,
-            min_chars=args.min_chars,
-            special_only=args.special_only,
-            drop_neutrals_for_agg=args.drop_neutrals_for_agg,
-        )
+
+    inp = Path(args.inp)
+    out_path = Path(args.out)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+
+    done_ids: set = set()
+    write_header: bool = True
+
+    if args.resume and out_path.exists():
+        done_ids = load_done_ids(out_path)
+        write_header = False
+        print(f"[sentiment] resuming — {len(done_ids):,} already done")
+
+    if not inp.exists():
+        print(f"[sentiment] ERROR: input not found: {inp}")
+        return
+
+    reader = iter_jsonl if inp.suffix.lower() in {".jsonl", ".txt"} else iter_csv
+    chunk_n = total_written = 0
+
+    with out_path.open("a", encoding="utf-8", newline="") as fout:
+        writer = None
+
+        for chunk in reader(inp, args.chunksize):
+            chunk_n += 1
+            chunk.columns = [c.strip() for c in chunk.columns]
+
+            if "body" not in chunk.columns and "text" in chunk.columns:
+                chunk = chunk.rename(columns={"text": "body"})
+            if "body" not in chunk.columns:
+                continue
+
+            chunk = chunk.dropna(subset=["body"]).copy()
+            chunk["body"] = chunk["body"].astype(str)
+            chunk = chunk[chunk["body"].str.len() >= args.min_body_len]
+
+            if "review_id" in chunk.columns and done_ids:
+                chunk = chunk[~chunk["review_id"].astype(str).isin(done_ids)]
+            if chunk.empty:
+                continue
+
+            chunk["is_adhd_review"] = chunk["body"].apply(flag_adhd)
+            chunk["body_len"] = chunk["body"].str.len()
+
+            texts = chunk["body"].tolist()
+            if args.backend == "roberta":
+                sent = classify_roberta(texts)
+            else:
+                sent = []
+                for t in texts:
+                    sent.append(classify_llm_single(t, model=args.llm_model))
+                    time.sleep(args.llm_sleep)
+
+            chunk["sentiment_label"] = [r["sentiment_label"] for r in sent]
+            chunk["sentiment_score"] = [r.get("sentiment_score", 0.0) for r in sent]
+
+            if writer is None:
+                writer = csv.DictWriter(
+                    fout,
+                    fieldnames=list(chunk.columns),
+                    quoting=csv.QUOTE_ALL,
+                    extrasaction="ignore",
+                    lineterminator="\n",
+                )
+                if write_header:
+                    writer.writeheader()
+
+            for _, row in chunk.iterrows():
+                writer.writerow(row.to_dict())
+
+            total_written += len(chunk)
+            print(f"[sentiment] chunk {chunk_n}: +{len(chunk):,} (total: {total_written:,})")
+
+    print(f"[sentiment] done — {total_written:,} rows → {out_path}")
 
 if __name__ == "__main__":
     main()

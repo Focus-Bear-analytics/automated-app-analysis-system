@@ -7,6 +7,20 @@ import plotly.express as px
 import streamlit as st
 import streamlit.components.v1 as components
 
+
+# -----------------------------------------------------------
+# OPTIONAL IMPORT: survivorship page
+# -----------------------------------------------------------
+try:
+    from survivorship_analysis import render_survivorship_page
+    SURVIVORSHIP_AVAILABLE = True
+    SURVIVORSHIP_ERROR = None
+except Exception as e:
+    render_survivorship_page = None
+    SURVIVORSHIP_AVAILABLE = False
+    SURVIVORSHIP_ERROR = e
+
+
 # -----------------------------------------------------------
 # PAGE CONFIGURATION
 # -----------------------------------------------------------
@@ -48,24 +62,53 @@ body {
     margin-bottom: 35px;
 }
 
-/* Radio Buttons */
-div[role='radiogroup'] label p {
-    font-size: 15px;
-    padding: 10px 16px;
-    margin: 5px 8px;
-    border-radius: 8px;
+/* Radio Buttons - aligned sidebar navigation */
+div[role='radiogroup'] {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Make the full radio option align as one row */
+div[role='radiogroup'] label {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    padding: 8px 10px !important;
+    margin: 2px 4px !important;
+    border-radius: 10px !important;
     transition: all 0.25s ease;
 }
-div[role='radiogroup'] label:hover p {
-    background-color: rgba(59,130,246,0.15);
-    color: #3B82F6;
-    transform: scale(1.02);
+
+/* Remove extra spacing from the text itself */
+div[role='radiogroup'] label p {
+    margin: 0 !important;
+    padding: 0 !important;
+    font-size: 15px !important;
+    line-height: 1.2 !important;
 }
-div[role='radiogroup'] label[data-selected="true"] p {
+
+/* Hover effect on the whole row, not just text */
+div[role='radiogroup'] label:hover {
+    background-color: rgba(59,130,246,0.15);
+    transform: translateX(2px);
+}
+
+/* Selected option */
+div[role='radiogroup'] label:has(input:checked) {
     background: linear-gradient(90deg, #2563EB, #1D4ED8);
-    color: white !important;
     box-shadow: 0 0 10px rgba(37,99,235,0.3);
+}
+
+/* Selected text */
+div[role='radiogroup'] label:has(input:checked) p {
+    color: white !important;
     font-weight: 600;
+}
+
+/* Keep radio circle aligned */
+div[role='radiogroup'] label input {
+    margin: 0 !important;
 }
 
 /* Metric Cards */
@@ -111,7 +154,7 @@ div[role='radiogroup'] label[data-selected="true"] p {
 st.sidebar.markdown("<div class='sidebar-header'>Focus Bear</div>", unsafe_allow_html=True)
 menu = st.sidebar.radio(
     "Navigation",
-    ["Overview", "Competitors", "Sentiment Analysis", "Feature Matrix", "ADHD Analysis", "Summary"],
+    ["Overview", "Competitors","Per-App Breakdown","Sentiment Analysis", "Feature Matrix", "ADHD Analysis","Survivorship Analysis", "Summary"],
     index=0
 )
 
@@ -121,10 +164,10 @@ menu = st.sidebar.radio(
 BASE_DIR = Path(__file__).resolve().parent
 CURATED_DIR = BASE_DIR / "data" / "curated"
 
-DATA_PATH = CURATED_DIR / "apps_all_clean.csv"
+DATA_PATH = CURATED_DIR / "apps_clean.csv"
 
 if not os.path.exists(DATA_PATH):
-    st.error("❌ File apps_all_clean.csv not found.")
+    st.error("❌ File apps_clean.csv not found. Run the pipeline to generate data/curated/apps_clean.csv.")
     st.stop()
 
 apps = pd.read_csv(DATA_PATH)
@@ -140,6 +183,182 @@ apps = apps.rename(columns={
 apps_display = apps[["App Name", "Developer", "Genre", "Average Rating", "Rating Count", "Installs", "Platform"]]
 
 # -----------------------------------------------------------
+# HELPER: parse installs/users column to numeric
+# -----------------------------------------------------------
+def parse_installs(series: pd.Series) -> pd.Series:
+    """
+    Convert installs/users values such as 1,000, 10K, 1.5M, or missing values
+    into numeric values for tables and charts.
+    """
+    cleaned = (
+        series.astype(str)
+        .str.replace(",", "", regex=False)
+        .str.upper()
+        .str.strip()
+    )
+
+    multipliers = cleaned.str.extract(r"([KM])", expand=False).map({"K": 1_000, "M": 1_000_000}).fillna(1)
+    numbers = pd.to_numeric(cleaned.str.extract(r"([0-9]+(?:\.[0-9]+)?)", expand=False), errors="coerce")
+    return numbers * multipliers
+
+def format_rating(value):
+    """
+    Format missing or invalid ratings for dashboard display.
+    Prevents raw 0.0 / nan values from appearing in app cards.
+    """
+    if pd.isna(value) or value == "" or str(value).lower() == "nan":
+        return "No rating"
+
+    try:
+        rating = float(value)
+
+        # If rating is 0, treat it as missing because app stores normally use 1–5 ratings.
+        if rating <= 0:
+            return "No rating"
+
+        return f"{rating:.1f}"
+    except Exception:
+        return "No rating"
+
+
+def format_installs(value):
+    """
+    Format installs/users for dashboard display.
+    Prevents raw nan values from appearing in app cards.
+    """
+    if pd.isna(value) or value == "" or str(value).lower() == "nan":
+        return "Not available"
+
+    try:
+        installs = int(float(str(value).replace(",", "")))
+
+        if installs >= 1_000_000:
+            return f"{installs / 1_000_000:.1f}M"
+
+        if installs >= 1_000:
+            return f"{installs / 1_000:.1f}K"
+
+        return str(installs)
+    except Exception:
+        return "Not available"
+
+
+def format_text(value, fallback="Not available"):
+    """
+    Format missing text fields such as developer or genre.
+    """
+    if pd.isna(value) or value == "" or str(value).lower() == "nan":
+        return fallback
+
+    return str(value)
+
+
+# -----------------------------------------------------------
+# FEATURE MATRIX DISPLAY HELPERS (from app_kelerra.py)
+# -----------------------------------------------------------
+# These helpers are only used by the Feature Matrix page. They keep the
+# rest of the dashboard unchanged while allowing Kelerra's taxonomy-based
+# feature matrix visuals to render correctly.
+PANEL = "#111827"
+CARD = "#172033"
+TEXT = "#F9FAFB"
+TEXT_SOFT = "#E5E7EB"
+BORDER = "#60A5FA"
+GRID = "#64748B"
+
+ACCESSIBLE_BLUE_SCALE = [
+    [0.0, "#1E3A8A"],
+    [0.35, "#1E40AF"],
+    [0.70, "#1D4ED8"],
+    [1.0, "#2563EB"],
+]
+
+ACCESSIBLE_DISCRETE = [
+    "#1E3A8A",
+    "#1D4ED8",
+    "#2563EB",
+    "#7C3AED",
+    "#0F766E",
+    "#B45309",
+]
+
+
+def dark_plot(fig):
+    """Apply readable dark-theme styling to Plotly charts."""
+    fig.update_layout(
+        title=dict(text=""),
+        title_text="",
+        plot_bgcolor=PANEL,
+        paper_bgcolor=PANEL,
+        font=dict(color=TEXT, size=14),
+        legend=dict(
+            font=dict(color=TEXT, size=13),
+            bgcolor="rgba(0,0,0,0)",
+        ),
+        xaxis=dict(
+            title_font=dict(color=TEXT, size=15),
+            tickfont=dict(color=TEXT_SOFT, size=13),
+            gridcolor=GRID,
+            zerolinecolor=GRID,
+            linecolor=GRID,
+        ),
+        yaxis=dict(
+            title_font=dict(color=TEXT, size=15),
+            tickfont=dict(color=TEXT_SOFT, size=13),
+            gridcolor=GRID,
+            zerolinecolor=GRID,
+            linecolor=GRID,
+        ),
+        coloraxis_colorbar=dict(
+            title_font=dict(color=TEXT, size=14),
+            tickfont=dict(color=TEXT_SOFT, size=13),
+        ),
+        hoverlabel=dict(
+            bgcolor="#020617",
+            bordercolor=BORDER,
+            font=dict(color=TEXT, size=13),
+        ),
+        margin=dict(l=80, r=40, t=30, b=70),
+    )
+
+    fig.update_traces(
+        textfont=dict(color=TEXT, size=14),
+        marker_line_color="#020617",
+        marker_line_width=1.2,
+    )
+
+    return fig
+
+
+def readable_treemap(fig):
+    """Apply readable dark-theme styling to Plotly treemaps."""
+    fig.update_layout(
+        title=dict(text=""),
+        title_text="",
+        paper_bgcolor=PANEL,
+        plot_bgcolor=PANEL,
+        font=dict(color=TEXT, size=15),
+        hoverlabel=dict(
+            bgcolor="#020617",
+            bordercolor=BORDER,
+            font=dict(color=TEXT, size=13),
+        ),
+        coloraxis_colorbar=dict(
+            title_font=dict(color=TEXT, size=14),
+            tickfont=dict(color=TEXT_SOFT, size=13),
+        ),
+        margin=dict(l=20, r=20, t=40, b=20),
+    )
+
+    fig.update_traces(
+        textfont=dict(color=TEXT, size=15),
+        marker=dict(line=dict(color="#020617", width=2)),
+        textinfo="label+value",
+    )
+
+    return fig
+
+# -----------------------------------------------------------
 # OVERVIEW PAGE
 # -----------------------------------------------------------
 if menu == "Overview":
@@ -149,7 +368,7 @@ if menu == "Overview":
     total_competitors = len(apps_display)
     avg_rating = apps_display["Average Rating"].mean()
     try:
-        installs = apps_display["Installs"].astype(str).str.replace(",", "").str.extract("(\d+)")[0].astype(float)
+        installs = apps_display["Installs"].astype(str).str.replace(",", "").str.extract(r"(\d+)")[0].astype(float)
         avg_installs = installs.mean()
     except:
         avg_installs = 0
@@ -201,7 +420,7 @@ elif menu == "Competitors":
         filtered = filtered[filtered["Genre"] == genre_filter]
 
     try:
-        filtered["Installs_num"] = filtered["Installs"].astype(str).str.replace(",", "").str.extract("(\d+)")[0].astype(float)
+        filtered["Installs_num"] = filtered["Installs"].astype(str).str.replace(",", "").str.extract(r"(\d+)")[0].astype(float)
     except:
         filtered["Installs_num"] = 0
 
@@ -220,23 +439,149 @@ elif menu == "Competitors":
     else:
         html_output = "<div style='display:flex; flex-direction:column; gap:15px;'>"
         for _, row in filtered.iterrows():
+            app_name = format_text(row.get("App Name"), "Unknown app")
+            developer = format_text(row.get("Developer"), "Unknown developer")
+            genre = format_text(row.get("Genre"), "Uncategorized")
+            rating = format_rating(row.get("Average Rating"))
+            installs = format_installs(row.get("Installs"))
+            platform = format_text(row.get("Platform"), "Unknown platform")
+
             html_output += f"""
             <div style="background: rgba(30,41,59,0.8); border: 1px solid rgba(59,130,246,0.25); 
                         border-radius: 15px; padding: 18px 20px;">
-                <h4 style="margin:0; color:#93C5FD; font-size:18px; font-weight:700;">{row['App Name']}</h4>
-                <p style="margin:3px 0 10px; color:#9CA3AF;">👨‍💻 {row['Developer']}</p>
-                <div style="display:flex; justify-content:space-between;">
-                    <div style="color:#FACC15;">⭐ {row['Average Rating']}</div>
-                    <div style="color:#10B981;">📈 {row['Installs']}</div>
-                    <div style="color:#60A5FA;">🧩 {row['Genre']}</div>
+               <h4 style="margin:0; color:#93C5FD; font-size:18px; font-weight:700;">{app_name}</h4>
+               <p style="margin:3px 0 10px; color:#9CA3AF;">👨‍💻 {developer}</p>
+               <div style="display:flex; justify-content:space-between;">
+                    <div style="color:#FACC15;">⭐ {rating}</div>
+                    <div style="color:#10B981;">📈 {installs}</div>
+                    <div style="color:#60A5FA;">🧩 {genre}</div>
                     <div style="background-color:#2563EB; color:white; padding:2px 8px; border-radius:6px;">
-                        {row['Platform']}
+                         {platform}
                     </div>
-                </div>
+               </div>
             </div>
             """
         html_output += "</div>"
         components.html(html_output, height=800, scrolling=True)
+
+
+# -----------------------------------------------------------
+# PER-APP BREAKDOWN PAGE
+# -----------------------------------------------------------
+elif menu == "Per-App Breakdown":
+    st.title("📋 Per-App Installs & Ratings Breakdown")
+
+    try:
+        per_app = apps_display[["App Name", "Platform", "Installs", "Average Rating", "Rating Count", "Genre"]].copy()
+        per_app["Installs (numeric)"] = parse_installs(per_app["Installs"])
+        per_app["Average Rating"] = pd.to_numeric(per_app["Average Rating"], errors="coerce")
+        per_app["Rating Count"] = pd.to_numeric(per_app["Rating Count"], errors="coerce")
+        per_app = per_app.sort_values("Installs (numeric)", ascending=False)
+
+        # Sortable table
+        per_app_display = per_app[
+            ["App Name", "Platform", "Average Rating", "Rating Count", "Installs (numeric)"]
+        ].copy()
+        per_app_display.columns = ["App Name", "Platform", "Avg Rating", "Rating Count", "Installs"]
+        per_app_display["Installs"] = per_app_display["Installs"].apply(
+            lambda x: f"{x:,.0f}" if pd.notna(x) else "N/A"
+        )
+        per_app_display["Rating Count"] = per_app_display["Rating Count"].apply(
+            lambda x: f"{x:,.0f}" if pd.notna(x) else "N/A"
+        )
+        per_app_display["Avg Rating"] = per_app_display["Avg Rating"].apply(
+            lambda x: f"{x:.2f}" if pd.notna(x) else "N/A"
+        )
+        st.dataframe(per_app_display, use_container_width=True, hide_index=True)
+
+        st.markdown("---")
+
+        # Row 1: Top 20 by Installs + Top 20 by Rating
+        col1, col2 = st.columns(2)
+
+        with col1:
+            fig_installs = px.bar(
+                per_app.head(20),
+                x="App Name",
+                y="Installs (numeric)",
+                color="Platform",
+                title="Top 20 Apps by Installs",
+                labels={"Installs (numeric)": "Installs"},
+                template="plotly_dark",
+            )
+            fig_installs.update_layout(xaxis_tickangle=-40, showlegend=True)
+            st.plotly_chart(fig_installs, use_container_width=True)
+
+        with col2:
+            fig_ratings = px.bar(
+                per_app.sort_values("Average Rating", ascending=False).head(20),
+                x="App Name",
+                y="Average Rating",
+                color="Platform",
+                title="Top 20 Apps by Average Rating",
+                template="plotly_dark",
+            )
+            fig_ratings.update_layout(xaxis_tickangle=-40, yaxis_range=[0, 5])
+            st.plotly_chart(fig_ratings, use_container_width=True)
+
+        st.markdown("---")
+
+        # Row 2: Scatter + Rating histogram
+        col3, col4 = st.columns(2)
+
+        with col3:
+            scatter_df = per_app.dropna(subset=["Installs (numeric)", "Average Rating"]).copy()
+            scatter_df["Rating Count"] = scatter_df["Rating Count"].fillna(10)
+            fig_scatter = px.scatter(
+                scatter_df,
+                x="Installs (numeric)",
+                y="Average Rating",
+                color="Platform",
+                hover_name="App Name",
+                size="Rating Count",
+                size_max=30,
+                title="Installs vs Rating (bubble = rating count)",
+                labels={"Installs (numeric)": "Installs", "Average Rating": "Avg Rating"},
+                template="plotly_dark",
+                log_x=True,
+            )
+            fig_scatter.update_layout(yaxis_range=[0, 5])
+            st.plotly_chart(fig_scatter, use_container_width=True)
+
+        with col4:
+            rating_hist = per_app.dropna(subset=["Average Rating"])
+            fig_hist = px.histogram(
+                rating_hist,
+                x="Average Rating",
+                nbins=20,
+                color="Platform",
+                title="Rating Distribution Across All Apps",
+                labels={"Average Rating": "Rating"},
+                template="plotly_dark",
+            )
+            fig_hist.update_layout(bargap=0.05)
+            st.plotly_chart(fig_hist, use_container_width=True)
+
+        st.markdown("---")
+
+        # Row 3: Platform donut only
+        st.subheader("App Count by Platform")
+        platform_counts = per_app["Platform"].value_counts().reset_index()
+        platform_counts.columns = ["Platform", "Count"]
+        fig_donut = px.pie(
+            platform_counts,
+            names="Platform",
+            values="Count",
+            title="App Count by Platform",
+            hole=0.45,
+            template="plotly_dark",
+        )
+        fig_donut.update_traces(textposition="outside", textinfo="percent+label")
+        st.plotly_chart(fig_donut, use_container_width=True)
+
+    except Exception as e:
+        st.warning(f"Could not render per-app breakdown: {e}")
+
 
 # -----------------------------------------------------------
 # SENTIMENT ANALYSIS PAGE (PlayStore + iOS combined)
@@ -398,464 +743,566 @@ elif menu == "Sentiment Analysis":
     ❌ **Negative Reviews:** {neg:,} ({neg/total:.1%})
     """)
 
+    # -------------------------------------------------------
+    # ADHD BEHAVIOURAL INSIGHTS
+    # -------------------------------------------------------
+    st.subheader("🧠 ADHD Behavioural Insights")
+
+    try:
+        adhd_df = pd.read_csv(CURATED_DIR / "adhd_reviews_analysis.csv")
+
+        total_adhd = len(adhd_df)
+        adhd_counts = adhd_df["ML_Sentiment"].value_counts()
+
+        positive_count = adhd_counts.get("Positive", 0)
+        neutral_count = adhd_counts.get("Neutral", 0)
+        negative_count = adhd_counts.get("Negative", 0)
+
+        st.markdown(f"""
+        ✅ **Positive ADHD Reviews:** {positive_count}
+
+        ⚠️ **Neutral ADHD Reviews:** {neutral_count}
+
+        ❌ **Negative ADHD Reviews:** {negative_count}
+
+        📊 **Total ADHD / Focus Reviews:** {total_adhd}
+        """)
+
+    except Exception as e:
+        st.warning("ADHD review analysis not available.")
+
+    # -------------------------------------------------------
+    # ADHD THEME ANALYSIS
+    # -------------------------------------------------------
+    st.subheader("🧠 ADHD Theme Analysis")
+
+    try:
+        theme_df = pd.read_csv(CURATED_DIR / "adhd_theme_analysis.csv")
+
+        theme_counts = theme_df["ADHD_Theme"].value_counts().reset_index()
+        theme_counts.columns = ["Theme", "Count"]
+
+        fig_theme = px.bar(
+            theme_counts,
+            x="Theme",
+            y="Count",
+            color="Theme",
+            title="ADHD Theme Distribution"
+        )
+
+        fig_theme.update_layout(
+            plot_bgcolor="#111827",
+            paper_bgcolor="#111827",
+            font=dict(color="#E5E7EB"),
+            xaxis_title="Theme",
+            yaxis_title="Count"
+        )
+
+        st.plotly_chart(fig_theme, use_container_width=True)
+
+        st.subheader("🤖 Automated ADHD Insight Summary")
+
+        top_theme = theme_counts.iloc[0]["Theme"]
+        second_theme = theme_counts.iloc[1]["Theme"] if len(theme_counts) > 1 else "None"
+        total_reviews = theme_counts["Count"].sum()
+
+        st.info(f"""
+        Most ADHD-related users primarily discuss **{top_theme}** within focus applications.
+
+        The second most common behavioural theme identified was **{second_theme}**.
+
+        Based on the detected ADHD behavioural review patterns, users frequently describe:
+
+        - attention regulation support
+        - task management assistance
+        - behavioural motivation patterns
+        - routine reinforcement behaviour
+        - concentration improvement during study/work tasks
+
+        Total ADHD behavioural reviews analysed: **{total_reviews}**
+        """)
+
+        st.subheader("💡 ADHD Behavioural Recommendations")
+
+        st.success("""
+        Based on the detected ADHD behavioural patterns, the analysis suggests:
+
+        • Users respond positively to structured attention-support systems  
+        • Gamified productivity features improve behavioural engagement  
+        • Routine reinforcement mechanisms help maintain task consistency  
+        • Positive ADHD-related reviews frequently mention motivation and concentration support  
+        • Productivity applications may assist users with attention regulation behaviours
+        """)
+
+    except Exception as e:
+        st.warning("ADHD theme analysis not available.")
+
+    # -----------------------------------------------------------
+    # LLM-BASED ADHD BEHAVIOUR DETECTION
+    # -----------------------------------------------------------
+    st.markdown("### 🧠 LLM-Based ADHD Behaviour Detection")
+
+    LLM_ADHD_PATH = CURATED_DIR / "llm_adhd_behaviour_analysis.csv"
+
+    if not os.path.exists(LLM_ADHD_PATH):
+        st.warning("⚠️ LLM ADHD behaviour analysis file not found.")
+    else:
+        try:
+            llm_df = pd.read_csv(LLM_ADHD_PATH)
+
+            if "LLM_ADHD_Theme" not in llm_df.columns:
+                st.warning("⚠️ Column 'LLM_ADHD_Theme' not found in LLM analysis file.")
+            else:
+                llm_counts = llm_df["LLM_ADHD_Theme"].value_counts().reset_index()
+                llm_counts.columns = ["Behaviour Theme", "Count"]
+
+                # Remove reviews classified as not ADHD-related
+                llm_adhd_counts = llm_counts[
+                    llm_counts["Behaviour Theme"] != "Not ADHD Related"
+                ]
+
+                if llm_adhd_counts.empty:
+                    st.info("No ADHD behavioural themes were detected by the LLM.")
+                else:
+                    fig_llm = px.bar(
+                        llm_adhd_counts,
+                        x="Behaviour Theme",
+                        y="Count",
+                        color="Behaviour Theme",
+                        title="LLM-Detected ADHD Behaviour Themes"
+                    )
+
+                    fig_llm.update_layout(
+                        plot_bgcolor="#111827",
+                        paper_bgcolor="#111827",
+                        font=dict(color="#E5E7EB"),
+                        xaxis_title="Behaviour Theme",
+                        yaxis_title="Review Count"
+                    )
+
+                    st.plotly_chart(fig_llm, use_container_width=True)
+
+                    total_llm_adhd = llm_adhd_counts["Count"].sum()
+
+                    st.info(f"""
+                    The LLM-based classifier identified **{total_llm_adhd}** reviews with ADHD-relevant behavioural patterns.
+
+                    Detected behavioural categories include:
+
+                    - Time Management
+                    - Motivation and Reward
+                    - Task Management
+                    - Distraction Management
+
+                    This adds a deeper behavioural layer beyond keyword-based ADHD review filtering.
+                    """)
+
+        except Exception as e:
+            st.error(f"Error loading LLM ADHD behaviour analysis: {e}")
 
 # -----------------------------------------------------------
 # FEATURE MATRIX PAGE (Interactive + Professional Layout)
 # -----------------------------------------------------------
 elif menu == "Feature Matrix":
-    st.title("🧩 Feature Matrix – Competitive Feature Analysis ")
-
-    FEATURE_DATA_PATH = CURATED_DIR / "features_extracted_merged_filled.csv"
-
-    if not os.path.exists(FEATURE_DATA_PATH):
-        st.error("❌ File features_extracted_merged_filled.csv not found.")
-        st.stop()
-
-    # --- Load and clean data ---
-    df = pd.read_csv(FEATURE_DATA_PATH)
-    df.columns = [c.strip() for c in df.columns]
-
-    if "features_list" not in df.columns:
-        st.error("❌ Column 'features_list' not found in dataset.")
-        st.stop()
-
-    # --- Parse feature lists safely ---
-    import ast
-    all_features = []
-    df["Parsed_Features"] = None
-
-    for i, row in df.iterrows():
-        try:
-            features = ast.literal_eval(row["features_list"])
-            if isinstance(features, list):
-                clean_features = [f.strip().lower() for f in features if isinstance(f, str)]
-                df.at[i, "Parsed_Features"] = clean_features
-                all_features.extend(clean_features)
-        except Exception:
-            continue
-
-    if not all_features:
-        st.error("⚠️ No features could be extracted from 'features_list'. Check file content.")
-        st.stop()
-
-    # --- Compute feature frequency ---
-    from collections import Counter
-    feature_counts = Counter(all_features)
-    feature_df = (
-        pd.DataFrame(feature_counts.items(), columns=["Feature", "Count"])
-        .sort_values(by="Count", ascending=False)
-    )
-    top10_features = feature_df.head(10)
-
-    # --- Compute feature diversity per app ---
-    df["Feature_Count"] = df["Parsed_Features"].apply(lambda x: len(x) if isinstance(x, list) else 0)
-    top_apps = df.nlargest(10, "Feature_Count")[["title", "Feature_Count"]]
-
-    # -----------------------------------------------------------
-    # 🔝 TOP FEATURES - Professional Card Layout
-    # -----------------------------------------------------------
-    st.markdown("### 🔝 Top 10 Most Common Features Across All Apps")
+    st.title("🧩 Feature Matrix – Lyngs-Based Taxonomy")
 
     st.markdown("""
     <style>
     .feature-card {
         background: linear-gradient(180deg, #1E293B, #0F172A);
-        border: 1px solid rgba(37,99,235,0.4);
+        border: 1px solid rgba(96,165,250,0.6);
         border-radius: 14px;
-        padding: 18px;
+        padding: 22px;
         text-align: center;
         box-shadow: 0 3px 10px rgba(37,99,235,0.25);
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        margin-bottom: 16px;
+        min-height: 120px;
     }
     .feature-card:hover {
         transform: translateY(-4px);
         box-shadow: 0 6px 15px rgba(37,99,235,0.4);
     }
+    .feature-title {
+        font-size: 18px;
+        font-weight: 700;
+        color: #FACC15 !important;
+    }
+    .feature-count {
+        font-size: 26px;
+        font-weight: 800;
+        color: #E5E7EB !important;
+        margin-top: 12px;
+    }
     </style>
     """, unsafe_allow_html=True)
 
-    rows = [top10_features.head(5), top10_features.tail(5)]
-    for rowset in rows:
-        cols = st.columns(5, gap="medium")
-        for i, row in enumerate(rowset.itertuples(index=False)):
-            with cols[i]:
+    FEATURE_SUMMARY_PATH = CURATED_DIR / "features_summary.csv"
+    FEATURE_LONG_PATH = CURATED_DIR / "features_long.csv"
+    FEATURE_CUSTOM_PATH = CURATED_DIR / "features_customisation_summary.csv"
+    FEATURE_EVIDENCE_PATH = CURATED_DIR / "features_evidence.csv"
+
+    if not os.path.exists(FEATURE_SUMMARY_PATH):
+        st.error("❌ File features_summary.csv not found. Please run build_feature_matrix.py first.")
+        st.code(
+            "python -m etl.build_feature_matrix --in-dir data/curated --out-dir data/curated "
+            "--taxonomy llm/taxonomy.yml --llm-csv data/curated/features_llm.csv "
+            "--bundle-apps --apps-csv data/curated/apps_all_clean.csv"
+        )
+        st.stop()
+
+    if not os.path.exists(FEATURE_LONG_PATH):
+        st.error("❌ File features_long.csv not found. Please run build_feature_matrix.py first.")
+        st.code(
+            "python -m etl.build_feature_matrix --in-dir data/curated --out-dir data/curated "
+            "--taxonomy llm/taxonomy.yml --llm-csv data/curated/features_llm.csv "
+            "--bundle-apps --apps-csv data/curated/apps_all_clean.csv"
+        )
+        st.stop()
+
+    feature_df = pd.read_csv(FEATURE_SUMMARY_PATH)
+    feature_df.columns = [c.strip() for c in feature_df.columns]
+
+    required_cols = {"app_type", "app_type_label", "feature", "feature_label", "num_apps"}
+
+    if not required_cols.issubset(feature_df.columns):
+        st.error("❌ features_summary.csv does not match the new taxonomy output format.")
+        st.write("Required:", sorted(required_cols))
+        st.write("Available:", list(feature_df.columns))
+        st.stop()
+
+    feature_df["num_apps"] = pd.to_numeric(
+        feature_df["num_apps"],
+        errors="coerce",
+    ).fillna(0).astype(int)
+
+    if "avg_confidence" not in feature_df.columns:
+        feature_df["avg_confidence"] = 0.0
+
+    if "core_apps" not in feature_df.columns:
+        feature_df["core_apps"] = 0
+
+    if "uncertain_apps" not in feature_df.columns:
+        feature_df["uncertain_apps"] = 0
+
+    feature_df["avg_confidence"] = pd.to_numeric(
+        feature_df["avg_confidence"],
+        errors="coerce",
+    ).fillna(0.0)
+
+    feature_df["core_apps"] = pd.to_numeric(
+        feature_df["core_apps"],
+        errors="coerce",
+    ).fillna(0).astype(int)
+
+    feature_df["uncertain_apps"] = pd.to_numeric(
+        feature_df["uncertain_apps"],
+        errors="coerce",
+    ).fillna(0).astype(int)
+
+    feature_df = feature_df.sort_values("num_apps", ascending=False)
+
+    long_df = pd.read_csv(FEATURE_LONG_PATH)
+    long_df.columns = [c.strip() for c in long_df.columns]
+
+    if "flag" in long_df.columns:
+        long_df["flag"] = pd.to_numeric(long_df["flag"], errors="coerce").fillna(0).astype(int)
+        long_positive = long_df[long_df["flag"] == 1].copy()
+    else:
+        long_positive = long_df.copy()
+
+    total_feature_detections = int(long_positive.shape[0])
+    total_apps_with_features = int(long_positive["app_key"].nunique()) if "app_key" in long_positive.columns else 0
+    total_taxonomy_features = int(feature_df["feature"].nunique())
+
+    avg_features_per_app = (
+        long_positive.groupby("app_key")["feature"].nunique().mean()
+        if not long_positive.empty
+        else 0
+    )
+
+    if pd.isna(avg_features_per_app):
+        avg_features_per_app = 0
+
+    
+    top_features = feature_df.head(12)
+
+    st.markdown("### 🔝 Top Detected Features")
+
+    if top_features.empty:
+        st.warning("No feature summary data available.")
+    else:
+        num_cols = min(3, max(1, len(top_features)))
+        cols = st.columns(num_cols, gap="medium")
+
+        for i, (_, row) in enumerate(top_features.iterrows()):
+            with cols[i % num_cols]:
                 st.markdown(f"""
                 <div class="feature-card">
-                    <div style="font-size:17px; font-weight:600; color:#FACC15;">
-                        ⭐ {row.Feature.title()}
-                    </div>
-                    <div style="font-size:22px; font-weight:700; color:#E5E7EB; margin-top:6px;">
-                        {int(row.Count)} apps
-                    </div>
+                    <div class="feature-title">⭐ {row['feature_label']}</div>
+                    <div class="feature-count">{int(row['num_apps']):,} apps</div>
                 </div>
                 """, unsafe_allow_html=True)
 
-    # -----------------------------------------------------------
-    # 📊 FEATURE VISUALS
-    # -----------------------------------------------------------
-    st.markdown("### 📊 Frequency of Top 10 Features")
-    fig_bar = px.bar(
-        top10_features,
-        x="Count",
-        y="Feature",
-        orientation="h",
-        color="Count",
-        color_continuous_scale="Blues",
-        text="Count",
-    )
-    fig_bar.update_layout(
-        plot_bgcolor="#111827",
-        paper_bgcolor="#111827",
-        font=dict(color="#E5E7EB"),
-        xaxis_title="Number of Apps Using Feature",
-        yaxis_title="Feature",
-    )
-    st.plotly_chart(fig_bar, use_container_width=True)
+        st.markdown("### 📊 Number of Apps by Feature")
 
-    st.markdown("### 🌳 Feature Distribution Treemap")
+        fig_bar = px.bar(
+            top_features,
+            x="num_apps",
+            y="feature_label",
+            orientation="h",
+            color="num_apps",
+            color_continuous_scale=ACCESSIBLE_BLUE_SCALE,
+            text="num_apps",
+            hover_data=[
+                col for col in [
+                    "app_type_label",
+                    "feature",
+                    "source",
+                    "avg_confidence",
+                    "core_apps",
+                    "uncertain_apps",
+                ]
+                if col in top_features.columns
+            ],
+        )
+
+        fig_bar.update_layout(
+            title=dict(text=""),
+            title_text="",
+            xaxis_title="Number of Apps",
+            yaxis_title="Feature",
+            yaxis=dict(autorange="reversed"),
+        )
+
+        fig_bar.update_traces(textposition="outside")
+        st.plotly_chart(dark_plot(fig_bar), use_container_width=True)
+
+    st.markdown("### 🌳 Feature Distribution by App Area")
+
     fig_tree = px.treemap(
-        feature_df.head(30),
-        path=["Feature"],
-        values="Count",
-        color="Count",
-        color_continuous_scale="Blues",
+        feature_df,
+        path=["app_type_label", "feature_label"],
+        values="num_apps",
+        color="num_apps",
+        color_continuous_scale=ACCESSIBLE_BLUE_SCALE,
+        hover_data=[
+            col for col in [
+                "feature",
+                "source",
+                "avg_confidence",
+                "core_apps",
+                "uncertain_apps",
+            ]
+            if col in feature_df.columns
+        ],
     )
-    fig_tree.update_layout(paper_bgcolor="#111827", font=dict(color="#E5E7EB"))
-    st.plotly_chart(fig_tree, use_container_width=True)
 
-    # -----------------------------------------------------------
-    # 🏆 TOP APPS (Interactive Expandable Cards)
-    # -----------------------------------------------------------
-    st.markdown("### 🏆 Apps with the Most Feature Diversity")
+    st.plotly_chart(readable_treemap(fig_tree), use_container_width=True)
 
-    st.markdown("""
-    <style>
-    .app-card {
-        background: linear-gradient(180deg, #1E3A8A, #1E40AF);
-        border: 1px solid rgba(59,130,246,0.3);
-        border-radius: 16px;
-        padding: 20px 24px;
-        margin-bottom: 16px;
-        box-shadow: 0 4px 14px rgba(37,99,235,0.3);
-        transition: transform 0.25s ease, box-shadow 0.25s ease;
-        color: #F9FAFB;
-    }
-    .app-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 20px rgba(37,99,235,0.5);
-    }
-    .app-card-title {
-        font-size: 18px;
-        font-weight: 600;
-        color: #E0F2FE;
-        margin-bottom: 8px;
-    }
-    .app-card-sub {
-        font-size: 14px;
-        font-weight: 500;
-        color: #A5B4FC;
-    }
-    .badge {
-        background-color: #3B82F6;
-        padding: 6px 12px;
-        border-radius: 8px;
-        font-size: 13px;
-        color: white;
-        font-weight: 600;
-        box-shadow: 0 0 8px rgba(59,130,246,0.4);
-    }
-    .feature-item {
-        background: rgba(30,41,59,0.6);
-        padding: 5px 10px;
-        border-radius: 6px;
-        margin: 3px;
-        font-size: 13px;
-        display: inline-block;
-        color: #E0E7FF;
-        border: 1px solid rgba(59,130,246,0.25);
-    }
-    </style>
-    """, unsafe_allow_html=True)
+    st.markdown("### 🧩 Feature Counts by App Area")
 
-    cols = st.columns(2, gap="large")
+    app_type_summary = (
+        feature_df.groupby(["app_type", "app_type_label"], as_index=False)["num_apps"]
+        .sum()
+        .sort_values("num_apps", ascending=False)
+    )
 
-    for i, row in enumerate(top_apps.itertuples(index=False)):
-        app_title = row.title
-        col = cols[i % 2]
-        with col:
-            # Find and parse app features
-            features = []
-            try:
-                app_row = df[df["title"] == app_title]
-                if not app_row.empty and isinstance(app_row.iloc[0]["Parsed_Features"], list):
-                    features = app_row.iloc[0]["Parsed_Features"]
-            except Exception:
-                pass
+    fig_type = px.bar(
+        app_type_summary,
+        x="app_type_label",
+        y="num_apps",
+        color="app_type_label",
+        text="num_apps",
+        color_discrete_sequence=ACCESSIBLE_DISCRETE,
+    )
 
-            # Card display
+    fig_type.update_layout(
+        title=dict(text=""),
+        title_text="",
+        xaxis_title="App Area",
+        yaxis_title="Total Feature Detections",
+        showlegend=False,
+    )
+
+    fig_type.update_traces(textposition="outside")
+    st.plotly_chart(dark_plot(fig_type), use_container_width=True)
+
+    
+    st.markdown("### 🏆 Apps with the Most Detected Features")
+
+    app_feature_counts = (
+        long_positive.groupby("app_key")["feature"]
+        .nunique()
+        .reset_index(name="Feature_Count")
+        .sort_values("Feature_Count", ascending=False)
+        .head(10)
+    )
+
+    if "app_key" in apps.columns:
+        app_titles = apps[["app_key", "App Name"]].drop_duplicates("app_key")
+        app_feature_counts = app_feature_counts.merge(app_titles, on="app_key", how="left")
+    else:
+        app_feature_counts["App Name"] = app_feature_counts["app_key"]
+
+    if app_feature_counts.empty:
+        st.warning("No app-level feature data available.")
+    else:
+        for i, (_, row) in enumerate(app_feature_counts.iterrows(), start=1):
+            app_name = row.get("App Name", row["app_key"])
+
+            if pd.isna(app_name) or app_name == "":
+                app_name = row["app_key"]
+
             st.markdown(f"""
-            <div class="app-card">
-                <div class="app-card-title">{app_title}</div>
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-top:10px;">
-                    <div class="app-card-sub">🏅 Ranked #{i+1}</div>
-                    <div class="badge">{int(row.Feature_Count)} Features</div>
-                </div>
+            <div style="background:{CARD};
+                        border:1.5px solid {BORDER};
+                        border-radius:16px;
+                        padding:18px 22px;
+                        margin-bottom:14px;
+                        color:{TEXT};">
+                <b style="color:{TEXT};">🏅 Rank #{i}: {app_name}</b><br>
+                <span style="color:{TEXT_SOFT}; font-weight:650;">
+                    {int(row['Feature_Count'])} taxonomy features detected
+                </span>
             </div>
             """, unsafe_allow_html=True)
 
-            # Expandable features section
-            with st.expander(f"🧩 View Features for {app_title}"):
-                if features:
-                    feature_html = "".join([f"<span class='feature-item'>{f}</span>" for f in features])
-                    st.markdown(feature_html, unsafe_allow_html=True)
-                else:
-                    st.markdown("<i>No detailed feature list available.</i>", unsafe_allow_html=True)
+            with st.expander(f"🧩 View detected features for {app_name}"):
+                display_cols = [
+                    col for col in [
+                        "app_type_label",
+                        "feature_label",
+                        "feature",
+                        "confidence",
+                        "core_cluster",
+                        "uncertain",
+                        "llm_sub_code",
+                        "llm_cognitive_primary",
+                        "evidence",
+                    ]
+                    if col in long_positive.columns
+                ]
 
-    # -----------------------------------------------------------
-    # 💡 INSIGHTS SUMMARY
-    # -----------------------------------------------------------
+                app_features = (
+                    long_positive[long_positive["app_key"] == row["app_key"]][display_cols]
+                    .drop_duplicates()
+                )
+
+                sort_cols = [
+                    col for col in ["app_type_label", "feature_label"]
+                    if col in app_features.columns
+                ]
+
+                if sort_cols:
+                    app_features = app_features.sort_values(sort_cols)
+
+                st.dataframe(app_features, use_container_width=True)
+
+    
     st.markdown("### 💡 Insights Summary")
-    top_feature = top10_features.iloc[0]["Feature"].title()
-    top_count = int(top10_features.iloc[0]["Count"])
-    st.info(f"""
-    🔹 The most common feature is **{top_feature}**, appearing in **{top_count}** apps.  
-    🔹 On average, each app supports **{df["Feature_Count"].mean():.1f}** unique features.  
-    🔹 Apps like **{', '.join(top_apps['title'].head(3))}** lead in feature diversity.  
-    """)
+
+    if not feature_df.empty:
+        top = feature_df.iloc[0]
+
+        top_diverse_apps = app_feature_counts.head(3).copy()
+
+        if not top_diverse_apps.empty:
+            top_app_names = []
+
+            for _, row in top_diverse_apps.iterrows():
+                app_name = row.get("App Name", row["app_key"])
+
+                if pd.isna(app_name) or app_name == "":
+                    app_name = row["app_key"]
+
+                top_app_names.append(str(app_name))
+
+            top_apps_text = ", ".join(top_app_names)
+        else:
+            top_apps_text = "N/A"
+
+        st.info(f"""
+        🔹 The most common feature is **{top['feature_label']}**, appearing in **{int(top['num_apps']):,}** apps.  
+        🔹 On average, each app supports **{avg_features_per_app:.1f} unique features**.  
+        🔹 Apps like **{top_apps_text}** lead in feature diversity.  
+        🔹 The updated dashboard separates **Digital Self-Control Tools**, **Habit Apps**, and **Planners** instead of forcing all apps into one taxonomy.  
+        🔹 DSCT features are aligned with Lyngs et al.’s taxonomy, while habit and planner features are handled separately.
+        """)
+
 
 # -----------------------------------------------------------
-# ADHD ANALYSIS PAGE (Based on TRUE Flag in special_reviews)
+# ADHD ANALYSIS PAGE
 # -----------------------------------------------------------
 elif menu == "ADHD Analysis":
-    st.title("🧠 ADHD Analysis – Deep Dive into Special User Reviews")
+    SENT_PATH = CURATED_DIR / "reviews_with_sentiment.csv"
+    st.title("🧠 ADHD / ND Review Analysis")
 
-    REVIEWS_PATH = CURATED_DIR / "reviews.csv"
-
-    if not os.path.exists(REVIEWS_PATH):
-        st.error("❌ File reviews.csv not found.")
-        st.stop()
-
-    # --- Load and clean data ---
-    df_reviews = pd.read_csv(REVIEWS_PATH)
-    df_reviews.columns = [c.strip().lower() for c in df_reviews.columns]
-
-    if "special_reviews" not in df_reviews.columns or "body" not in df_reviews.columns:
-        st.error("❌ Columns 'special_reviews' or 'body' not found in reviews.csv.")
-        st.stop()
-
-    # --- Filter TRUE flagged reviews ---
-    df_special = df_reviews[df_reviews["special_reviews"] == True].copy()
-
-    if df_special.empty:
-        st.warning("⚠️ No reviews are flagged as TRUE in 'special_reviews'.")
-        st.stop()
-
-    st.markdown(f"### Found **{len(df_special)} ADHD-related reviews** 🧩")
-
-    
-    
-    # -----------------------------------------------------------
-    # ⭐ Rating Distribution among ADHD Reviews (Final Stable Version)
-    # -----------------------------------------------------------
-    st.markdown("#### ⭐ Rating Distribution among ADHD Reviews")
-
-    # --- Detect the rating column automatically ---
-    rating_col = next((c for c in df_special.columns if "rating" in c.lower()), None)
-
-    if rating_col and rating_col in df_special.columns:
-        try:
-            # Ensure numeric (some CSVs may load ratings as strings)
-            df_special[rating_col] = pd.to_numeric(df_special[rating_col], errors="coerce")
-            df_special = df_special.dropna(subset=[rating_col])
-
-            # --- Compute value counts ---
-            rating_counts = (
-                df_special[rating_col]
-                .value_counts()
-                .sort_index()
-                .reset_index()
-            )
-            rating_counts.columns = ["Rating", "Count"]
-
-            # --- Create Bar Chart ---
-            fig_rating = px.bar(
-                rating_counts,
-                x="Rating",
-                y="Count",
-                text="Count",
-                color="Rating",
-                color_continuous_scale=["#EF4444", "#F59E0B", "#10B981", "#3B82F6"],
-            )
-
-            fig_rating.update_layout(
-                title="User Rating Distribution (ADHD Reviews)",
-                plot_bgcolor="#111827",
-                paper_bgcolor="#111827",
-                font=dict(color="#E5E7EB"),
-                xaxis_title="User Rating (1–5 Stars)",
-                yaxis_title="Number of Reviews",
-                showlegend=False
-            )
-            fig_rating.update_traces(
-                textposition="outside",
-                marker_line_color="#2563EB",
-                marker_line_width=1.2
-            )
-
-            st.plotly_chart(fig_rating, use_container_width=True)
-
-            # --- Display average rating ---
-            avg_rating = df_special[rating_col].mean()
-            st.markdown(f"⭐ **Average ADHD Review Rating:** {avg_rating:.2f} / 5")
-
-        except Exception as e:
-            st.error(f"Error creating rating chart: {e}")
-
+    if not SENT_PATH.exists():
+        st.warning("No reviews data found.")
     else:
-        st.warning("⚠️ No rating column found in dataset.")
-        st.write("Available columns:", list(df_special.columns))
+        chunks = []
+        for chunk in pd.read_csv( SENT_PATH,
+    chunksize=50_000,
+    engine="python",
+    on_bad_lines="skip"):
+            chunks.append(chunk)
+        sent_df = pd.concat(chunks, ignore_index=True)
 
+        adhd_col = None
+        for candidate in ["is_adhd_review", "isadhdreview", "special_reviews", "specialreviews"]:
+            if candidate in sent_df.columns:
+                adhd_col = candidate
+                break
 
-    # -----------------------------------------------------------
-    # ☁️ Word Cloud – Common Terms in ADHD Reviews (Resized Version)
-    # -----------------------------------------------------------
-    st.markdown("#### ☁️ Word Cloud – Common Terms in ADHD Reviews")
-
-    try:
-        from wordcloud import WordCloud
-        import matplotlib.pyplot as plt
-
-        # --- Get text from 'body' column ---
-        text_col = next((c for c in df_special.columns if "body" in c.lower()), None)
-
-        if text_col and not df_special[text_col].dropna().empty:
-            all_text = " ".join(df_special[text_col].astype(str).tolist())
-
-            # --- Generate Word Cloud (smaller text size) ---
-            wordcloud = WordCloud(
-                width=900,              # reduce width
-                height=400,             # reduce height
-                background_color="#0f172a",
-                colormap="Blues",
-                max_words=80,           # fewer words for cleaner display
-                min_font_size=8,        # smaller minimum font
-                max_font_size=60,       # smaller maximum font
-                collocations=False
-            ).generate(all_text)
-
-            # --- Display ---
-            fig, ax = plt.subplots(figsize=(10, 5))  # smaller figure size
-            ax.imshow(wordcloud, interpolation="bilinear")
-            ax.axis("off")
-            fig.patch.set_facecolor("#0f172a")
-            st.pyplot(fig, use_container_width=True)
-
+        if adhd_col is None:
+            st.info("No ADHD flag column found in sentiment data.")
+            st.write("Available columns:", list(sent_df.columns))
         else:
-            st.info("⚠️ No valid text data found in the 'body' column for word cloud.")
+            adhd_df = sent_df[
+                sent_df[adhd_col].astype(str).str.lower().isin(["true", "1", "yes"])
+            ]
+            total_nd = len(adhd_df)
+            st.metric("Total ND/ADHD-flagged Reviews", f"{total_nd:,}")
 
-    except Exception as e:
-        st.error(f"Error generating word cloud: {e}")
+            if total_nd < 50:
+                st.warning(
+                    f"⚠️ Only {total_nd} ADHD-flagged reviews found — too small for strong conclusions. "
+                    "Consider expanding to more apps, a longer time window, or broader ND filters."
+                )
 
+            if total_nd > 0 and "sentiment_label" in adhd_df.columns:
+                fig = px.histogram(
+                    adhd_df,
+                    x="sentiment_label",
+                    color="sentiment_label",
+                    title="ADHD Review Sentiment Distribution",
+                    template="plotly_dark",
+                )
+                st.plotly_chart(fig, use_container_width=True)
 
+            st.subheader("Sample ADHD/ND Reviews")
+            cols = [c for c in ["app_key", "body", "rating", "sentiment_label", "at"] if c in adhd_df.columns]
+            st.dataframe(adhd_df[cols].head(50), use_container_width=True, hide_index=True)
 
+# -----------------------------------------------------------
+# SURVIVORSHIP ANALYSIS PAGE
+# -----------------------------------------------------------
+elif menu == "Survivorship Analysis":
+    st.title("📚 Survivorship Analysis")
 
-    # -----------------------------------------------------------
-    # 2️⃣ Sentiment Analysis (simple keyword-based)
-    # -----------------------------------------------------------
-    st.markdown("#### 💬 Sentiment Breakdown (Keyword-based)")
-    positive_words = ["good", "great", "love", "help", "focus", "improve", "useful", "amazing"]
-    negative_words = ["bad", "bug", "crash", "issue", "problem", "hate", "annoying"]
-
-    def detect_sentiment(text):
-        text = str(text).lower()
-        if any(w in text for w in positive_words):
-            return "Positive"
-        elif any(w in text for w in negative_words):
-            return "Negative"
-        else:
-            return "Neutral"
-
-    df_special["sentiment"] = df_special["body"].apply(detect_sentiment)
-    sentiment_counts = df_special["sentiment"].value_counts().reset_index()
-    sentiment_counts.columns = ["Sentiment", "Count"]
-
-    fig_sentiment = px.pie(
-        sentiment_counts,
-        names="Sentiment",
-        values="Count",
-        hole=0.55,
-        color="Sentiment",
-        color_discrete_map={"Positive": "#10B981", "Neutral": "#3B82F6", "Negative": "#EF4444"}
-    )
-    fig_sentiment.update_layout(
-        paper_bgcolor="#111827",
-        font=dict(color="#E5E7EB"),
-        title=dict(text="Sentiment Distribution for ADHD Reviews", font=dict(size=16, color="#E5E7EB"))
-    )
-    st.plotly_chart(fig_sentiment, use_container_width=True)
-
-    # -----------------------------------------------------------
-    # 3️⃣ Keyword Frequency (Top 20)
-    # -----------------------------------------------------------
-    st.markdown("#### ☁️ Top Keywords in ADHD Reviews")
-
-    import re
-    from collections import Counter
-    text_corpus = " ".join(str(x) for x in df_special["body"] if isinstance(x, str))
-    words = re.findall(r'\b[a-zA-Z]{3,}\b', text_corpus.lower())
-    word_df = pd.DataFrame(Counter(words).most_common(20), columns=["Word", "Count"])
-
-    fig_words = px.bar(
-        word_df,
-        x="Count",
-        y="Word",
-        orientation="h",
-        color="Count",
-        color_continuous_scale="Blues",
-        text="Count"
-    )
-    fig_words.update_layout(
-        plot_bgcolor="#111827",
-        paper_bgcolor="#111827",
-        font=dict(color="#E5E7EB"),
-        xaxis_title="Frequency",
-        yaxis_title="Keyword"
-    )
-    fig_words.update_traces(marker_line_color="#3B82F6", marker_line_width=1.2, textposition="outside")
-    st.plotly_chart(fig_words, use_container_width=True)
-
-    # -----------------------------------------------------------
-    # 4️⃣ Sample Reviews
-    # -----------------------------------------------------------
-    st.markdown("#### 🧾 Sample ADHD-Flagged Reviews")
-
-    for _, row in df_special.head(5).iterrows():
-        st.markdown(f"""
-        <div style='background:linear-gradient(180deg,#1E3A8A,#1E40AF);
-                    padding:15px;border-radius:12px;margin-bottom:10px;
-                    box-shadow:0 3px 10px rgba(37,99,235,0.3);color:#F9FAFB;'>
-            <b>⭐ {row.get('rating', 'N/A')}</b> – {row.get('user_nam', 'Anonymous')}<br>
-            <i>{row.get('body', '')}</i><br>
-            <small style='color:#9CA3AF;'>Version {row.get('version', 'N/A')} | {row.get('at', '')}</small>
-        </div>
-        """, unsafe_allow_html=True)
-
-    # -----------------------------------------------------------
-    # 5️⃣ Insights Summary
-    # -----------------------------------------------------------
-    st.markdown("### 💡 Insights Summary")
-    avg_rating = df_special["rating"].mean() if "rating" in df_special.columns else 0
-    top_word = word_df.iloc[0]["Word"] if not word_df.empty else "N/A"
-    pos_percent = (df_special["sentiment"].value_counts(normalize=True).get("Positive", 0) * 100)
-
-    st.info(f"""
-    🔹 **Average Rating:** {avg_rating:.2f}/5  
-    🔹 **Most Frequent Keyword:** '{top_word.title()}'  
-    🔹 **Positive Sentiment:** {pos_percent:.1f}% of ADHD-tagged users  
-    🔹 Users often mention focus, concentration, and improvement when describing ADHD benefits.
-    """)
-
-
+    if not SURVIVORSHIP_AVAILABLE:
+        st.error("Could not import survivorship_analysis.py")
+        st.exception(SURVIVORSHIP_ERROR)
+        st.info(
+            "Make sure survivorship_analysis.py contains a function named "
+            "`render_survivorship_page()`."
+        )
+    else:
+        try:
+            render_survivorship_page()
+        except Exception as e:
+            st.error("Survivorship page failed to render.")
+            st.exception(e)
 
 
 # -----------------------------------------------------------
@@ -901,17 +1348,237 @@ elif menu == "Summary":
     """)
 
     # -----------------------------------------------------------
-    # 🔍 Quick Stats
+    # 🔍 Quick Stats + Dashboard UX Improvements (from app_moncy.py)
     # -----------------------------------------------------------
+    REVIEWS_PATH = CURATED_DIR / "reviews.csv"
+    adhd_review_count = 0
+
+    if os.path.exists(REVIEWS_PATH):
+        try:
+            reviews_temp = pd.read_csv(REVIEWS_PATH)
+            reviews_temp.columns = [c.strip().lower() for c in reviews_temp.columns]
+
+            if "special_reviews" in reviews_temp.columns:
+                adhd_review_count = len(
+                    reviews_temp[reviews_temp["special_reviews"].astype(str).str.lower().isin(["true", "1", "yes"])]
+                )
+        except Exception:
+            adhd_review_count = 0
+
     st.markdown("### 📊 Dashboard Statistics")
+
+    def clean_installs_for_summary(value):
+        """Convert install values such as 10K, 1.5M, 1,000+ or missing values to a number."""
+        value = str(value).replace(",", "").strip().upper()
+
+        try:
+            if "B" in value:
+                return float(value.replace("B", "").replace("+", "")) * 1_000_000_000
+            if "M" in value:
+                return float(value.replace("M", "").replace("+", "")) * 1_000_000
+            if "K" in value:
+                return float(value.replace("K", "").replace("+", "")) * 1_000
+
+            numbers = "".join(c for c in value if c.isdigit())
+            return float(numbers) if numbers else 0
+        except Exception:
+            return 0
+
+    summary_apps = apps_display.copy()
+    summary_apps["Average Rating"] = pd.to_numeric(summary_apps["Average Rating"], errors="coerce")
+    summary_apps["Rating Count"] = pd.to_numeric(summary_apps["Rating Count"], errors="coerce").fillna(0)
+    summary_apps["Installs_num"] = summary_apps["Installs"].apply(clean_installs_for_summary)
+
+    total_apps = summary_apps["App Name"].nunique()
+    avg_rating_summary = summary_apps["Average Rating"].mean()
 
     c1, c2, c3 = st.columns(3)
     with c1:
-        st.metric("Total Apps Analyzed", f"{len(apps):,}")
+        st.metric("Total Apps Analysed", f"{total_apps:,}")
     with c2:
-        st.metric("Average App Rating", f"{apps['Average Rating'].mean():.2f} ⭐")
+        st.metric(
+            "Average App Rating",
+            f"{avg_rating_summary:.2f} ⭐" if pd.notna(avg_rating_summary) else "N/A",
+        )
     with c3:
-        st.metric("Total ADHD Reviews", "18")
+        st.metric("Total ADHD Reviews", f"{adhd_review_count:,}")
+
+    # -----------------------------------------------------------
+    # ⭐ Top Rated Competitor Apps
+    # -----------------------------------------------------------
+    st.markdown("---")
+    st.markdown("### ⭐ Top Rated Competitor Apps")
+    st.caption(
+        "This section highlights highly rated competitor apps with at least 50 ratings. "
+        "For platforms where install data is unavailable, installs are estimated from rating count."
+    )
+
+    with st.container(border=True):
+        top_apps_display = summary_apps.copy()
+
+        top_apps_display["Platform"] = top_apps_display["Platform"].replace({
+            "playstore": "Play Store",
+            "PlayStore": "Play Store",
+            "appstore": "App Store",
+            "AppStore": "App Store",
+            "ios": "App Store",
+            "iOS": "App Store",
+            "chromews": "Web/Chrome",
+            "ChromeWS": "Web/Chrome",
+            "web": "Web/Chrome",
+        })
+
+        top_apps = top_apps_display[top_apps_display["Rating Count"] >= 50].copy()
+        top_apps = top_apps.sort_values(
+            by=["Average Rating", "Rating Count"],
+            ascending=[False, False],
+        ).head(10)
+
+        def estimate_installs(row):
+            installs_num = row.get("Installs_num", 0)
+            rating_count_num = row.get("Rating Count", 0)
+
+            if pd.isna(installs_num):
+                installs_num = 0
+            if pd.isna(rating_count_num):
+                rating_count_num = 0
+
+            # If installs are missing/zero, estimate using rating count.
+            # Heuristic: 1 rating ≈ 100 installs.
+            if installs_num == 0 and rating_count_num > 0:
+                return f"{int(rating_count_num * 100):,}+"
+
+            return f"{int(installs_num):,}" if installs_num > 0 else "Not available"
+
+        if not top_apps.empty:
+            top_apps["Installs"] = top_apps.apply(estimate_installs, axis=1)
+            st.dataframe(
+                top_apps[[
+                    "App Name",
+                    "Average Rating",
+                    "Rating Count",
+                    "Installs",
+                    "Platform",
+                    "Genre",
+                ]],
+                use_container_width=True,
+                hide_index=True,
+            )
+        else:
+            st.info("No apps found with at least 50 ratings.")
+
+    # -----------------------------------------------------------
+    # 🔍 Individual App Drill-Down
+    # -----------------------------------------------------------
+    st.markdown("---")
+    st.markdown("### 🔍 Individual App Drill-Down")
+    st.caption("This section shows details only for the selected app.")
+
+    with st.container(border=True):
+        available_apps = sorted(summary_apps["App Name"].dropna().unique())
+
+        if not available_apps:
+            st.info("No apps available for drill-down.")
+        else:
+            selected_app = st.selectbox(
+                "Select an app to view details",
+                available_apps,
+            )
+
+            selected_app_data = summary_apps[summary_apps["App Name"] == selected_app].copy()
+
+            if not selected_app_data.empty:
+                app_row = selected_app_data.iloc[0]
+
+                d1, d2, d3 = st.columns(3)
+
+                with d1:
+                    rating_value = app_row.get("Average Rating")
+                    st.metric(
+                        "Rating",
+                        f"{rating_value:.2f} ⭐" if pd.notna(rating_value) else "N/A",
+                    )
+
+                with d2:
+                    installs_num = app_row.get("Installs_num", 0)
+                    rating_count_num = app_row.get("Rating Count", 0)
+
+                    if pd.isna(installs_num):
+                        installs_num = 0
+                    if pd.isna(rating_count_num):
+                        rating_count_num = 0
+
+                    if installs_num == 0 and rating_count_num > 0:
+                        installs_display = f"{int(rating_count_num * 100):,}+"
+                    elif installs_num > 0:
+                        installs_display = f"{int(installs_num):,}"
+                    else:
+                        installs_display = "Not available"
+
+                    st.metric("Installs", installs_display)
+
+                with d3:
+                    st.metric("Platform", format_text(app_row.get("Platform"), "N/A"))
+
+                st.markdown("#### App Details")
+                display_details = selected_app_data.drop(columns=["Installs_num"], errors="ignore")
+                st.dataframe(display_details, use_container_width=True, hide_index=True)
+
+    # -----------------------------------------------------------
+    # 🧩 Platform Split Analysis
+    # -----------------------------------------------------------
+    st.markdown("---")
+    st.markdown("### 🧩 Platform Split Analysis")
+    st.caption(
+        "This section compares competitor apps across different platforms "
+        "including Play Store, App Store, and Web/Chrome."
+    )
+
+    with st.container(border=True):
+        platform_clean = summary_apps.copy()
+
+        platform_clean["Platform"] = platform_clean["Platform"].replace({
+            "playstore": "Play Store",
+            "PlayStore": "Play Store",
+            "appstore": "App Store",
+            "AppStore": "App Store",
+            "ios": "App Store",
+            "iOS": "App Store",
+            "chromews": "Web/Chrome",
+            "ChromeWS": "Web/Chrome",
+            "web": "Web/Chrome",
+        })
+
+        platform_summary = platform_clean.groupby("Platform").agg(
+            Number_of_Apps=("App Name", "nunique"),
+            Average_Rating=("Average Rating", "mean"),
+        ).reset_index()
+
+        platform_summary["Average_Rating"] = platform_summary["Average_Rating"].round(2)
+
+        st.markdown("#### 📊 Platform Summary")
+        st.dataframe(platform_summary, use_container_width=True, hide_index=True)
+
+        fig_platform_summary = px.bar(
+            platform_summary,
+            x="Platform",
+            y="Number_of_Apps",
+            text="Number_of_Apps",
+            color="Platform",
+            color_discrete_sequence=["#3B82F6", "#10B981", "#F59E0B"],
+        )
+
+        fig_platform_summary.update_layout(
+            plot_bgcolor="#111827",
+            paper_bgcolor="#111827",
+            font=dict(color="#E5E7EB"),
+            xaxis_title="Platform",
+            yaxis_title="Number of Apps",
+            title="Platform Distribution of Competitor Apps",
+        )
+
+        fig_platform_summary.update_traces(textposition="outside")
+        st.plotly_chart(fig_platform_summary, use_container_width=True)
 
     # -----------------------------------------------------------
     # 💡 Strategic Recommendations

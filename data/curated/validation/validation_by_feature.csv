@@ -1,0 +1,5 @@
+feature,total,matches,match_rate
+block_removal,14,7,0.5
+goal_advancement,14,11,0.7857
+reward_punishment,14,10,0.7143
+self_tracking,14,6,0.4286

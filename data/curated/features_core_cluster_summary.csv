@@ -1,0 +1,9 @@
+app_type,app_type_label,feature,feature_label,source,num_core_apps
+dsct,Digital Self-Control Tools,self_tracking,Self-Tracking,Lyngs et al.,314
+dsct,Digital Self-Control Tools,goal_advancement,Goal-Advancement,Lyngs et al.,242
+dsct,Digital Self-Control Tools,block_removal,Block/Removal,Lyngs et al.,188
+dsct,Digital Self-Control Tools,reward_punishment,Reward/Punishment,Lyngs et al.,126
+dsct,Digital Self-Control Tools,scheduling,Scheduling,Project extension,77
+dsct,Digital Self-Control Tools,custom_rules,Custom Rules,Project extension,19
+dsct,Digital Self-Control Tools,override_friction,Override Friction,Project extension,8
+dsct,Digital Self-Control Tools,emergency_access,Emergency Access,Project extension,2

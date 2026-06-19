@@ -1,0 +1,19 @@
+# scrapers/seeds.yml
+# Conservative seed list for focus/productivity/ADHD-related competitor discovery.
+
+play_ids:
+  - cc.forestapp          # Forest: focus and productivity
+  - com.stayfocused      # Stay Focused: app and website blocker
+  - com.blocksite        # BlockSite: distraction blocking
+  - org.isoron.uhabits   # Loop Habit Tracker
+  - com.todoist          # Todoist
+
+cws_ids:
+  - laankejkbhbdhmipfmgcngdelahlfoji  # StayFocusd
+  - eiimnmioipafcokbfikbljfdeojpcgbh  # BlockSite
+  - kjacjjdnoddnpbbcjilcajfhhbdhkpgk  # Forest extension
+
+ios_ids:
+  - id1146560473  # Forest
+  - id966057213   # Focus To-Do: Pomodoro & Tasks
+  - id572688855   # Todoist

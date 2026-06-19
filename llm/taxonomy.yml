@@ -1,33 +1,508 @@
-features:
-  blocking:
-    def: "Blocks distracting apps/sites or categories."
-    positive: ["block instagram", "website blocker", "distraction blocking"]
-    negative: ["block of text", "writer's block"]
-  timer:
-    def: "Any timer or time tracking of sessions."
-    positive: ["countdown", "session timer"]
-    negative: ["delivery time", "screen time* (unless analytics)"]
-  pomodoro:
-    def: "Pomodoro method (work/break cycles)."
-    positive: ["25/5 cycles", "pomodoro", "short/long breaks"]
-  habit_tracking:
-    def: "Track habits/streaks/routines/goals."
-    positive: ["habit streaks", "daily routine", "goal check-ins"]
-  focus_mode:
-    def: "Focus/Deep Work modes that hide distractions."
-    positive: ["focus mode", "deep work", "distraction-free"]
-  screen_time:
-    def: "Usage analytics of apps/time (digital wellbeing)."
-    positive: ["screen time report", "usage stats"]
-  parental_control:
-    def: "Controls for kids/parents (limits, filters)."
-    positive: ["parental control", "child lock", "family link"]
-  adhd_support:
-    def: "ADHD / neurodivergent / autism / ASD explicit support."
-    positive: ["ADHD-friendly", "for neurodivergent", "autism", "ASD"]
-  reminders:
-    def: "Reminders/notifications/alarms/nudges."
-    positive: ["reminder", "notification", "alarm", "snooze"]
-  analytics:
-    def: "Analytics/insights/charts/reports."
-    positive: ["analytics", "insights", "dashboard", "trends"]
+app_taxonomy:
+  dsct:
+    label: "Digital Self-Control Tools"
+    description: "Apps or browser extensions that help users regulate digital device use, reduce distractions, and support focus. DSCT features follow Lyngs et al.'s four-cluster taxonomy."
+    features:
+      block_removal:
+        label: "Block/Removal"
+        source: "Lyngs et al."
+        def: "Blocks, removes, hides, limits, delays, or restricts distracting apps, websites, content, feeds, notifications, or interface elements. This includes hard blocking, time limits before blocking, launch-count limits, time lags before distractions load, feature minimisation, hiding feeds, stripping distracting content, replacing new-tab content, and limiting device functionality."
+        positive:
+          - "app blocker"
+          - "website blocker"
+          - "block distracting apps"
+          - "block distracting websites"
+          - "hide news feed"
+          - "remove recommendations"
+          - "lock distracting apps"
+          - "site blocker"
+          - "distraction blocking"
+          - "content blocker"
+          - "hide YouTube recommendations"
+          - "remove Facebook news feed"
+          - "time limit before blocking"
+          - "launch-count limit"
+          - "time lag before distraction loads"
+          - "minimal writing mode"
+          - "replace new tab content"
+          - "limit home screen functionality"
+          - "strict blocking"
+          - "block social media"
+        negative:
+          - "block of text"
+          - "writer's block"
+          - "building block"
+          - "time blocking for planning"
+          - "calendar block"
+          - "project block"
+
+      self_tracking:
+        label: "Self-Tracking"
+        source: "Lyngs et al."
+        def: "Records, measures, visualises, or displays information about device use, app use, website use, screen time, focus sessions, countdown timers, productivity behaviour, or time spent not using the device."
+        positive:
+          - "screen time report"
+          - "usage statistics"
+          - "app usage tracking"
+          - "time spent"
+          - "focus timer"
+          - "session tracking"
+          - "productivity dashboard"
+          - "usage history"
+          - "activity tracking"
+          - "time tracking"
+          - "tracks phone usage"
+          - "visualise usage data"
+          - "timer"
+          - "countdown"
+          - "track time not using phone"
+          - "daily usage report"
+          - "focus session history"
+          - "analytics dashboard"
+        negative:
+          - "delivery time"
+          - "time zone"
+          - "screen brightness"
+          - "calendar time only"
+          - "task deadline only"
+
+      goal_advancement:
+        label: "Goal-Advancement"
+        source: "Lyngs et al."
+        def: "Reminds, nudges, prompts, redirects, or supports users toward concrete time goals, task goals, general goals, values, intentions, or planned behaviour. This includes goal setting and comparing actual behaviour against goals."
+        positive:
+          - "goal reminder"
+          - "task reminder"
+          - "nudge"
+          - "prompt"
+          - "to-do list"
+          - "new tab task list"
+          - "usage goal"
+          - "focus goal"
+          - "redirect to productive site"
+          - "reminds user of goal"
+          - "goal prompt"
+          - "motivational quote"
+          - "set explicit goals"
+          - "compare behaviour against goals"
+          - "daily focus goal"
+          - "planned behaviour reminder"
+          - "intention reminder"
+        negative:
+          - "football goal"
+          - "goal keeper"
+          - "sports goal"
+          - "soccer goal"
+          - "goal score"
+          - "scored a goal"
+          - "goal post"
+          - "goal net"
+
+      reward_punishment:
+        label: "Reward/Punishment"
+        source: "Lyngs et al."
+        def: "Uses rewards, punishments, incentives, points, streaks, leaderboards, achievements, gamification, virtual consequences, social sharing, or real-world rewards and penalties to encourage digital self-control."
+        positive:
+          - "points"
+          - "reward"
+          - "punishment"
+          - "tree dies"
+          - "plant grows"
+          - "streak"
+          - "badge"
+          - "coin"
+          - "challenge"
+          - "penalty"
+          - "virtual tree"
+          - "gamified reward"
+          - "leaderboard"
+          - "achievement unlock"
+          - "social sharing"
+          - "lose money"
+          - "earn discount"
+          - "plant a tree"
+          - "virtual pet"
+          - "focus coins"
+        negative:
+          - "credit card rewards"
+          - "shopping rewards"
+          - "sports leaderboard"
+          - "game unrelated to focus"
+
+      custom_rules:
+        label: "Custom Rules"
+        source: "Project extension"
+        def: "Allows users to customise what counts as a distraction or what is targeted by the tool, including blocked apps, websites, schedules, categories, allowed lists, block lists, or focus rules. This aligns with the cross-cutting customisation dimension in Lyngs et al., but is kept as a separate project feature for dashboard analysis."
+        positive:
+          - "custom block list"
+          - "allow list"
+          - "blacklist"
+          - "whitelist"
+          - "schedule blocking"
+          - "custom rules"
+          - "choose apps to block"
+          - "choose websites to block"
+          - "customise restrictions"
+          - "custom categories"
+          - "allowed apps"
+          - "blocked websites"
+          - "user-defined distraction list"
+          - "select distracting apps"
+          - "select allowed websites"
+        negative:
+          - "shopping list"
+          - "playlist"
+          - "wish list"
+          - "task list only"
+
+      override_friction:
+        label: "Override Friction"
+        source: "Project extension"
+        def: "Adds effort, delay, restriction, or cost before users can bypass, disable, uninstall, or change an active block or restriction. This is related to Lyngs et al.'s override-friction sub-code under Block/Removal, but is kept separately for project-level analysis."
+        positive:
+          - "hard to disable"
+          - "strict mode"
+          - "password to unlock"
+          - "type random letters"
+          - "challenge to unlock"
+          - "delay before unlock"
+          - "cannot uninstall"
+          - "difficult to bypass"
+          - "lock mode"
+          - "disallow stopping session"
+          - "admin permission"
+          - "payment to override"
+          - "time lag before override"
+          - "force mode"
+          - "deep focus mode"
+        negative:
+          - "password manager"
+          - "login password only"
+          - "account password"
+          - "forgot password"
+
+      emergency_access:
+        label: "Emergency Access"
+        source: "Project extension"
+        def: "Provides emergency bypass, pause, temporary unlock, break-glass access, or safe access when restrictions are active."
+        positive:
+          - "emergency access"
+          - "temporary unlock"
+          - "pause blocking"
+          - "break glass"
+          - "allow emergency use"
+          - "unlock for emergency"
+          - "emergency bypass"
+          - "temporary pause"
+          - "emergency override"
+          - "quick unlock"
+          - "temporary access"
+        negative:
+          - "emergency contact only"
+          - "emergency notification only"
+          - "medical emergency information"
+
+      scheduling:
+        label: "Scheduling"
+        source: "Project extension"
+        def: "Allows users to schedule blocking, focus sessions, restrictions, routines, recurring self-control periods, work-hour limits, or automatic focus periods."
+        positive:
+          - "schedule blocking"
+          - "automatic schedule"
+          - "recurring focus session"
+          - "daily blocking schedule"
+          - "work hours"
+          - "sleep schedule"
+          - "scheduled restrictions"
+          - "automatic focus schedule"
+          - "repeat focus session"
+          - "weekday schedule"
+          - "focus timetable"
+          - "scheduled focus mode"
+        negative:
+          - "calendar event only"
+          - "meeting schedule only"
+          - "task schedule only"
+
+  habit_apps:
+    label: "Habit Apps"
+    description: "Apps that help users build, monitor, maintain, or improve habits and routines. These apps may support productivity and focus, but they are classified separately from DSCTs unless explicit digital self-control features are present."
+    features:
+      habit_tracking:
+        label: "Habit Tracking"
+        source: "Project extension"
+        def: "Tracks repeated habits, daily behaviours, routines, completion status, or consistency over time."
+        positive:
+          - "habit tracker"
+          - "track habits"
+          - "daily habits"
+          - "habit completion"
+          - "routine tracking"
+          - "track daily routine"
+          - "habit log"
+          - "daily habit checklist"
+          - "habit progress"
+          - "mark habit complete"
+          - "habit calendar"
+          - "habit record"
+        negative:
+          - "customer habits"
+          - "shopping habits"
+          - "usage habit analysis only"
+
+      streaks:
+        label: "Streaks"
+        source: "Project extension"
+        def: "Uses streak counts, consecutive completion records, consistency chains, or unbroken habit records to motivate users."
+        positive:
+          - "streak"
+          - "daily streak"
+          - "keep your streak"
+          - "habit chain"
+          - "consecutive days"
+          - "do not break the streak"
+          - "streak counter"
+          - "consistency chain"
+          - "completion streak"
+        negative:
+          - "winning streak in game"
+          - "sports streak"
+          - "stock market streak"
+
+      routine_builder:
+        label: "Routine Builder"
+        source: "Project extension"
+        def: "Supports morning routines, evening routines, habit stacks, repeated checklists, or structured daily workflows."
+        positive:
+          - "routine builder"
+          - "morning routine"
+          - "evening routine"
+          - "habit stack"
+          - "daily checklist"
+          - "routine planner"
+          - "build routine"
+          - "repeat routine"
+          - "structured routine"
+          - "daily workflow"
+          - "habit stacking"
+        negative:
+          - "software routine"
+          - "routine update"
+          - "routine maintenance only"
+
+      habit_reminders:
+        label: "Habit Reminders"
+        source: "Project extension"
+        def: "Provides reminders, notifications, nudges, alarms, or prompts for habit completion or routine consistency."
+        positive:
+          - "habit reminder"
+          - "daily reminder"
+          - "notification"
+          - "habit alarm"
+          - "remind me"
+          - "habit prompt"
+          - "routine reminder"
+          - "habit notification"
+          - "custom reminder"
+          - "reminder to complete habit"
+        negative:
+          - "notification settings only"
+          - "system notification only"
+          - "email notification only"
+
+      habit_analytics:
+        label: "Habit Analytics"
+        source: "Project extension"
+        def: "Shows habit completion history, progress charts, consistency reports, habit insights, trend analysis, or habit statistics."
+        positive:
+          - "habit analytics"
+          - "completion chart"
+          - "habit report"
+          - "consistency report"
+          - "progress graph"
+          - "habit insights"
+          - "habit statistics"
+          - "completion history"
+          - "habit trends"
+          - "weekly habit report"
+          - "monthly habit summary"
+        negative:
+          - "business analytics"
+          - "website analytics"
+          - "advertising analytics"
+
+      accountability:
+        label: "Accountability"
+        source: "Project extension"
+        def: "Uses social accountability, sharing, groups, friends, coaches, community support, or check-ins to support habit consistency."
+        positive:
+          - "accountability partner"
+          - "share progress"
+          - "friends"
+          - "group challenge"
+          - "coach"
+          - "check-in"
+          - "community accountability"
+          - "shared habits"
+          - "habit group"
+          - "social support"
+          - "team challenge"
+        negative:
+          - "account login"
+          - "account settings"
+          - "bank account"
+
+  planners:
+    label: "Planners"
+    description: "Apps that support planning, task organisation, scheduling, prioritisation, and productivity workflows. These apps are classified separately from DSCTs unless explicit digital self-control features are present."
+    features:
+      task_management:
+        label: "Task Management"
+        source: "Project extension"
+        def: "Creates, organises, tracks, prioritises, or completes tasks, to-do lists, subtasks, or checklists."
+        positive:
+          - "task list"
+          - "to-do list"
+          - "task manager"
+          - "manage tasks"
+          - "subtasks"
+          - "task completion"
+          - "checklist"
+          - "task organiser"
+          - "create tasks"
+          - "complete tasks"
+          - "task tracking"
+          - "daily tasks"
+        negative:
+          - "system task manager"
+          - "background task"
+          - "task unrelated to planning"
+
+      calendar_scheduling:
+        label: "Calendar/Scheduling"
+        source: "Project extension"
+        def: "Supports calendar views, scheduling, due dates, events, recurring tasks, reminders, agendas, or daily schedules."
+        positive:
+          - "calendar"
+          - "schedule"
+          - "due date"
+          - "event"
+          - "recurring task"
+          - "agenda"
+          - "calendar view"
+          - "daily schedule"
+          - "weekly schedule"
+          - "scheduled reminder"
+          - "planner calendar"
+          - "event planning"
+        negative:
+          - "calendar wallpaper"
+          - "calendar icon only"
+          - "holiday calendar only"
+
+      time_blocking:
+        label: "Time Blocking"
+        source: "Project extension"
+        def: "Allocates blocks of time for tasks, focus sessions, routines, study, work, or planned activities."
+        positive:
+          - "time blocking"
+          - "block time"
+          - "plan your day"
+          - "schedule focus blocks"
+          - "timebox"
+          - "time boxing"
+          - "planned work block"
+          - "focus block"
+          - "allocate time"
+          - "time block planner"
+          - "calendar blocks"
+        negative:
+          - "blocking websites"
+          - "app blocking"
+          - "site blocking"
+          - "block access"
+
+      goal_planning:
+        label: "Goal Planning"
+        source: "Project extension"
+        def: "Supports goal setting, goal breakdown, milestones, long-term planning, progress toward goals, weekly goals, or monthly goals."
+        positive:
+          - "set goals"
+          - "goal planning"
+          - "milestones"
+          - "long-term goals"
+          - "goal breakdown"
+          - "goal progress"
+          - "weekly goals"
+          - "monthly goals"
+          - "goal roadmap"
+          - "personal goals"
+          - "project goals"
+        negative:
+          - "football goal"
+          - "sports goal"
+          - "goal keeper"
+          - "soccer goal"
+
+      prioritisation:
+        label: "Prioritisation"
+        source: "Project extension"
+        def: "Helps users rank, prioritise, organise, or choose important tasks."
+        positive:
+          - "priority"
+          - "prioritise"
+          - "urgent"
+          - "important tasks"
+          - "Eisenhower matrix"
+          - "rank tasks"
+          - "priority list"
+          - "task priority"
+          - "high priority"
+          - "important and urgent"
+          - "focus priority"
+        negative:
+          - "priority support plan"
+          - "priority customer service"
+          - "shipping priority"
+
+      project_planning:
+        label: "Project Planning"
+        source: "Project extension"
+        def: "Supports projects, boards, workflows, subtasks, Kanban, deadlines, project tracking, or multi-step planning."
+        positive:
+          - "project board"
+          - "kanban"
+          - "project planning"
+          - "workflow"
+          - "subtasks"
+          - "deadline"
+          - "project management"
+          - "project tracker"
+          - "multi-step project"
+          - "task board"
+          - "project timeline"
+        negative:
+          - "school project only"
+          - "project description only"
+          - "project name only"
+
+      notes_knowledge:
+        label: "Notes/Knowledge Management"
+        source: "Project extension"
+        def: "Supports notes, documents, knowledge bases, writing, organising information, capturing ideas, or maintaining a personal wiki."
+        positive:
+          - "notes"
+          - "note taking"
+          - "knowledge base"
+          - "document"
+          - "wiki"
+          - "writing"
+          - "organise notes"
+          - "capture ideas"
+          - "personal wiki"
+          - "linked notes"
+          - "knowledge management"
+        negative:
+          - "release notes only"
+          - "developer notes only"
+          - "music notes"

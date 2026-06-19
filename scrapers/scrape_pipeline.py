@@ -46,6 +46,105 @@ def _load_discovery_cfg():
     return {}
 
 
+
+def norm_text(value) -> str:
+    if value is None:
+        return ""
+    return str(value).strip().lower()
+
+
+def _contains_word_or_phrase(text: str, term: str) -> bool:
+    """Match exact phrases and whole words; avoids game matching management."""
+    import re
+    text = norm_text(text)
+    term = norm_text(term)
+    if not term:
+        return False
+    if " " in term:
+        return term in text
+    return re.search(r"(?<![a-z0-9])" + re.escape(term) + r"(?![a-z0-9])", text) is not None
+
+
+def _row_text(row: dict) -> str:
+    fields = [
+        row.get("title"), row.get("name"), row.get("app_name"), row.get("trackName"),
+        row.get("description"), row.get("summary"), row.get("short_description"), row.get("subtitle"),
+        row.get("category"), row.get("genre"), row.get("primaryGenreName"),
+        row.get("developer"), row.get("developer_name"), row.get("offered_by"), row.get("seller"), row.get("artistName"),
+    ]
+    return " ".join(norm_text(x) for x in fields if x is not None)
+
+
+def _row_title(row: dict) -> str:
+    return norm_text(row.get("title") or row.get("name") or row.get("app_name") or row.get("trackName"))
+
+
+def _row_developer(row: dict) -> str:
+    return norm_text(row.get("developer") or row.get("developer_name") or row.get("offered_by") or row.get("seller") or row.get("artistName"))
+
+
+def _row_category(row: dict) -> str:
+    return norm_text(row.get("category") or row.get("genre") or row.get("primaryGenreName"))
+
+
+def _list_norm(values) -> list[str]:
+    return [norm_text(v) for v in (values or []) if norm_text(v)]
+
+
+def is_explicitly_excluded(row: dict, filters: dict) -> tuple[bool, str]:
+    title = _row_title(row)
+    developer = _row_developer(row)
+    category = _row_category(row)
+    text = _row_text(row)
+
+    for bad_title in _list_norm(filters.get("exclude_titles", [])):
+        if title == bad_title or bad_title in title:
+            return True, f"excluded_title:{bad_title}"
+
+    for bad_dev in _list_norm(filters.get("exclude_developers", [])):
+        if developer == bad_dev or bad_dev in developer:
+            return True, f"excluded_developer:{bad_dev}"
+
+    for bad_cat in _list_norm(filters.get("exclude_categories", [])):
+        if category == bad_cat:
+            return True, f"excluded_category:{bad_cat}"
+
+    for term in _list_norm(filters.get("exclude_terms", [])):
+        if _contains_word_or_phrase(text, term):
+            return True, f"excluded_term:{term}"
+
+    return False, ""
+
+
+def has_scope_signal(row: dict, filters: dict) -> bool:
+    text = _row_text(row)
+    include_terms = _list_norm(filters.get("include_terms", []))
+    return any(_contains_word_or_phrase(text, term) for term in include_terms)
+
+
+def filter_competitor_rows(rows: list[dict], filters: dict) -> list[dict]:
+    """Filter non-relevant competitors before normalization."""
+    filtered = []
+    drop_counts = {}
+
+    for row in rows:
+        excluded, reason = is_explicitly_excluded(row, filters)
+        if excluded:
+            drop_counts[reason] = drop_counts.get(reason, 0) + 1
+            continue
+        if not has_scope_signal(row, filters):
+            reason = "no_focus_adhd_productivity_scope_signal"
+            drop_counts[reason] = drop_counts.get(reason, 0) + 1
+            continue
+        filtered.append(row)
+
+    logger.info(f"competitor pre-filter kept {len(filtered)} of {len(rows)} rows")
+    if drop_counts:
+        logger.info("competitor pre-filter drop summary:")
+        for reason, count in sorted(drop_counts.items(), key=lambda x: x[1], reverse=True):
+            logger.info(f"  {reason}: {count}")
+    return filtered
+
 def discover_catalog_from_seeds() -> list[dict]:
     if not SEEDS.exists():
         return []
@@ -225,16 +324,16 @@ def cmd_full(out: str = "data/input/full_dump.jsonl",
     logger.info(f"total candidates={len(items)}; scraping…")
     rows = scrape_details(items)
 
-    # Optional pre-filter before normalize
-    if not no_filter and (include_terms or exclude_terms):
-        logger.info("pre-filtering scraped rows using filters.include_terms/exclude_terms from discovery.yml …")
-        filtered = []
-        for r in rows:
-            if keep_title_or_desc(r.get("title"), r.get("description"), include_terms, exclude_terms):
-                filtered.append(r)
+    # Optional pre-filter before normalize.
+    # Point 3 update: remove irrelevant competitors at ingestion stage.
+    if not no_filter and filters:
+        logger.info("pre-filtering scraped rows using competitor cleaning rules from discovery.yml …")
+        filtered = filter_competitor_rows(rows, filters)
         if filtered:
             rows = filtered
             logger.info(f"pre-filter kept {len(rows)} rows")
+        else:
+            logger.warning("competitor pre-filter removed all rows; keeping original rows to avoid empty pipeline")
 
     # Write raw dump (JSONL)
     write_jsonl(rows, Path(out))

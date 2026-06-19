@@ -1,0 +1,342 @@
+# scrapers/discovery.yml
+# Purpose:
+# Discover apps that are genuinely related to focus, ADHD support,
+# productivity, habit-building, distraction blocking, routine planning,
+# Pomodoro/time management, and executive-function support.
+#
+# This file also reduces irrelevant competitors such as AI chatbots,
+# office suites, document editors, games, wallpapers, VPN tools,
+# browsers, and general utilities.
+
+keywords:
+  # Core focus and productivity
+  - focus app
+  - focus timer
+  - productivity app
+  - productivity timer
+  - deep work
+  - deep work timer
+  - concentration app
+  - concentration timer
+  - focus sessions
+  - focus productivity
+
+  # Pomodoro and time management
+  - pomodoro
+  - pomodoro timer
+  - pomodoro focus timer
+  - work timer
+  - study timer
+  - time blocking
+  - time management
+  - time management app
+  - timeboxing app
+  - focus stopwatch
+
+  # Distraction blocking and digital control
+  - distraction blocker
+  - website blocker
+  - site blocker
+  - app blocker
+  - screen time blocker
+  - screen time control
+  - digital wellbeing
+  - digital wellness
+  - phone addiction blocker
+  - social media blocker
+  - internet blocker
+
+  # ADHD and executive-function support
+  - ADHD productivity
+  - ADHD planner
+  - ADHD focus
+  - ADHD routine
+  - ADHD task manager
+  - ADHD habit tracker
+  - ADHD time management
+  - executive function app
+  - executive function support
+  - time blindness app
+  - visual schedule app
+
+  # Habit and routine support
+  - habit tracker
+  - habit builder
+  - habit formation
+  - routine tracker
+  - routine planner
+  - daily routine
+  - morning routine app
+  - goal tracker
+  - streak tracker
+
+  # Study and task support
+  - study focus
+  - study planner
+  - task planner
+  - task manager focus
+  - todo focus
+  - reminders app productivity
+  - daily planner productivity
+
+limits:
+  # Increased carefully to capture more relevant apps.
+  # If too many irrelevant apps return, reduce max_total_candidates back to 500.
+  per_keyword_per_store: 75
+  similar_per_app: 25
+  max_total_candidates: 1000
+
+filters:
+  min_rating_count: 25
+  min_play_installs: 50000
+  min_cws_users: 10000
+  min_relevance: 0.15
+
+  # Keep apps that show clear focus/productivity/ADHD relevance.
+  include_terms:
+    - focus
+    - focused
+    - productivity
+    - productive
+    - concentration
+    - deep work
+    - pomodoro
+    - timer
+    - study
+    - work timer
+    - time blocking
+    - time management
+    - timeboxing
+    - habit
+    - habit tracker
+    - habit builder
+    - routine
+    - routine planner
+    - daily routine
+    - goal
+    - task
+    - todo
+    - planner
+    - reminder
+    - reminders
+    - distraction
+    - block
+    - blocker
+    - website blocker
+    - site blocker
+    - app blocker
+    - screen time
+    - screen time control
+    - digital wellbeing
+    - digital wellness
+    - social media blocker
+    - adhd
+    - executive function
+    - time blindness
+    - visual schedule
+  
+     
+
+  # Remove broad or irrelevant apps.
+  exclude_terms:
+    - wallpaper
+    - theme
+    - ringtone
+    - launcher
+    - keyboard
+    - icon
+    - icon pack
+    - vpn
+    - antivirus
+    - browser
+    - camera
+    - photo
+    - video
+    - music
+    - game
+    - games
+    - gallery
+    - widget
+    - movie
+    - streaming
+    - shopping
+    - dating
+    - social media platform
+    - news
+    - weather
+    - calculator
+    - file manager
+    - cleaner
+    - battery saver
+    - qr scanner
+    - scanner
+    - crypto
+    - finance
+    - banking
+    - food delivery
+    - travel booking
+
+    # Exclusions for non-core competitors
+    - chatbot
+    - chat bot
+    - ai assistant
+    - ai chatbot
+    - search assistant
+    - search engine
+    - general ai
+    - office
+    - office suite
+    - document editor
+    - documents
+    - spreadsheet
+    - presentation
+    - slides
+    - word processor
+    - pdf editor
+    - email client
+    - meeting
+    - calendar only
+
+  # Explicit app-title exclude list.
+  # These are not core focus / ADHD / habit-building competitors.
+  exclude_titles:
+    - grok
+    - perplexity
+    - perplexity - ask anything
+    - microsoft office
+    - microsoft 365
+    - google docs
+    - google sheets
+    - google slides
+    - google drive
+    - gmail
+    - chatgpt
+    - claude
+    - gemini
+    - copilot
+    - microsoft copilot
+    - google assistant
+    - google search
+    - bing
+    - yahoo
+    - canva
+    - notion
+    - dropbox
+    - zoom
+    - slack
+    - teams
+
+  # Explicit developer exclude list.
+  # Use carefully, because some large developers may also publish relevant tools.
+  exclude_developers:
+    - x.ai
+    - perplexity ai
+    - microsoft corporation
+    - openai
+    - anthropic
+    - google llc
+    - google
+    - slack technologies
+    - zoom video communications
+    - dropbox
+    - canva
+
+  # Broad app-store categories that often bring unrelated apps.
+  exclude_categories:
+    - games
+    - game
+    - entertainment
+    - photo & video
+    - music
+    - social networking
+    - shopping
+    - news
+    - weather
+    - finance
+    - business
+    - travel
+    - food & drink
+    - sports
+    - lifestyle
+    - utilities
+    - tools
+    - personalization
+    - communication
+    - dating
+    - books
+    - reference
+    - navigation
+
+  # Useful for later sanity checks.
+  # Apps should normally match at least one of these conceptual groups.
+  in_scope_groups:
+    focus_and_attention:
+      - focus
+      - focused
+      - concentration
+      - deep work
+      - focus mode
+      - focus sessions
+
+    distraction_blocking:
+      - distraction blocker
+      - website blocker
+      - site blocker
+      - app blocker
+      - screen time
+      - screen time control
+      - digital wellbeing
+      - digital wellness
+      - social media blocker
+
+    time_management:
+      - pomodoro
+      - timer
+      - time blocking
+      - time management
+      - work timer
+      - study timer
+      - timeboxing
+
+    habit_and_routine:
+      - habit tracker
+      - habit builder
+      - habit formation
+      - routine tracker
+      - routine planner
+      - daily routine
+      - goal tracker
+      - streak tracker
+
+    adhd_and_executive_function:
+      - adhd
+      - adhd planner
+      - adhd focus
+      - adhd routine
+      - adhd productivity
+      - executive function
+      - time blindness
+      - visual schedule
+
+    task_and_planning:
+      - task planner
+      - task manager
+      - todo
+      - daily planner
+      - reminders
+      - productivity planner
+
+categories:
+  play:
+    - PRODUCTIVITY
+    - EDUCATION
+    - HEALTH_AND_FITNESS
+
+  cws:
+    - Productivity
+    - Education
+
+  ios:
+    - Productivity
+    - Education
+    - Health & Fitness
