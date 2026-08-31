@@ -111,7 +111,7 @@ div[role='radiogroup'] label[data-selected="true"] p {
 st.sidebar.markdown("<div class='sidebar-header'>Focus Bear</div>", unsafe_allow_html=True)
 menu = st.sidebar.radio(
     "Navigation",
-    ["Overview", "Competitors", "Sentiment Analysis", "Feature Matrix", "ADHD Analysis", "Summary"],
+    ["Overview", "Competitors", "Sentiment Analysis", "Feature Matrix", "ADHD Analysis", "Summary", "Survivorship Analysis"],
     index=0
 )
 
@@ -1019,6 +1019,170 @@ elif menu == "ADHD Analysis":
 # -----------------------------------------------------------
 # SUMMARY PAGE – Executive Insights
 # -----------------------------------------------------------
+# -----------------------------------------------------------
+# SURVIVORSHIP ANALYSIS PAGE
+# -----------------------------------------------------------
+elif menu == "Survivorship Analysis":
+    st.title("⏳ Survivorship Analysis (7-Year Study)")
+    
+    SURV_PATH = CURATED_DIR / "survivorship_results.csv"
+    
+    if not os.path.exists(SURV_PATH):
+        st.warning("⚠️ Data not ready. Please run the `survivorship_scraper.py` script first.")
+        st.stop()
+        
+    df_surv = pd.read_csv(SURV_PATH)
+    
+    # Layout 2 columns
+    c1, c2 = st.columns(2)
+    
+    with c1:
+        st.markdown("### 📊 7-Year Survivorship Rate")
+        status_counts = df_surv["Status"].value_counts().reset_index()
+        status_counts.columns = ["Status", "Count"]
+        
+        # Pie chart using Plotly
+        fig_pie = px.pie(
+            status_counts, 
+            names="Status", 
+            values="Count",
+            color="Status", 
+            color_discrete_map={"Operational": "#10B981", "Defunct": "#EF4444", "Unknown": "#6B7280"},
+            hole=0.4
+        )
+        fig_pie.update_layout(paper_bgcolor="#111827", font=dict(color="#E5E7EB"))
+        st.plotly_chart(fig_pie, use_container_width=True)
+        
+    with c2:
+        st.markdown("### 💡 Summary Insights")
+        total = len(df_surv)
+        operational = len(df_surv[df_surv["Status"] == "Operational"])
+        defunct = len(df_surv[df_surv["Status"] == "Defunct"])
+        
+        if total > 0:
+            surv_rate = operational / total
+        else:
+            surv_rate = 0
+            
+        st.info(f"""
+        The original 7-year-old study by **Ulrik Lyngs** evaluated **{total}** digital self-control and productivity applications.
+        
+        **Current Status:**
+        - 🟢 **{operational}** apps are still operational on app stores.
+        - 🔴 **{defunct}** apps have been removed or discontinued.
+        
+        **Overall Survivorship Rate: {surv_rate:.1%}**
+        """)
+
+        # -----------------------------------------------------------
+    # FEATURE / CATEGORY SURVIVORSHIP
+    # -----------------------------------------------------------
+    st.markdown("---")
+    st.markdown("### 🔍 Feature & Category Survival Analysis")
+    st.markdown("Analyzing which primary features or categories contributed to an app's longevity.")
+
+    # Check if the CSV file has a 'main category' column 
+    if 'main category' in df_surv.columns:
+        # Group data by Category and Status
+        feature_stats = df_surv.groupby(['main category', 'Status']).size().reset_index(name='Count')
+        
+        # Filter out NaN or empty categories for a cleaner chart
+        feature_stats = feature_stats.dropna(subset=['main category'])
+        
+        # Draw a Grouped Bar Chart
+        fig_bar = px.bar(
+            feature_stats, 
+            x="main category", 
+            y="Count", 
+            color="Status",
+            barmode="group",
+            color_discrete_map={"Operational": "#10B981", "Defunct": "#EF4444"},
+            text="Count"
+        )
+        
+        fig_bar.update_layout(
+            plot_bgcolor="#111827",
+            paper_bgcolor="#111827", 
+            font=dict(color="#E5E7EB"), 
+            xaxis_title="App Category / Primary Feature", 
+            yaxis_title="Number of Apps",
+            xaxis={'categoryorder':'total descending'} # Sort columns in descending order of total count
+        )
+        fig_bar.update_traces(textposition="outside")
+        
+        st.plotly_chart(fig_bar, use_container_width=True)
+        
+    else:
+        st.info("💡 Could not find the 'main category' column in the data. Please verify the feature column name in your historical_apps.csv file.")
+
+
+    # -----------------------------------------------------------
+    # FEATURE-LEVEL DEEP DIVE (COMPARING FEATURE SETS)
+    # -----------------------------------------------------------
+    st.markdown("---")
+    st.markdown("### 🛠️ Feature-Level Survivorship")
+    st.markdown("Comparing specific feature sets between surviving (Operational) and defunct apps.")
+
+    # List of key features to analyze from Ulrik Lyngs' dataset
+    key_features = [
+        "Block: Time limit",
+        "Block-override-friction: Uninstallation prevention",
+        "Self-tracking: Record history",
+        "Self-tracking: Visualisation",
+        "Goal-advancement: Set activity goal/s",
+        "Reward/punish: Gain points/streaks",
+        "Reward/punish: Social sharing/leaderboards"
+    ]
+    
+    # Filter only columns that actually exist in the dataframe to prevent errors
+    existing_features = [f for f in key_features if f in df_surv.columns]
+    
+    if existing_features:
+        feature_data = []
+        for feature in existing_features:
+            # Safely convert feature column to numeric (assuming 1 = has feature, 0/NaN = doesn't have)
+            # If the CSV uses strings like '1' or '0', this will handle it.
+            df_surv[feature + '_numeric'] = pd.to_numeric(df_surv[feature], errors='coerce').fillna(0)
+            
+            # Count Operational and Defunct apps that possess this feature
+            op_count = len(df_surv[(df_surv['Status'] == 'Operational') & (df_surv[feature + '_numeric'] > 0)])
+            def_count = len(df_surv[(df_surv['Status'] == 'Defunct') & (df_surv[feature + '_numeric'] > 0)])
+            
+            feature_data.append({"Feature": feature, "Status": "Operational", "Count": op_count})
+            feature_data.append({"Feature": feature, "Status": "Defunct", "Count": def_count})
+            
+        df_features = pd.DataFrame(feature_data)
+        
+        # Draw a Horizontal Bar Chart for better readability of long feature names
+        fig_features = px.bar(
+            df_features,
+            x="Count",
+            y="Feature",
+            color="Status",
+            barmode="group",
+            orientation='h',
+            color_discrete_map={"Operational": "#10B981", "Defunct": "#EF4444"},
+            text="Count"
+        )
+        
+        fig_features.update_layout(
+            plot_bgcolor="#111827",
+            paper_bgcolor="#111827", 
+            font=dict(color="#E5E7EB"),
+            xaxis_title="Number of Apps with Feature",
+            yaxis_title="Specific Feature",
+            yaxis={'categoryorder':'total ascending'} # Sort from least to most common
+        )
+        fig_features.update_traces(textposition="outside")
+        
+        st.plotly_chart(fig_features, use_container_width=True)
+        
+        # Automated Insight based on the data
+        st.info("""
+        **💡 Feature Survivorship Insight:**  
+        By analyzing the feature sets, we can observe whether complex features (like gamification or strict blocking) contribute to a higher retention and survival rate in the digital productivity market compared to simple features.
+        """)
+
 elif menu == "Summary":
     st.title("📘 Summary – Focus Bear Competitive Intelligence Insights")
 
