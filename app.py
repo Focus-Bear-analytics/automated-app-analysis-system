@@ -164,14 +164,25 @@ if menu == "Overview":
     st.markdown("### 📈 Genre Distribution")
     genre_counts = apps_display["Genre"].value_counts().reset_index()
     genre_counts.columns = ["Genre", "Count"]
-    fig_genre = px.bar(genre_counts, x="Count", y="Genre", orientation="h", color="Genre",
+    fig_genre = px.bar(genre_counts, x="Count", y="Genre", orientation="h", color="Genre", text = "Count",
                        color_discrete_sequence=px.colors.sequential.Blues)
-    fig_genre.update_layout(plot_bgcolor="#111827", paper_bgcolor="#111827", font=dict(color="#E5E7EB"))
+    fig_genre.update_layout(plot_bgcolor="#111827", paper_bgcolor="#111827", font=dict(color="#E5E7EB", size = 13),
+                     showlegend = False, height=600)
+    fig_genre.update_traces(textposition='outside', textfont=dict(size=14, color="white"))
     st.plotly_chart(fig_genre, use_container_width=True)
+
 
     st.markdown("### 🧩 Platform Distribution")
     fig_platform = px.pie(apps_display, names="Platform", color_discrete_sequence=px.colors.sequential.Blues)
-    fig_platform.update_layout(paper_bgcolor="#111827", font=dict(color="#E5E7EB"))
+    fig_platform.update_layout(paper_bgcolor="#111827", font=dict(color="#E5E7EB"),showlegend=True, 
+        legend=dict(
+        font=dict(color="white", size=13), 
+        orientation="h", 
+        yanchor="bottom", y=-0.2, 
+        xanchor="center", x=0.5
+    ))
+    fig_platform.update_traces(textposition='inside', textinfo='percent+label', 
+                               insidetextfont=dict(size=15, color="#111827") )
     st.plotly_chart(fig_platform, use_container_width=True)
 
 # -----------------------------------------------------------
@@ -323,9 +334,17 @@ elif menu == "Sentiment Analysis":
         values="Count",
         hole=0.35,
         color="Sentiment",
-        color_discrete_map={"Positive": "#10B981", "Neutral": "#FBBF24", "Negative": "#EF4444"}
+        color_discrete_map={"Positive": "#8BC6FC", "Neutral": "#FFB3B3", "Negative": "#FFE699"}
     )
-    fig_sentiment.update_layout(paper_bgcolor="#111827", font=dict(color="#E5E7EB"))
+    fig_sentiment.update_traces( textposition='inside', textinfo='percent+label', 
+        insidetextfont=dict(size=14, color="#111827") )
+    fig_sentiment.update_layout(paper_bgcolor="#111827", font=dict(color="#E5E7EB"),
+                                showlegend=True, 
+                                legend=dict(
+                                font=dict(color="white", size=13),
+                                orientation="h", 
+                                yanchor="top", y=-0.1,   
+                                xanchor="center", x=0.5))
     st.plotly_chart(fig_sentiment, use_container_width=True)
 
     # ⭐ 2. Average Rating by Sentiment
@@ -349,15 +368,22 @@ elif menu == "Sentiment Analysis":
                 y="Rating",
                 text=avg_rating["Rating"].round(2),
                 color="SentimentCategory",
-                color_discrete_map={"Positive": "#10B981", "Neutral": "#FBBF24", "Negative": "#EF4444"}
+                color_discrete_map={"Positive": "#8BC6FC", "Neutral": "#FFB3B3", "Negative": "#FFE699"}
             )
             fig_rating.update_traces(textposition="outside")
             fig_rating.update_layout(
                 plot_bgcolor="#111827",
                 paper_bgcolor="#111827",
-                font=dict(color="#E5E7EB"),
+                font=dict(color="white", size = 15),
                 yaxis_title="Average User Rating",
-                xaxis_title="Sentiment Category"
+                xaxis_title="Sentiment Category",
+                showlegend=True, 
+                legend=dict(
+                title = None,
+                font=dict(color="white", size=13),
+                orientation="h", 
+                yanchor="top", y=-0.3,   
+                xanchor="center", x=0.5)
             )
             st.plotly_chart(fig_rating, use_container_width=True)
         else:
@@ -385,17 +411,28 @@ elif menu == "Sentiment Analysis":
         platform_sent,
         x="Platform",
         y="Count",
+        text="Count",
+        barmode='group',
         color="SentimentCategory",
-        barmode="group",
-        color_discrete_map={"Positive": "#10B981", "Neutral": "#FBBF24", "Negative": "#EF4444"}
+        color_discrete_map={"Positive": "#8BC6FC", "Neutral": "#FFB3B3", "Negative": "#FFE699"}
     )
     fig_platform.update_layout(
         plot_bgcolor="#111827",
         paper_bgcolor="#111827",
-        font=dict(color="#E5E7EB"),
+        font=dict(color="white", size = 15),
         yaxis_title="Review Count",
-        xaxis_title="Platform"
+        xaxis_title="Platform",
+        showlegend=True, 
+        legend=dict(
+        title = None,
+        font=dict(color="white", size=13),
+        orientation="h", 
+        yanchor="top", y=-0.3,   
+        xanchor="center", x=0.5)
     )
+    fig_platform.update_traces(
+    textposition='outside', 
+    textfont=dict(size=14, color='white'))
     st.plotly_chart(fig_platform, use_container_width=True)
 
     # -------------------------------------------------------
@@ -457,15 +494,25 @@ elif menu == "Sentiment Analysis":
             x="Theme",
             y="Count",
             color="Theme",
+            text="Count",
             title="ADHD Theme Distribution"
         )
 
         fig_theme.update_layout(
             plot_bgcolor="#111827",
             paper_bgcolor="#111827",
-            font=dict(color="white")
+            font=dict(color="white"),
+            showlegend=True, 
+                            legend=dict(
+                            title = None, 
+                            font=dict(color="white", size=13),
+                            orientation="h", 
+                            yanchor="top", y=-0.3,   
+                            xanchor="center", x=0.5)
         )
-
+        fig_theme.update_traces(
+            textposition='outside',
+            textfont=dict(size=14, color='white'))
         st.plotly_chart(fig_theme, use_container_width=True)
 
         # -------------------------------------------------
@@ -525,6 +572,7 @@ elif menu == "Sentiment Analysis":
             llm_adhd_counts,
             x="Behaviour Theme",
             y="Count",
+            text="Count",
             color="Behaviour Theme",
             title="LLM-Detected ADHD Behaviour Themes"
         )
@@ -534,8 +582,18 @@ elif menu == "Sentiment Analysis":
             paper_bgcolor="#111827",
             font=dict(color="white"),
             xaxis_title="Behaviour Theme",
-            yaxis_title="Review Count"
+            yaxis_title="Review Count",
+            showlegend=True, 
+                            legend=dict(
+                            title = None, 
+                            font=dict(color="white", size=13),
+                            orientation="h", 
+                            yanchor="top", y=-0.3,   
+                            xanchor="center", x=0.5)
         )
+        fig_llm.update_traces(
+                    textposition='outside',
+                    textfont=dict(size=14, color='white'))
 
         st.plotly_chart(fig_llm, use_container_width=True)
 
