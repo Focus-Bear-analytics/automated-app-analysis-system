@@ -1091,7 +1091,7 @@ elif menu == "ADHD Analysis":
 # SURVIVORSHIP ANALYSIS PAGE
 # -----------------------------------------------------------
 elif menu == "Survivorship Analysis":
-    st.title("⏳ Survivorship Analysis")
+    st.title("⏳ Survivorship Analysis (7-Year Study)")
     
     SURV_PATH = CURATED_DIR / "survivorship_results.csv"
     
@@ -1115,15 +1115,10 @@ elif menu == "Survivorship Analysis":
             names="Status", 
             values="Count",
             color="Status", 
-            color_discrete_map={"Operational": "#8BC6FC", "Defunct": "#FFB3B3", "Unknown": "#FFE699"},
+            color_discrete_map={"Operational": "#10B981", "Defunct": "#EF4444", "Unknown": "#6B7280"},
             hole=0.4
         )
-        fig_pie.update_layout(paper_bgcolor="#111827", font=dict(color="#E5E7EB"), showlegend=True,
-                    legend=dict(
-                    orientation="h",
-                    yanchor="top", y=-0.1,  
-                    xanchor="center", x=0.5, 
-                    font=dict(color="white")))
+        fig_pie.update_layout(paper_bgcolor="#111827", font=dict(color="#E5E7EB"))
         st.plotly_chart(fig_pie, use_container_width=True)
         
     with c2:
@@ -1169,7 +1164,7 @@ elif menu == "Survivorship Analysis":
             y="Count", 
             color="Status",
             barmode="group",
-            color_discrete_map={"Operational": "#8BC6FC", "Defunct": "#FFB3B3"},
+            color_discrete_map={"Operational": "#10B981", "Defunct": "#EF4444"},
             text="Count"
         )
         
@@ -1179,13 +1174,7 @@ elif menu == "Survivorship Analysis":
             font=dict(color="#E5E7EB"), 
             xaxis_title="App Category / Primary Feature", 
             yaxis_title="Number of Apps",
-            xaxis={'categoryorder':'total descending'},
-            showlegend=True,
-                    legend=dict(
-                    orientation="h",
-                    yanchor="top", y=-0.3,  
-                    xanchor="center", x=0.5, 
-                    font=dict(color="white")) # Sort columns in descending order of total count
+            xaxis={'categoryorder':'total descending'} # Sort columns in descending order of total count
         )
         fig_bar.update_traces(textposition="outside")
         
@@ -1240,7 +1229,7 @@ elif menu == "Survivorship Analysis":
             color="Status",
             barmode="group",
             orientation='h',
-            color_discrete_map={"Operational": "#8BC6FC", "Defunct": "#FFB3B3"},
+            color_discrete_map={"Operational": "#10B981", "Defunct": "#EF4444"},
             text="Count"
         )
         
@@ -1250,13 +1239,7 @@ elif menu == "Survivorship Analysis":
             font=dict(color="#E5E7EB"),
             xaxis_title="Number of Apps with Feature",
             yaxis_title="Specific Feature",
-            yaxis={'categoryorder':'total ascending'},
-            showlegend=True,
-                    legend=dict(
-                    orientation="h",
-                    yanchor="top", y=-0.3,  
-                    xanchor="center", x=0.5, 
-                    font=dict(color="white")) # Sort from least to most common
+            yaxis={'categoryorder':'total ascending'} # Sort from least to most common
         )
         fig_features.update_traces(textposition="outside")
         
