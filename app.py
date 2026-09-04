@@ -1115,7 +1115,7 @@ elif menu == "Survivorship Analysis":
             names="Status", 
             values="Count",
             color="Status", 
-            color_discrete_map={"Operational": "#10B981", "Defunct": "#EF4444", "Unknown": "#6B7280"},
+            color_discrete_map={"Operational": "#83C9FF", "Defunct":"#FFABAB", "Unknown": "#6B7280"},
             hole=0.4
         )
         fig_pie.update_layout(paper_bgcolor="#111827", font=dict(color="#E5E7EB"))
@@ -1164,7 +1164,7 @@ elif menu == "Survivorship Analysis":
             y="Count", 
             color="Status",
             barmode="group",
-            color_discrete_map={"Operational": "#10B981", "Defunct": "#EF4444"},
+            color_discrete_map={"Operational": "#83C9FF", "Defunct":"#FFABAB"},
             text="Count"
         )
         
@@ -1229,7 +1229,7 @@ elif menu == "Survivorship Analysis":
             color="Status",
             barmode="group",
             orientation='h',
-            color_discrete_map={"Operational": "#10B981", "Defunct": "#EF4444"},
+            color_discrete_map={"Operational": "#83C9FF", "Defunct":"#FFABAB"},
             text="Count"
         )
         
