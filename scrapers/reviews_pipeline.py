@@ -22,20 +22,56 @@ UTC = timezone.utc
 NOW_ISO = datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 # ------------------ ND / special reviews tagging ------------------
-ND_TERMS = (
-    r"\badhd\b|\bau?dhd\b|\badd\b|"
+# This section checks if a review talks about ADHD, autism, or something similar
+
+# Matches "adhd" or "audhd" (having both ADHD and autism), any case
+ADHD_RX = re.compile(r"\badhd\b|\bau?dhd\b", re.I)
+
+# Matches "ADD" only in capital letters, so it skips the normal word "add"
+ADD_RX = re.compile(r"\bADD\b")
+
+# Matches "autism", "autistic", "asd", or "asperger's", any case
+AUTISM_RX = re.compile(r"\bautis\w*\b|\basd\b|\basperger'?s?\b", re.I)
+
+# Matches other related words like dyslexia, dyspraxia, Tourette's, etc.
+OTHER_ND_RX = re.compile(
     r"\bneurodivergen\w*\b|\bneurodivers\w*\b|\bnd[- ]?friendly\b|"
-    r"\bautis\w*\b|\basd\b|\basperger'?s?\b|"
     r"\bdyslexi\w*\b|\bdyscalculi\w*\b|\bdysprax\w*\b|"
     r"\btourette'?s?\b|"
-    r"\bsensory\s+processing\b|\bexecutive\s+function\w*\b"
+    r"\bsensory\s+processing\b|\bexecutive\s+function\w*\b",
+    re.I,
 )
-ND_RX = re.compile(ND_TERMS, re.I)
 
+# Checks one review and returns which categories it belongs to
+def get_nd_categories(title: str | None, body: str | None) -> list[str]:
+    """Returns which neurodivergent categories this review mentions: any of
+    'adhd', 'autism', 'other_nd' — or an empty list if it mentions none."""
+
+    # Combine title and body into one block of text to search
+    text = f"{title or ''}\n{body or ''}"
+
+    # Will hold every category this review matches
+    categories = []
+
+    # Check for ADHD mentions
+    if ADHD_RX.search(text) or ADD_RX.search(text):
+        categories.append("adhd")
+
+    # Check for autism mentions
+    if AUTISM_RX.search(text):
+        categories.append("autism")
+
+    # Check for other neurodivergent mentions
+    if OTHER_ND_RX.search(text):
+        categories.append("other_nd")
+
+    # Return whatever categories were found
+    return categories
+
+
+# Simple True/False version, for places that just need a yes/no answer
 def is_special_review(title: str | None, body: str | None) -> bool:
-    t = (title or "")
-    b = (body or "")
-    return bool(ND_RX.search(f"{t}\n{b}"))
+    return len(get_nd_categories(title, body)) > 0
 
 # ------------------ common helpers ------------------
 
@@ -473,8 +509,8 @@ def main():
     p_all.add_argument("--stores", default="play,ios", help="comma list: play,ios,cws (CWS not implemented)")
     p_all.add_argument("--countries", default="au,us,gb", help="comma list of country codes")
     p_all.add_argument("--langs", default="en", help="comma list of languages")
-    p_all.add_argument("--max-per-app", type=int, default=300)
-    p_all.add_argument("--since-days", type=int, default=365)
+    p_all.add_argument("--max-per-app", type=int, default=2000)
+    p_all.add_argument("--since-days", type=int, default=1095)
     p_all.add_argument("--flush-every", type=int, default=200)
     p_all.add_argument("--dedupe-scope", choices=["country","global"], default="global",
                        help="global (default) removes cross-country duplicates by text")
